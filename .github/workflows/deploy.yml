@@ -2,9 +2,8 @@ name: Build & Deploy
 
 on:
   push:
-    tags:
-      - 'v*.*.*'   # déclenché sur les tags ex: v1.0.0
-
+    branches:
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
