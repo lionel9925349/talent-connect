@@ -15,10 +15,7 @@ services:
         condition: service_completed_successfully
 
   migrate:
-    image: ${GHCR_IMAGE}-migrate
-    build:
-      context: .
-      dockerfile: Dockerfile.migrate
+    image: ${GHCR_MIGRATE_IMAGE}
     environment:
       DATABASE_URL: ${DATABASE_URL}
     depends_on:
