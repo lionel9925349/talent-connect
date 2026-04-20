@@ -6,6 +6,9 @@ import 'dotenv/config'
 export default defineConfig({
   earlyAccess: true,
   schema: 'prisma/schema.prisma',
+  migrations: {
+    seed: 'tsx prisma/seed.ts',
+  },
   migrate: {
     async adapter() {
       const { PrismaPg } = await import('@prisma/adapter-pg')

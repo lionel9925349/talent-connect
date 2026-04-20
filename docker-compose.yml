@@ -11,17 +11,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      migrate:
-        condition: service_completed_successfully
-
-  migrate:
-    image: ${GHCR_MIGRATE_IMAGE}
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: "no"
 
   db:
     image: postgres:16-alpine
@@ -40,3 +29,4 @@ services:
 
 volumes:
   postgres_data:
+    name: mf_talent_postgres_data
