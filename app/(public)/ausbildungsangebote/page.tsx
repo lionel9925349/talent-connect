@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { JobCard } from '@/components/sections/JobCard'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { prisma } from '@/lib/prisma'
