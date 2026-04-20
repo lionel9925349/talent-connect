@@ -20,7 +20,7 @@ jobs:
       - name: Extract version
         id: version
         run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
-        # ex: tag "v1.2.3" → VERSION="1.2.3"
+        # ex: tag "v1.2.3" → VERSION="1.2.3 "
 
       # ── 3. Build & push image app ────────────────────────────────────────────
       - name: Log in to GitHub Container Registry
