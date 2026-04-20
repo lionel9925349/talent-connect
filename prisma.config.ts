@@ -9,6 +9,9 @@ export default defineConfig({
   migrations: {
     seed: 'tsx prisma/seed.ts',
   },
+  datasource: {
+    url: process.env.DATABASE_URL,
+  },
   migrate: {
     async adapter() {
       const { PrismaPg } = await import('@prisma/adapter-pg')
