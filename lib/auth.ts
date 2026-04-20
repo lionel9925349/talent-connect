@@ -1,35 +1,31 @@
-import { createHmac, timingSafeEqual } from 'crypto'
 import { cookies } from 'next/headers'
+import type { NextRequest } from 'next/server'
 
-const COOKIE_NAME = 'admin_session'
-const COOKIE_MAX_AGE = 60 * 60 * 8 // 8 hours
+export const ADMIN_COOKIE = 'mf_admin'
+export const COOKIE_MAX_AGE = 60 * 60 * 8 // 8 heures
 
-function sign(value: string): string {
-  const secret = process.env.COOKIE_SECRET ?? 'fallback_secret'
-  const hmac = createHmac('sha256', secret)
-  hmac.update(value)
-  return `${value}.${hmac.digest('hex')}`
+function getSecret(): string {
+  return process.env.ADMIN_PASSWORD ?? 'admin123'
 }
 
-function verify(signed: string): string | null {
-  const lastDot = signed.lastIndexOf('.')
-  if (lastDot === -1) return null
-  const value = signed.slice(0, lastDot)
-  const expected = sign(value)
-  try {
-    const a = Buffer.from(signed)
-    const b = Buffer.from(expected)
-    if (a.length !== b.length) return null
-    if (!timingSafeEqual(a, b)) return null
-    return value
-  } catch {
-    return null
-  }
+/** Pour les Route Handlers — vérifie le cookie dans la requête. */
+export function isAdminRequest(request: NextRequest): boolean {
+  return request.cookies.get(ADMIN_COOKIE)?.value === getSecret()
+}
+
+/** Pour les Server Components — vérifie la valeur du cookie. */
+export function isAdminSession(cookieValue: string | undefined): boolean {
+  return cookieValue === getSecret()
+}
+
+/** Valeur à stocker dans le cookie au login. */
+export function getSessionToken(): string {
+  return getSecret()
 }
 
 export async function setAdminSession(): Promise<void> {
-  const cookieStore = await cookies()
-  cookieStore.set(COOKIE_NAME, sign('1'), {
+  const store = await cookies()
+  store.set(ADMIN_COOKIE, getSecret(), {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
@@ -39,13 +35,11 @@ export async function setAdminSession(): Promise<void> {
 }
 
 export async function clearAdminSession(): Promise<void> {
-  const cookieStore = await cookies()
-  cookieStore.delete(COOKIE_NAME)
+  const store = await cookies()
+  store.delete(ADMIN_COOKIE)
 }
 
 export async function isAdminAuthenticated(): Promise<boolean> {
-  const cookieStore = await cookies()
-  const cookie = cookieStore.get(COOKIE_NAME)
-  if (!cookie) return false
-  return verify(cookie.value) === '1'
+  const store = await cookies()
+  return store.get(ADMIN_COOKIE)?.value === getSecret()
 }

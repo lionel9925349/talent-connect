@@ -1,0 +1,39 @@
+# Usage:
+#   docker compose -f docker-compose.dev.yml up -d
+#   → PostgreSQL démarre, migrations et seed s'exécutent automatiquement
+#   → Mettez DATABASE_URL=postgresql://mf_user:mf_password@localhost:5432/mf_talent dans .env.local
+#
+# Réinitialiser les données :
+#   docker compose -f docker-compose.dev.yml down -v && docker compose -f docker-compose.dev.yml up -d
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mf_talent
+      POSTGRES_USER: mf_user
+      POSTGRES_PASSWORD: mf_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - mf_dev_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mf_user -d mf_talent"]
+      interval: 3s
+      timeout: 3s
+      retries: 15
+
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile.migrate
+    environment:
+      DATABASE_URL: postgresql://mf_user:mf_password@db:5432/mf_talent
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+volumes:
+  mf_dev_data:

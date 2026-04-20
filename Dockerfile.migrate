@@ -1,0 +1,17 @@
+FROM node:20-alpine
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable pnpm
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY prisma ./prisma
+COPY prisma.config.ts ./
+COPY lib/prisma.ts ./lib/
+COPY scripts ./scripts
+COPY tsconfig.json ./
+
+RUN pnpm install --frozen-lockfile
+RUN npx prisma generate
+
+CMD ["sh", "-c", "npx tsx scripts/setup-db.ts && npx tsx prisma/seed.ts"]

@@ -1,0 +1,97 @@
+name: Build & Deploy
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'   # déclenché sur les tags ex: v1.0.0
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      # ── 1. Source ────────────────────────────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── 2. Version depuis le tag ──────────────────────────────────────────────
+      - name: Extract version
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+        # ex: tag "v1.2.3" → VERSION="1.2.3"
+
+      # ── 3. Build & push image app ────────────────────────────────────────────
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push app image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          dockerfile: Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:${{ steps.version.outputs.VERSION }}
+            ghcr.io/${{ github.repository }}:latest
+
+      # ── 4. Build & push image migrate ────────────────────────────────────────
+      - name: Build and push migrate image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          dockerfile: Dockerfile.migrate
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}-migrate:${{ steps.version.outputs.VERSION }}
+            ghcr.io/${{ github.repository }}-migrate:latest
+
+      # ── 5. Copier docker-compose.yml sur le VPS ──────────────────────────────
+      - name: Copy docker-compose.yml to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host:     ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          source:   docker-compose.yml
+          target:   ~/mf-talent-connect
+
+      # ── 6. Déployer sur le VPS ────────────────────────────────────────────────
+      - name: Deploy on VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            set -e
+            cd ~/mf-talent-connect
+
+            # Écrire le fichier .env avec les secrets
+            cat > .env <<'ENVEOF'
+            GHCR_IMAGE=ghcr.io/${{ github.repository }}:${{ steps.version.outputs.VERSION }}
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            POSTGRES_DB=mf_talent
+            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+            ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
+            NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
+            ENVEOF
+
+            # Login GHCR pour puller les images privées
+            echo "${{ secrets.GITHUB_TOKEN }}" | \
+              docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            # Mettre à jour les images et redémarrer
+            docker compose pull app migrate
+            docker compose up -d --remove-orphans
+
+            # Vérifier que l'app répond
+            sleep 10
+            docker compose ps
