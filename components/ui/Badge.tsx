@@ -12,7 +12,7 @@ const variantClasses: Record<BadgeVariant, string> = {
   vollzeit: 'bg-blue-100 text-blue-800',
   teilzeit: 'bg-purple-100 text-purple-800',
   minijob: 'bg-orange-100 text-orange-800',
-  default: 'bg-[#1A3A6B]/10 text-[#1A3A6B]',
+  default: 'bg-primary/10 text-primary',
 }
 
 export function Badge({ children, variant = 'default', className = '' }: BadgeProps) {

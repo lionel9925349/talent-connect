@@ -51,18 +51,18 @@ export default function AdminHeroPage() {
     setTimeout(() => setSaved(null), 2000)
   }
 
-  if (loading) return <p className="text-[#6B7280]">Laden...</p>
+  if (loading) return <p className="text-muted">Laden...</p>
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[#1A1A2E] mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
+      <h1 className="text-2xl font-bold text-foreground mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
         Hero / Bannières
       </h1>
 
       <div className="space-y-6">
         {heroes.map((hero) => (
           <div key={hero.key} className="bg-white rounded-xl border border-gray-100 p-6">
-            <h2 className="font-semibold text-[#1A1A2E] mb-4 text-sm uppercase tracking-wide text-[#6B7280]">
+            <h2 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wide text-muted">
               {hero.key}
             </h2>
             <div className="space-y-4">

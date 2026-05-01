@@ -55,13 +55,13 @@ export default function EditFormationPage() {
     router.refresh()
   }
 
-  if (!form) return <p className="text-[#6B7280]">Laden...</p>
+  if (!form) return <p className="text-muted">Laden...</p>
 
   return (
     <div className="max-w-2xl">
       <div className="flex items-center gap-3 mb-8">
-        <Link href="/admin/formations" className="text-[#6B7280] hover:text-[#1A3A6B] text-sm">← Zurück</Link>
-        <h1 className="text-2xl font-bold text-[#1A1A2E]" style={{ fontFamily: 'var(--font-heading)' }}>Formation bearbeiten</h1>
+        <Link href="/admin/formations" className="text-muted hover:text-primary text-sm">← Zurück</Link>
+        <h1 className="text-2xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>Formation bearbeiten</h1>
       </div>
 
       <div className="bg-white rounded-xl border border-gray-100 p-6">
@@ -76,8 +76,8 @@ export default function EditFormationPage() {
           <Textarea label="Beschreibung" value={form.description} onChange={(e) => set('description', e.target.value)} required rows={5} />
           <Textarea label="Zugangsbedingungen" value={form.conditions} onChange={(e) => set('conditions', e.target.value)} required rows={4} />
           <label className="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" checked={form.isActive} onChange={(e) => set('isActive', e.target.checked)} className="w-4 h-4 accent-[#1A3A6B]" />
-            <span className="text-sm font-medium text-[#1A1A2E]">Aktiv (öffentlich sichtbar)</span>
+            <input type="checkbox" checked={form.isActive} onChange={(e) => set('isActive', e.target.checked)} className="w-4 h-4 accent-primary" />
+            <span className="text-sm font-medium text-foreground">Aktiv (öffentlich sichtbar)</span>
           </label>
           <div className="flex gap-3 pt-2">
             <Button type="submit" disabled={saving}>{saving ? 'Speichern...' : 'Änderungen speichern'}</Button>

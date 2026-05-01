@@ -54,13 +54,13 @@ export default function EditJobPage() {
     router.refresh()
   }
 
-  if (!form) return <p className="text-[#6B7280]">Laden...</p>
+  if (!form) return <p className="text-muted">Laden...</p>
 
   return (
     <div className="max-w-2xl">
       <div className="flex items-center gap-3 mb-8">
-        <Link href="/admin/jobs" className="text-[#6B7280] hover:text-[#1A3A6B] text-sm">← Zurück</Link>
-        <h1 className="text-2xl font-bold text-[#1A1A2E]" style={{ fontFamily: 'var(--font-heading)' }}>Stelle bearbeiten</h1>
+        <Link href="/admin/jobs" className="text-muted hover:text-primary text-sm">← Zurück</Link>
+        <h1 className="text-2xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>Stelle bearbeiten</h1>
       </div>
 
       <div className="bg-white rounded-xl border border-gray-100 p-6">
@@ -69,8 +69,8 @@ export default function EditJobPage() {
           <Input label="Unternehmen" value={form.company} onChange={(e) => set('company', e.target.value)} required />
           <Input label="Standort" value={form.location} onChange={(e) => set('location', e.target.value)} required />
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium text-[#1A1A2E]">Vertragstyp</label>
-            <select value={form.contractType} onChange={(e) => set('contractType', e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2 text-[#1A1A2E] focus:outline-none focus:ring-2 focus:ring-[#1A3A6B]">
+            <label className="text-sm font-medium text-foreground">Vertragstyp</label>
+            <select value={form.contractType} onChange={(e) => set('contractType', e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option>Vollzeit</option>
               <option>Teilzeit</option>
               <option>Minijob</option>
@@ -79,8 +79,8 @@ export default function EditJobPage() {
           <Textarea label="Beschreibung" value={form.description} onChange={(e) => set('description', e.target.value)} required rows={5} />
           <Textarea label="Anforderungen" value={form.requirements} onChange={(e) => set('requirements', e.target.value)} required rows={5} />
           <label className="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" checked={form.isActive} onChange={(e) => set('isActive', e.target.checked)} className="w-4 h-4 accent-[#1A3A6B]" />
-            <span className="text-sm font-medium text-[#1A1A2E]">Aktiv (öffentlich sichtbar)</span>
+            <input type="checkbox" checked={form.isActive} onChange={(e) => set('isActive', e.target.checked)} className="w-4 h-4 accent-primary" />
+            <span className="text-sm font-medium text-foreground">Aktiv (öffentlich sichtbar)</span>
           </label>
           <div className="flex gap-3 pt-2">
             <Button type="submit" disabled={saving}>{saving ? 'Speichern...' : 'Änderungen speichern'}</Button>

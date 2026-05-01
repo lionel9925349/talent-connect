@@ -15,14 +15,13 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'M&F Talent Connect — Ihre Brücke zwischen Afrika und Deutschland',
-  description:
-    'M&F Talent Connect vermittelt qualifizierte Fachkräfte und Ausbildungssuchende aus Afrika und Europa an deutsche Unternehmen.',
+  title: 'M&F Talent Connect',
+  description: 'M&F Talent Connect — Ihre Brücke zwischen Afrika und Deutschland.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html className={`${playfair.variable} ${dmSans.variable}`}>
       <body className="min-h-screen flex flex-col">{children}</body>
     </html>
   )

@@ -32,13 +32,13 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#1A1A2E] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-foreground flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-[#1A1A2E]" style={{ fontFamily: 'var(--font-heading)' }}>
-            M<span className="text-[#E87722]">&amp;</span>F Admin
+          <h1 className="text-2xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>
+            M<span className="text-accent">&amp;</span>F Admin
           </h1>
-          <p className="text-[#6B7280] text-sm mt-1">Geben Sie Ihr Passwort ein</p>
+          <p className="text-muted text-sm mt-1">Geben Sie Ihr Passwort ein</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

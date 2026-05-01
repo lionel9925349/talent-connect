@@ -1,0 +1,263 @@
+{
+  "meta": {
+    "title": "M&F Talent Connect — Ihre Brücke zum deutschen Arbeitsmarkt",
+    "description": "M&F Talent Connect vermittelt qualifizierte Fachkräfte und Ausbildungssuchende an deutsche Unternehmen — schnell, zuverlässig und auf Augenhöhe."
+  },
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "forCompanies": "Für Unternehmen",
+    "forApplicants": "Für Bewerber",
+    "jobs": "Jobangebote",
+    "training": "Ausbildung",
+    "contact": "Kontakt",
+    "applyNow": "Jetzt bewerben"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "contact": "Kontakt",
+    "rights": "Alle Rechte vorbehalten.",
+    "legal": "Impressum",
+    "privacy": "Datenschutz"
+  },
+  "localeSwitcher": {
+    "de": "DE",
+    "en": "EN",
+    "label": "Sprache wechseln"
+  },
+  "home": {
+    "heroTitle": "M&F Talent Connect",
+    "heroSubtitle": "Zwischen potentiellen Fachkräften und dem deutschen Markt — wir verbinden Talente aus dem Ausland mit deutschen Unternehmen.",
+    "heroCtaText": "Jetzt per E-Mail bewerben",
+    "heroAllOffers": "Alle Angebote",
+    "heroKeywords": ["schnell", "zuverlässig", "unkompliziert", "Auf Augenhöhe"],
+    "latestJobs": "Aktuelle Jobangebote",
+    "latestTrainings": "Ausbildungsangebote",
+    "viewAll": "Alle anzeigen",
+    "ctaTitle": "Bereit für den nächsten Schritt?",
+    "ctaSubtitle": "Ob Unternehmen oder Bewerber — wir begleiten Sie auf Ihrem Weg.",
+    "ctaContact": "Jetzt Kontakt aufnehmen",
+    "ctaLearnMore": "Mehr erfahren"
+  },
+  "services": {
+    "title": "Unsere Leistungen",
+    "subtitle": "M&F Talent Connect — Ihre verlässliche Brücke zum deutschen Arbeitsmarkt.",
+    "items": [
+      {
+        "title": "Vermittlung",
+        "description": "Wir vermitteln qualifizierte Fachkräfte und Ausbildungssuchende an deutsche Unternehmen — schnell, zuverlässig und auf Augenhöhe."
+      },
+      {
+        "title": "Ausbildung",
+        "description": "Wir begleiten Ausbildungssuchende auf ihrem Weg ins deutsche Berufsausbildungssystem und unterstützen bei allen bürokratischen Schritten."
+      },
+      {
+        "title": "Für Unternehmen",
+        "description": "Finden Sie motivierte Mitarbeiter und Auszubildende — mit vollständiger Vorauswahl, Sprachüberprüfung und Integrationssupport."
+      },
+      {
+        "title": "Für Bewerber",
+        "description": "Ob Berufserfahrene oder Ausbildungssuchende — wir öffnen Ihnen die Türen zum deutschen Arbeitsmarkt und stehen Ihnen Seite an Seite."
+      }
+    ]
+  },
+  "jobs": {
+    "pageTitle": "Jobangebote",
+    "pageSubtitle": "Entdecken Sie aktuelle Stellenangebote bei deutschen Unternehmen.",
+    "noJobs": "Aktuell keine Jobangebote verfügbar.",
+    "checkBack": "Schauen Sie bald wieder vorbei!",
+    "found": "{count, plural, one {# Angebot gefunden} other {# Angebote gefunden}}",
+    "foundOf": "von {total}",
+    "detail": {
+      "back": "← Zurück zu Jobangeboten",
+      "description": "Beschreibung",
+      "requirements": "Anforderungen",
+      "applyInfoTitle": "So bewerben Sie sich:",
+      "applyInfoText": "Senden Sie Ihre Bewerbungsunterlagen (Lebenslauf, Zeugnisse, Motivationsschreiben) per E-Mail. Wir melden uns schnell bei Ihnen.",
+      "applyBtn": "Jetzt per E-Mail bewerben",
+      "emailSubject": "Bewerbung: {title} bei {company}",
+      "emailBody": "Guten Tag,\n\nich möchte mich für die Stelle \"{title}\" bei {company} bewerben.\n\nIm Anhang finden Sie meine Bewerbungsunterlagen:\n- Lebenslauf\n- Zeugnisse\n- Motivationsschreiben\n\nMit freundlichen Grüßen"
+    },
+    "filter": {
+      "searchPlaceholder": "Stelle oder Unternehmen suchen…",
+      "contractType": "Vertragsart",
+      "allLocations": "Alle Standorte",
+      "location": "Standort",
+      "noResults": "Keine Ergebnisse",
+      "noResultsHint": "Kein Angebot entspricht Ihren Kriterien. Passen Sie die Filter an.",
+      "resetFilters": "Filter zurücksetzen",
+      "clearAll": "Alle Filter löschen",
+      "activeFilters": "Aktive Filter"
+    }
+  },
+  "training": {
+    "pageTitle": "Ausbildungsangebote",
+    "pageSubtitle": "Starten Sie Ihre berufliche Karriere in Deutschland mit einer dualen Ausbildung.",
+    "noTrainings": "Aktuell keine Ausbildungsangebote verfügbar.",
+    "checkBack": "Schauen Sie bald wieder vorbei!",
+    "found": "{count, plural, one {# Angebot gefunden} other {# Angebote gefunden}}",
+    "foundOf": "von {total}",
+    "filter": {
+      "searchPlaceholder": "Ausbildungsberuf oder Branche suchen…",
+      "duration": "Dauer",
+      "allDurations": "Alle Dauern",
+      "location": "Standort",
+      "allLocations": "Alle Standorte",
+      "noResults": "Keine Ergebnisse",
+      "noResultsHint": "Kein Angebot entspricht Ihren Kriterien. Passen Sie die Filter an.",
+      "resetFilters": "Filter zurücksetzen",
+      "clearAll": "Alle Filter löschen"
+    },
+    "detail": {
+      "back": "← Zurück zu Ausbildungsangeboten",
+      "location": "Standort",
+      "duration": "Dauer",
+      "start": "Beginn",
+      "description": "Beschreibung",
+      "conditions": "Zugangsbedingungen",
+      "applyBtn": "Jetzt bewerben"
+    }
+  },
+  "about": {
+    "heroTitle": "Über M&F Talent Connect",
+    "heroSubtitle": "Wir glauben an eine Welt, in der Talent keine Grenzen kennt.",
+    "missionTitle": "Unsere Mission",
+    "missionText1": "M&F Talent Connect wurde gegründet, um eine echte Brücke zwischen qualifizierten Fachkräften und dem deutschen Arbeitsmarkt zu bauen. Wir verstehen die Herausforderungen auf beiden Seiten — und wir haben Lösungen.",
+    "missionText2": "Unser Ansatz ist persönlich, professionell und auf langfristigen Erfolg ausgerichtet. Wir begleiten unsere Kandidaten von der ersten Bewerbung bis zur erfolgreichen Integration.",
+    "missionBtn": "Kontakt aufnehmen",
+    "stats": {
+      "placements": "Vermittlungen",
+      "partners": "Partnerunternehmen",
+      "countries": "Länder",
+      "satisfaction": "Zufriedenheit"
+    },
+    "teamTitle": "Unser Team",
+    "team": [
+      { "name": "Marie F.", "role": "Gründerin & Geschäftsführerin", "bio": "Über 10 Jahre Erfahrung in der internationalen Personalvermittlung." },
+      { "name": "Amadou B.", "role": "Berater für Bewerber", "bio": "Experte für Integration und Anerkennungsverfahren in Deutschland." },
+      { "name": "Sandra K.", "role": "Unternehmensberaterin", "bio": "Verbindet deutsche Unternehmen mit internationalen Talenten." }
+    ]
+  },
+  "forApplicants": {
+    "heroTitle": "Für Bewerber",
+    "heroSubtitle": "Ihr Traum vom Arbeiten oder Lernen in Deutschland — wir machen ihn real.",
+    "heroCtaText": "Jetzt bewerben",
+    "supportTitle": "Wir begleiten Sie von A bis Z",
+    "supportSubtitle": "Der Weg nach Deutschland kann komplex sein. Wir machen ihn einfacher — mit persönlicher Begleitung, Fachwissen und echtem Engagement für Ihren Erfolg.",
+    "support": [
+      { "title": "Bewerbungsbegleitung", "desc": "Wir helfen Ihnen, eine überzeugende Bewerbung auf Deutsch zu erstellen." },
+      { "title": "Visa & Anerkennung", "desc": "Vollständige Unterstützung bei allen behördlichen Verfahren." },
+      { "title": "Sprachvorbereitung", "desc": "Empfehlungen für Sprachkurse und Prüfungsvorbereitungen." },
+      { "title": "Integration", "desc": "Unterstützung bei der Wohnungssuche und dem Ankommen in Deutschland." }
+    ],
+    "eligibilityTitle": "Wer kann sich bewerben?",
+    "eligibility": [
+      "Fachkräfte mit anerkanntem oder anerkennungsfähigem Abschluss",
+      "Ausbildungssuchende mit guter Schulbildung",
+      "Personen mit Deutschkenntnissen ab B1",
+      "Motivierte Kandidaten mit klarem Berufsziel"
+    ],
+    "readyTitle": "Bereit loszulegen?",
+    "readySubtitle": "Schauen Sie sich unsere aktuellen Angebote an oder nehmen Sie direkt Kontakt auf.",
+    "viewJobs": "Jobangebote ansehen",
+    "viewTrainings": "Ausbildungsangebote"
+  },
+  "forCompanies": {
+    "heroTitle": "Für Unternehmen",
+    "heroSubtitle": "Finden Sie die Fachkräfte, die Ihr Unternehmen voranbringen — motiviert, qualifiziert und bereit.",
+    "heroCtaText": "Kandidaten anfragen",
+    "whyTitle": "Warum M&F Talent Connect?",
+    "benefits": [
+      { "title": "Vorausgewählte Kandidaten", "description": "Wir liefern Ihnen nur Bewerber, die Ihren Anforderungen entsprechen — mit geprüften Qualifikationen und Sprachkenntnissen." },
+      { "title": "Schnelle Besetzung", "description": "Dank unseres großen Netzwerks können wir offene Stellen in kürzester Zeit besetzen." },
+      { "title": "Rechtssicherheit", "description": "Wir übernehmen die komplette Abwicklung aller Visa- und Anerkennungsverfahren — Sie müssen sich um nichts kümmern." },
+      { "title": "Integration & Support", "description": "Nach der Einstellung begleiten wir sowohl Ihr Unternehmen als auch den neuen Mitarbeiter in der Eingewöhnungsphase." }
+    ],
+    "howTitle": "So funktioniert es",
+    "steps": [
+      { "num": "01", "title": "Anfrage senden", "desc": "Teilen Sie uns Ihre offene Stelle und Anforderungen mit." },
+      { "num": "02", "title": "Kandidatenauswahl", "desc": "Wir suchen und präsentieren geeignete Bewerber." },
+      { "num": "03", "title": "Vorstellungsgespräch", "desc": "Sie führen Gespräche und treffen Ihre Wahl." },
+      { "num": "04", "title": "Onboarding", "desc": "Wir begleiten den gesamten Prozess bis zur Einstellung." }
+    ],
+    "requestBtn": "Jetzt Anfrage stellen"
+  },
+  "contact": {
+    "heroTitle": "Kontakt",
+    "heroSubtitle": "Nehmen Sie Kontakt auf — wir antworten innerhalb von 24 Stunden.",
+    "formTitle": "Schreiben Sie uns",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "firstNamePlaceholder": "Marie",
+    "lastNamePlaceholder": "Müller",
+    "email": "E-Mail",
+    "emailPlaceholder": "ihre@email.de",
+    "phone": "Telefon (optional)",
+    "phonePlaceholder": "+49 XXX XXXXXXX",
+    "iam": "Ich bin…",
+    "typeApplicant": "Bewerber / Kandidat",
+    "typeCompany": "Unternehmen",
+    "typeOther": "Sonstiges",
+    "message": "Nachricht",
+    "messagePlaceholder": "Wie können wir Ihnen helfen?",
+    "sending": "Wird gesendet…",
+    "send": "Nachricht senden",
+    "successTitle": "Danke für Ihre Nachricht!",
+    "successText": "Wir melden uns so schnell wie möglich bei Ihnen.",
+    "infoTitle": "Kontaktdaten",
+    "labelEmail": "E-Mail",
+    "labelPhone": "Telefon",
+    "labelAddress": "Adresse",
+    "errorText": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  },
+  "apply": {
+    "sectionTitle": "Jetzt bewerben",
+    "sectionSubtitle": "Füllen Sie das Formular aus — wir melden uns schnell bei Ihnen.",
+    "firstName": "Vorname",
+    "firstNamePlaceholder": "Marie",
+    "lastName": "Nachname",
+    "lastNamePlaceholder": "Müller",
+    "email": "E-Mail-Adresse",
+    "emailPlaceholder": "ihre@email.de",
+    "phone": "Telefon",
+    "phonePlaceholder": "+237 XXX XXX XXX",
+    "phoneFormatHint": "Bitte geben Sie Ihre Telefonnummer mit Ländervorwahl an (z.B. +237 XXX XXX XXX)",
+    "filesLabel": "Dokumente (max. 5)",
+    "filesHint": "CV, Zeugnisse, Motivationsschreiben — PDF, Word oder Bild",
+    "filesAdd": "Dateien auswählen",
+    "filesDrop": "oder hier ablegen",
+    "filesMax": "Maximal 5 Dokumente, je max. 5 MB",
+    "filesTypeError": "Ungültiger Dateityp. Erlaubt: PDF, DOC, DOCX, JPG, PNG",
+    "filesSizeError": "Datei zu groß (max. 5 MB)",
+    "filesLimitError": "Maximal 5 Dokumente erlaubt",
+    "send": "Bewerbung absenden",
+    "sending": "Wird gesendet…",
+    "successTitle": "Bewerbung erfolgreich eingegangen!",
+    "successText": "Vielen Dank für Ihre Bewerbung. Wir melden uns so schnell wie möglich bei Ihnen.",
+    "errorText": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per E-Mail.",
+    "phoneRequired": "Bitte geben Sie eine Telefonnummer an"
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "section1Title": "1. Datenschutz auf einen Blick",
+    "section1Text": "Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.",
+    "section2Title": "2. Allgemeine Hinweise und Pflichtinformationen",
+    "section2Text": "Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.",
+    "section3Title": "3. Datenerfassung auf dieser Website",
+    "section3Text": "Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter."
+  },
+  "contractTypes": {
+    "Vollzeit": "Vollzeit",
+    "Teilzeit": "Teilzeit",
+    "Minijob": "Minijob"
+  },
+  "impressum": {
+    "title": "Impressum",
+    "legalTitle": "Angaben gemäß § 5 TMG",
+    "contactTitle": "Kontakt",
+    "disclaimerTitle": "Haftungsausschluss",
+    "disclaimerText": "Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.",
+    "copyrightTitle": "Urheberrecht",
+    "copyrightText": "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers."
+  }
+}

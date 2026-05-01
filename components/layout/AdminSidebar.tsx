@@ -8,17 +8,20 @@ const navItems = [
   { label: 'Hero / Bannières', href: '/admin/hero', icon: '🖼️' },
   { label: 'Offres d\'emploi', href: '/admin/jobs', icon: '💼' },
   { label: 'Formations', href: '/admin/formations', icon: '🎓' },
+  { label: 'Bewerbungen', href: '/admin/applications', icon: '📋' },
+  { label: 'Kontaktnachrichten', href: '/admin/contacts', icon: '✉️' },
+  { label: 'Einstellungen', href: '/admin/settings', icon: '⚙️' },
 ]
 
 export function AdminSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="w-64 min-h-screen bg-[#1A1A2E] text-white flex flex-col">
+    <aside className="w-64 min-h-screen bg-foreground text-white flex flex-col">
       <div className="p-6 border-b border-white/10">
         <Link href="/admin/dashboard">
           <h1 className="font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
-            M<span className="text-[#E87722]">&amp;</span>F Admin
+            M<span className="text-accent">&amp;</span>F Admin
           </h1>
         </Link>
       </div>
@@ -32,7 +35,7 @@ export function AdminSidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 active
-                  ? 'bg-[#E87722] text-white'
+                  ? 'bg-accent text-white'
                   : 'text-gray-300 hover:bg-white/10 hover:text-white'
               }`}
             >

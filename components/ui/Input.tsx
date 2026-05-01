@@ -13,13 +13,13 @@ export function Input({ label, error, className = '', id, ...props }: InputProps
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <label htmlFor={inputId} className="text-sm font-medium text-[#1A1A2E]">
+        <label htmlFor={inputId} className="text-sm font-medium text-foreground">
           {label}
         </label>
       )}
       <input
         id={inputId}
-        className={`border border-gray-300 rounded-lg px-3 py-2 text-[#1A1A2E] focus:outline-none focus:ring-2 focus:ring-[#1A3A6B] focus:border-transparent transition ${error ? 'border-red-500' : ''} ${className}`}
+        className={`border border-gray-300 rounded-lg px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition ${error ? 'border-red-500' : ''} ${className}`}
         {...props}
       />
       {error && <span className="text-sm text-red-500">{error}</span>}
@@ -32,14 +32,14 @@ export function Textarea({ label, error, className = '', id, ...props }: Textare
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <label htmlFor={inputId} className="text-sm font-medium text-[#1A1A2E]">
+        <label htmlFor={inputId} className="text-sm font-medium text-foreground">
           {label}
         </label>
       )}
       <textarea
         id={inputId}
         rows={4}
-        className={`border border-gray-300 rounded-lg px-3 py-2 text-[#1A1A2E] focus:outline-none focus:ring-2 focus:ring-[#1A3A6B] focus:border-transparent transition resize-none ${error ? 'border-red-500' : ''} ${className}`}
+        className={`border border-gray-300 rounded-lg px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition resize-none ${error ? 'border-red-500' : ''} ${className}`}
         {...props}
       />
       {error && <span className="text-sm text-red-500">{error}</span>}

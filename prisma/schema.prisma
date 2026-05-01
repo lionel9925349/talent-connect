@@ -48,3 +48,45 @@ model TrainingOffer {
 
   @@map("training_offers")
 }
+
+model Setting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+
+model Application {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  jobId     Int?
+  jobTitle  String
+  company   String
+  fileNames String[]
+  status    String   @default("new")
+  locale    String   @default("de")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("applications")
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  phone     String?
+  type      String   @default("sonstiges")
+  message   String   @db.Text
+  status    String   @default("new")
+  locale    String   @default("de")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("contact_messages")
+}

@@ -11,10 +11,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-[#E87722] hover:bg-[#C9631A] text-white',
-  secondary: 'bg-[#1A3A6B] hover:bg-[#2355A0] text-white',
-  outline: 'border-2 border-[#1A3A6B] text-[#1A3A6B] hover:bg-[#1A3A6B] hover:text-white',
-  ghost: 'text-[#1A3A6B] hover:bg-[#1A3A6B]/10',
+  primary: 'bg-accent hover:bg-accent-hover text-white',
+  secondary: 'bg-primary hover:bg-primary-hover text-white',
+  outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white',
+  ghost: 'text-primary hover:bg-primary/10',
 }
 
 const sizeClasses: Record<Size, string> = {
@@ -34,6 +34,13 @@ export function Button({
   const base = `inline-flex items-center justify-center font-semibold rounded-lg transition-colors duration-200 cursor-pointer ${variantClasses[variant]} ${sizeClasses[size]} ${className}`
 
   if (href) {
+    if (href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('http')) {
+      return (
+        <a href={href} className={base}>
+          {children}
+        </a>
+      )
+    }
     return (
       <Link href={href} className={base}>
         {children}

@@ -1,0 +1,263 @@
+{
+  "meta": {
+    "title": "M&F Talent Connect — Your Bridge to the German Job Market",
+    "description": "M&F Talent Connect connects skilled professionals and apprenticeship seekers with German companies — fast, reliable, and at eye level."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "forCompanies": "For Companies",
+    "forApplicants": "For Applicants",
+    "jobs": "Job Offers",
+    "training": "Apprenticeships",
+    "contact": "Contact",
+    "applyNow": "Apply Now"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "rights": "All rights reserved.",
+    "legal": "Legal Notice",
+    "privacy": "Privacy Policy"
+  },
+  "localeSwitcher": {
+    "de": "DE",
+    "en": "EN",
+    "label": "Switch language"
+  },
+  "home": {
+    "heroTitle": "M&F Talent Connect",
+    "heroSubtitle": "Bridging skilled professionals and the German market — connecting talents from abroad with German companies.",
+    "heroCtaText": "Apply by Email",
+    "heroAllOffers": "All Offers",
+    "heroKeywords": ["fast", "reliable", "straightforward", "Eye to Eye"],
+    "latestJobs": "Latest Job Offers",
+    "latestTrainings": "Apprenticeship Offers",
+    "viewAll": "View all",
+    "ctaTitle": "Ready for the next step?",
+    "ctaSubtitle": "Whether a company or an applicant — we guide you on your journey.",
+    "ctaContact": "Get in touch",
+    "ctaLearnMore": "Learn more"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "M&F Talent Connect — your reliable bridge to the German job market.",
+    "items": [
+      {
+        "title": "Recruitment",
+        "description": "We place qualified professionals and apprenticeship seekers with German companies — fast, reliable, and at eye level."
+      },
+      {
+        "title": "Apprenticeships",
+        "description": "We guide apprenticeship seekers through the German vocational training system and support them with all bureaucratic steps."
+      },
+      {
+        "title": "For Companies",
+        "description": "Find motivated employees and apprentices — with full pre-selection, language verification, and integration support."
+      },
+      {
+        "title": "For Applicants",
+        "description": "Whether experienced professionals or apprenticeship seekers — we open the doors to the German job market and stand by your side."
+      }
+    ]
+  },
+  "jobs": {
+    "pageTitle": "Job Offers",
+    "pageSubtitle": "Discover current job openings at German companies.",
+    "noJobs": "No job offers currently available.",
+    "checkBack": "Check back soon!",
+    "found": "{count, plural, one {# offer found} other {# offers found}}",
+    "foundOf": "of {total}",
+    "detail": {
+      "back": "← Back to Job Offers",
+      "description": "Description",
+      "requirements": "Requirements",
+      "applyInfoTitle": "How to apply:",
+      "applyInfoText": "Send your application documents (CV, certificates, cover letter) by email. We will get back to you quickly.",
+      "applyBtn": "Apply by Email",
+      "emailSubject": "Application: {title} at {company}",
+      "emailBody": "Hello,\n\nI would like to apply for the position \"{title}\" at {company}.\n\nPlease find my application documents attached:\n- CV\n- Certificates\n- Cover Letter\n\nBest regards"
+    },
+    "filter": {
+      "searchPlaceholder": "Search job title or company…",
+      "contractType": "Contract type",
+      "allLocations": "All locations",
+      "location": "Location",
+      "noResults": "No results",
+      "noResultsHint": "No offers match your criteria. Try adjusting the filters.",
+      "resetFilters": "Reset filters",
+      "clearAll": "Clear all filters",
+      "activeFilters": "Active filters"
+    }
+  },
+  "training": {
+    "pageTitle": "Apprenticeship Offers",
+    "pageSubtitle": "Start your professional career in Germany with a dual apprenticeship.",
+    "noTrainings": "No apprenticeship offers currently available.",
+    "checkBack": "Check back soon!",
+    "found": "{count, plural, one {# offer found} other {# offers found}}",
+    "foundOf": "of {total}",
+    "filter": {
+      "searchPlaceholder": "Search apprenticeship or sector…",
+      "duration": "Duration",
+      "allDurations": "All durations",
+      "location": "Location",
+      "allLocations": "All locations",
+      "noResults": "No results",
+      "noResultsHint": "No offers match your criteria. Try adjusting the filters.",
+      "resetFilters": "Reset filters",
+      "clearAll": "Clear all filters"
+    },
+    "detail": {
+      "back": "← Back to Apprenticeships",
+      "location": "Location",
+      "duration": "Duration",
+      "start": "Start date",
+      "description": "Description",
+      "conditions": "Entry requirements",
+      "applyBtn": "Apply now"
+    }
+  },
+  "about": {
+    "heroTitle": "About M&F Talent Connect",
+    "heroSubtitle": "We believe in a world where talent knows no borders.",
+    "missionTitle": "Our Mission",
+    "missionText1": "M&F Talent Connect was founded to build a real bridge between qualified professionals and the German job market. We understand the challenges on both sides — and we have solutions.",
+    "missionText2": "Our approach is personal, professional and geared towards long-term success. We guide our candidates from the first application through to successful integration.",
+    "missionBtn": "Get in touch",
+    "stats": {
+      "placements": "Placements",
+      "partners": "Partner companies",
+      "countries": "Countries",
+      "satisfaction": "Satisfaction"
+    },
+    "teamTitle": "Our Team",
+    "team": [
+      { "name": "Marie F.", "role": "Founder & CEO", "bio": "Over 10 years of experience in international recruitment." },
+      { "name": "Amadou B.", "role": "Applicant Advisor", "bio": "Expert in integration and recognition procedures in Germany." },
+      { "name": "Sandra K.", "role": "Corporate Consultant", "bio": "Connects German companies with international talent." }
+    ]
+  },
+  "forApplicants": {
+    "heroTitle": "For Applicants",
+    "heroSubtitle": "Your dream of working or studying in Germany — we make it real.",
+    "heroCtaText": "Apply Now",
+    "supportTitle": "We guide you every step of the way",
+    "supportSubtitle": "The path to Germany can be complex. We make it easier — with personal guidance, expertise, and genuine commitment to your success.",
+    "support": [
+      { "title": "Application Support", "desc": "We help you create a compelling application in German." },
+      { "title": "Visa & Recognition", "desc": "Full support with all administrative procedures." },
+      { "title": "Language Preparation", "desc": "Recommendations for language courses and exam preparation." },
+      { "title": "Integration", "desc": "Support with finding housing and settling in Germany." }
+    ],
+    "eligibilityTitle": "Who can apply?",
+    "eligibility": [
+      "Professionals with a recognized or recognizable qualification",
+      "Apprenticeship seekers with a good educational background",
+      "Persons with German language skills from B1 level",
+      "Motivated candidates with a clear career goal"
+    ],
+    "readyTitle": "Ready to start?",
+    "readySubtitle": "Browse our current offers or get in touch directly.",
+    "viewJobs": "View job offers",
+    "viewTrainings": "Apprenticeship offers"
+  },
+  "forCompanies": {
+    "heroTitle": "For Companies",
+    "heroSubtitle": "Find the professionals who will drive your company forward — motivated, qualified, and ready.",
+    "heroCtaText": "Request candidates",
+    "whyTitle": "Why M&F Talent Connect?",
+    "benefits": [
+      { "title": "Pre-selected Candidates", "description": "We only deliver applicants who match your requirements — with verified qualifications and language skills." },
+      { "title": "Fast Placement", "description": "Thanks to our extensive network, we can fill open positions in a very short time." },
+      { "title": "Legal Compliance", "description": "We handle all visa and recognition procedures from start to finish — you don't have to worry about anything." },
+      { "title": "Integration & Support", "description": "After hiring, we support both your company and the new employee during the onboarding phase." }
+    ],
+    "howTitle": "How it works",
+    "steps": [
+      { "num": "01", "title": "Send request", "desc": "Tell us about your open position and requirements." },
+      { "num": "02", "title": "Candidate selection", "desc": "We search and present suitable applicants." },
+      { "num": "03", "title": "Interview", "desc": "You conduct interviews and make your choice." },
+      { "num": "04", "title": "Onboarding", "desc": "We accompany the entire process through to hiring." }
+    ],
+    "requestBtn": "Submit a request"
+  },
+  "contact": {
+    "heroTitle": "Contact",
+    "heroSubtitle": "Get in touch — we respond within 24 hours.",
+    "formTitle": "Write to us",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "firstNamePlaceholder": "John",
+    "lastNamePlaceholder": "Smith",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "phone": "Phone (optional)",
+    "phonePlaceholder": "+49 XXX XXXXXXX",
+    "iam": "I am…",
+    "typeApplicant": "Applicant / Candidate",
+    "typeCompany": "Company",
+    "typeOther": "Other",
+    "message": "Message",
+    "messagePlaceholder": "How can we help you?",
+    "sending": "Sending…",
+    "send": "Send message",
+    "successTitle": "Thank you for your message!",
+    "successText": "We will get back to you as soon as possible.",
+    "infoTitle": "Contact details",
+    "labelEmail": "Email",
+    "labelPhone": "Phone",
+    "labelAddress": "Address",
+    "errorText": "Something went wrong. Please try again."
+  },
+  "apply": {
+    "sectionTitle": "Apply Now",
+    "sectionSubtitle": "Fill in the form — we will get back to you quickly.",
+    "firstName": "First name",
+    "firstNamePlaceholder": "John",
+    "lastName": "Last name",
+    "lastNamePlaceholder": "Smith",
+    "email": "Email address",
+    "emailPlaceholder": "your@email.com",
+    "phone": "Phone number",
+    "phonePlaceholder": "+237 XXX XXX XXX",
+    "phoneFormatHint": "Please include your country code (e.g. +237 XXX XXX XXX)",
+    "filesLabel": "Documents (max. 5)",
+    "filesHint": "CV, certificates, cover letter — PDF, Word or image",
+    "filesAdd": "Choose files",
+    "filesDrop": "or drop here",
+    "filesMax": "Maximum 5 documents, up to 5 MB each",
+    "filesTypeError": "Invalid file type. Allowed: PDF, DOC, DOCX, JPG, PNG",
+    "filesSizeError": "File too large (max. 5 MB)",
+    "filesLimitError": "Maximum 5 documents allowed",
+    "send": "Submit application",
+    "sending": "Sending…",
+    "successTitle": "Application received!",
+    "successText": "Thank you for your application. We will get back to you as soon as possible.",
+    "errorText": "Something went wrong. Please try again or contact us directly by email.",
+    "phoneRequired": "Please provide a phone number"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "section1Title": "1. Data protection at a glance",
+    "section1Text": "The following information provides a simple overview of what happens to your personal data when you visit this website.",
+    "section2Title": "2. General notes and mandatory information",
+    "section2Text": "The operators of this website take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with the statutory data protection regulations and this privacy policy.",
+    "section3Title": "3. Data collection on this website",
+    "section3Text": "If you send us enquiries via the contact form, your details from the enquiry form, including the contact details you provided there, will be stored by us for the purpose of processing the enquiry and in the event of follow-up questions. We will not share this data without your consent."
+  },
+  "contractTypes": {
+    "Vollzeit": "Full-time",
+    "Teilzeit": "Part-time",
+    "Minijob": "Mini-job"
+  },
+  "impressum": {
+    "title": "Legal Notice",
+    "legalTitle": "Information according to § 5 TMG",
+    "contactTitle": "Contact",
+    "disclaimerTitle": "Disclaimer",
+    "disclaimerText": "The contents of our pages have been created with the greatest care. However, we cannot guarantee the accuracy, completeness and timeliness of the content.",
+    "copyrightTitle": "Copyright",
+    "copyrightText": "The content and works on these pages created by the site operators are subject to German copyright law. Reproduction, editing, distribution and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator."
+  }
+}
