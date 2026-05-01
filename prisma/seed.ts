@@ -57,7 +57,7 @@ async function main() {
         description:
           'Die ElektroTech GmbH ist ein mittelständisches Unternehmen mit 20 Jahren Erfahrung im Bereich Elektroinstallation und Gebäudetechnik.\n\nSie führen selbstständig Elektroinstallationen in Neubauten und Bestandsgebäuden durch, lesen Schaltpläne und arbeiten eng mit dem Bauleiter zusammen.',
         requirements:
-          '• Abgeschlossene Ausbildung als Elektriker oder vergleichbar\n• Mindestens B1-Deutschkenntnisse\n• Führerschein Klasse B von Vorteil\n• Selbstständige Arbeitsweise',
+          '• Abgeschlossene Ausbildung als  Elektriker oder vergleichbar\n• Mindestens B1-Deutschkenntnisse\n• Führerschein Klasse B von Vorteil\n• Selbstständige Arbeitsweise',
         isActive: true,
       },
       {
