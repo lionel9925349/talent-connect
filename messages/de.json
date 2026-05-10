@@ -138,50 +138,6 @@
       { "name": "Sandra K.", "role": "Unternehmensberaterin", "bio": "Verbindet deutsche Unternehmen mit internationalen Talenten." }
     ]
   },
-  "forApplicants": {
-    "heroTitle": "Für Bewerber",
-    "heroSubtitle": "Ihr Traum vom Arbeiten oder Lernen in Deutschland — wir machen ihn real.",
-    "heroCtaText": "Jetzt bewerben",
-    "supportTitle": "Wir begleiten Sie von A bis Z",
-    "supportSubtitle": "Der Weg nach Deutschland kann komplex sein. Wir machen ihn einfacher — mit persönlicher Begleitung, Fachwissen und echtem Engagement für Ihren Erfolg.",
-    "support": [
-      { "title": "Bewerbungsbegleitung", "desc": "Wir helfen Ihnen, eine überzeugende Bewerbung auf Deutsch zu erstellen." },
-      { "title": "Visa & Anerkennung", "desc": "Vollständige Unterstützung bei allen behördlichen Verfahren." },
-      { "title": "Sprachvorbereitung", "desc": "Empfehlungen für Sprachkurse und Prüfungsvorbereitungen." },
-      { "title": "Integration", "desc": "Unterstützung bei der Wohnungssuche und dem Ankommen in Deutschland." }
-    ],
-    "eligibilityTitle": "Wer kann sich bewerben?",
-    "eligibility": [
-      "Fachkräfte mit anerkanntem oder anerkennungsfähigem Abschluss",
-      "Ausbildungssuchende mit guter Schulbildung",
-      "Personen mit Deutschkenntnissen ab B1",
-      "Motivierte Kandidaten mit klarem Berufsziel"
-    ],
-    "readyTitle": "Bereit loszulegen?",
-    "readySubtitle": "Schauen Sie sich unsere aktuellen Angebote an oder nehmen Sie direkt Kontakt auf.",
-    "viewJobs": "Jobangebote ansehen",
-    "viewTrainings": "Ausbildungsangebote"
-  },
-  "forCompanies": {
-    "heroTitle": "Für Unternehmen",
-    "heroSubtitle": "Finden Sie die Fachkräfte, die Ihr Unternehmen voranbringen — motiviert, qualifiziert und bereit.",
-    "heroCtaText": "Kandidaten anfragen",
-    "whyTitle": "Warum M&F Talent Connect?",
-    "benefits": [
-      { "title": "Vorausgewählte Kandidaten", "description": "Wir liefern Ihnen nur Bewerber, die Ihren Anforderungen entsprechen — mit geprüften Qualifikationen und Sprachkenntnissen." },
-      { "title": "Schnelle Besetzung", "description": "Dank unseres großen Netzwerks können wir offene Stellen in kürzester Zeit besetzen." },
-      { "title": "Rechtssicherheit", "description": "Wir übernehmen die komplette Abwicklung aller Visa- und Anerkennungsverfahren — Sie müssen sich um nichts kümmern." },
-      { "title": "Integration & Support", "description": "Nach der Einstellung begleiten wir sowohl Ihr Unternehmen als auch den neuen Mitarbeiter in der Eingewöhnungsphase." }
-    ],
-    "howTitle": "So funktioniert es",
-    "steps": [
-      { "num": "01", "title": "Anfrage senden", "desc": "Teilen Sie uns Ihre offene Stelle und Anforderungen mit." },
-      { "num": "02", "title": "Kandidatenauswahl", "desc": "Wir suchen und präsentieren geeignete Bewerber." },
-      { "num": "03", "title": "Vorstellungsgespräch", "desc": "Sie führen Gespräche und treffen Ihre Wahl." },
-      { "num": "04", "title": "Onboarding", "desc": "Wir begleiten den gesamten Prozess bis zur Einstellung." }
-    ],
-    "requestBtn": "Jetzt Anfrage stellen"
-  },
   "contact": {
     "heroTitle": "Kontakt",
     "heroSubtitle": "Nehmen Sie Kontakt auf — wir antworten innerhalb von 24 Stunden.",

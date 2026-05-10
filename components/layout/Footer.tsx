@@ -15,7 +15,14 @@ export async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="font-bold text-xl mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
-              M<span className="text-accent">&amp;</span>F Talent Connect
+              M
+              <span
+                className="text-accent mx-0.5"
+                style={{ fontFamily: 'var(--font-body)', fontWeight: 700 }}
+              >
+                &
+              </span>
+              F Talent Connect
             </h3>
             <p className="text-blue-200 text-sm">{siteConfig.tagline}</p>
           </div>

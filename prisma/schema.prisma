@@ -57,6 +57,19 @@ model Setting {
   @@map("settings")
 }
 
+model PageContent {
+  id        Int      @id @default(autoincrement())
+  slug      String
+  locale    String
+  content   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([slug, locale])
+  @@index([slug])
+  @@map("page_contents")
+}
+
 model Application {
   id        Int      @id @default(autoincrement())
   firstName String

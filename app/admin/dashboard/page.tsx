@@ -27,39 +27,101 @@ export default async function DashboardPage() {
   const stats = await getStats()
 
   const cards = [
-    { label: 'Jobs total', value: stats.jobs, sub: `${stats.activeJobs} aktiv`, href: '/admin/jobs', color: 'bg-blue-50 text-primary' },
-    { label: 'Formations total', value: stats.trainings, sub: `${stats.activeTrainings} aktiv`, href: '/admin/formations', color: 'bg-orange-50 text-accent' },
-    { label: 'Bewerbungen', value: stats.applications, sub: `${stats.newApplications} neu`, href: '/admin/applications', color: 'bg-green-50 text-green-700' },
-    { label: 'Kontaktnachrichten', value: stats.contacts, sub: `${stats.newContacts} neu`, href: '/admin/contacts', color: 'bg-purple-50 text-purple-700' },
+    {
+      label: 'Stellenangebote',
+      value: stats.jobs,
+      sub: `${stats.activeJobs} aktiv`,
+      href: '/admin/jobs',
+      ring: 'ring-blue-200',
+      iconBg: 'bg-blue-50 text-primary',
+      icon: '💼',
+    },
+    {
+      label: 'Ausbildungen',
+      value: stats.trainings,
+      sub: `${stats.activeTrainings} aktiv`,
+      href: '/admin/formations',
+      ring: 'ring-orange-200',
+      iconBg: 'bg-orange-50 text-accent',
+      icon: '🎓',
+    },
+    {
+      label: 'Bewerbungen',
+      value: stats.applications,
+      sub: `${stats.newApplications} neu`,
+      href: '/admin/applications',
+      ring: 'ring-emerald-200',
+      iconBg: 'bg-emerald-50 text-emerald-700',
+      icon: '📋',
+    },
+    {
+      label: 'Kontaktnachrichten',
+      value: stats.contacts,
+      sub: `${stats.newContacts} neu`,
+      href: '/admin/contacts',
+      ring: 'ring-purple-200',
+      iconBg: 'bg-purple-50 text-purple-700',
+      icon: '✉️',
+    },
+  ]
+
+  const quickActions = [
+    { label: 'Hero & Banner bearbeiten', href: '/admin/hero', icon: '🖼️', desc: 'Startseiten-Bannertexte ändern' },
+    { label: 'Seiten-Inhalte verwalten', href: '/admin/pages', icon: '📝', desc: 'Texte auf "Für Unternehmen", "Über uns" usw. bearbeiten' },
+    { label: 'Neue Stelle ausschreiben', href: '/admin/jobs/new', icon: '➕', desc: 'Stellenangebot erstellen' },
+    { label: 'Neues Ausbildungsangebot', href: '/admin/formations/new', icon: '🎓', desc: 'Ausbildungsplatz hinzufügen' },
+    { label: 'E-Mail-Adresse pflegen', href: '/admin/settings', icon: '⚙️', desc: 'Empfangsadresse für Bewerbungen' },
   ]
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-foreground mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
-        Dashboard
-      </h1>
+      <div className="mb-8">
+        <h1
+          className="text-3xl md:text-4xl font-bold text-foreground"
+          style={{ fontFamily: 'var(--font-heading)' }}
+        >
+          Dashboard
+        </h1>
+        <p className="text-muted mt-1">Übersicht über Ihre Inhalte und Anfragen.</p>
+      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {cards.map((card) => (
-          <Link key={card.label} href={card.href}>
-            <div className={`${card.color} rounded-xl p-6 hover:shadow-md transition-shadow`}>
-              <p className="text-sm font-medium opacity-80">{card.label}</p>
-              <p className="text-4xl font-bold mt-1" style={{ fontFamily: 'var(--font-heading)' }}>{card.value}</p>
-              <p className="text-xs mt-2 opacity-70">{card.sub}</p>
+          <Link key={card.label} href={card.href} className="group">
+            <div className="bg-white rounded-xl p-5 ring-1 ring-gray-100 hover:ring-2 hover:shadow-md transition-all h-full">
+              <div className="flex items-start justify-between">
+                <div
+                  className={`${card.iconBg} w-10 h-10 rounded-lg flex items-center justify-center text-lg`}
+                >
+                  {card.icon}
+                </div>
+                <span className="text-xs text-muted">{card.sub}</span>
+              </div>
+              <p className="text-sm text-muted mt-4">{card.label}</p>
+              <p
+                className="text-3xl font-bold mt-1 text-foreground"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                {card.value}
+              </p>
             </div>
           </Link>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {[
-          { label: 'Hero bearbeiten', href: '/admin/hero', icon: '🖼️', desc: 'Startseiten-Bannertexte ändern' },
-          { label: 'Job hinzufügen', href: '/admin/jobs/new', icon: '➕', desc: 'Neue Stelle ausschreiben' },
-          { label: 'Formation hinzufügen', href: '/admin/formations/new', icon: '🎓', desc: 'Neues Ausbildungsangebot' },
-        ].map((action) => (
+      <div className="mb-4">
+        <h2
+          className="text-xl font-bold text-foreground"
+          style={{ fontFamily: 'var(--font-heading)' }}
+        >
+          Schnellzugriff
+        </h2>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {quickActions.map((action) => (
           <Link key={action.href} href={action.href}>
-            <div className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md hover:border-accent/30 transition-all">
-              <div className="text-3xl mb-3">{action.icon}</div>
+            <div className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md hover:border-accent/40 transition-all h-full">
+              <div className="text-2xl mb-3">{action.icon}</div>
               <h3 className="font-semibold text-foreground">{action.label}</h3>
               <p className="text-sm text-muted mt-1">{action.desc}</p>
             </div>

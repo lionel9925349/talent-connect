@@ -138,50 +138,6 @@
       { "name": "Sandra K.", "role": "Corporate Consultant", "bio": "Connects German companies with international talent." }
     ]
   },
-  "forApplicants": {
-    "heroTitle": "For Applicants",
-    "heroSubtitle": "Your dream of working or studying in Germany — we make it real.",
-    "heroCtaText": "Apply Now",
-    "supportTitle": "We guide you every step of the way",
-    "supportSubtitle": "The path to Germany can be complex. We make it easier — with personal guidance, expertise, and genuine commitment to your success.",
-    "support": [
-      { "title": "Application Support", "desc": "We help you create a compelling application in German." },
-      { "title": "Visa & Recognition", "desc": "Full support with all administrative procedures." },
-      { "title": "Language Preparation", "desc": "Recommendations for language courses and exam preparation." },
-      { "title": "Integration", "desc": "Support with finding housing and settling in Germany." }
-    ],
-    "eligibilityTitle": "Who can apply?",
-    "eligibility": [
-      "Professionals with a recognized or recognizable qualification",
-      "Apprenticeship seekers with a good educational background",
-      "Persons with German language skills from B1 level",
-      "Motivated candidates with a clear career goal"
-    ],
-    "readyTitle": "Ready to start?",
-    "readySubtitle": "Browse our current offers or get in touch directly.",
-    "viewJobs": "View job offers",
-    "viewTrainings": "Apprenticeship offers"
-  },
-  "forCompanies": {
-    "heroTitle": "For Companies",
-    "heroSubtitle": "Find the professionals who will drive your company forward — motivated, qualified, and ready.",
-    "heroCtaText": "Request candidates",
-    "whyTitle": "Why M&F Talent Connect?",
-    "benefits": [
-      { "title": "Pre-selected Candidates", "description": "We only deliver applicants who match your requirements — with verified qualifications and language skills." },
-      { "title": "Fast Placement", "description": "Thanks to our extensive network, we can fill open positions in a very short time." },
-      { "title": "Legal Compliance", "description": "We handle all visa and recognition procedures from start to finish — you don't have to worry about anything." },
-      { "title": "Integration & Support", "description": "After hiring, we support both your company and the new employee during the onboarding phase." }
-    ],
-    "howTitle": "How it works",
-    "steps": [
-      { "num": "01", "title": "Send request", "desc": "Tell us about your open position and requirements." },
-      { "num": "02", "title": "Candidate selection", "desc": "We search and present suitable applicants." },
-      { "num": "03", "title": "Interview", "desc": "You conduct interviews and make your choice." },
-      { "num": "04", "title": "Onboarding", "desc": "We accompany the entire process through to hiring." }
-    ],
-    "requestBtn": "Submit a request"
-  },
   "contact": {
     "heroTitle": "Contact",
     "heroSubtitle": "Get in touch — we respond within 24 hours.",

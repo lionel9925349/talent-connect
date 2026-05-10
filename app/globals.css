@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/*
+ * Subset font from Google Fonts: Inter weight 600, ONLY the ampersand glyph.
+ * This downloads a few hundred bytes once, and gives us a clean & glyph
+ * regardless of the user's installed system fonts.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&text=%26&display=swap");
+
 @theme {
   /* Brand colors */
   --color-primary: #1A3A6B;
@@ -12,8 +19,13 @@
   --color-foreground: #1A1A2E;
   --color-muted: #6B7280;
 
-  /* Typography */
-  --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  /*
+   * Typography
+   * "Inter" is loaded as a subset (only & character). When listed first in
+   * the heading font-family chain, the browser uses it for & only, then
+   * falls back to Playfair for every other character.
+   */
+  --font-heading: "Inter", var(--font-playfair), "Playfair Display", Georgia, serif;
   --font-body: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
 }
 
