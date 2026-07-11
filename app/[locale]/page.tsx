@@ -1,23 +1,36 @@
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 import { getTranslations, getLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
+import { ProcessSection } from '@/components/sections/ProcessSection'
 import { JobCard } from '@/components/sections/JobCard'
 import { Button } from '@/components/ui/Button'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import { prisma } from '@/lib/prisma'
 
 async function getHomeData() {
   try {
     const [hero, jobs, trainings] = await Promise.all([
       prisma.heroContent.findUnique({ where: { key: 'home_hero' } }),
-      prisma.jobOffer.findMany({ where: { isActive: true }, take: 3, orderBy: { createdAt: 'desc' } }),
-      prisma.trainingOffer.findMany({ where: { isActive: true }, take: 3, orderBy: { createdAt: 'desc' } }),
+      prisma.jobOffer.findMany({
+        where: { isActive: true },
+        take: 3,
+        orderBy: { createdAt: 'desc' },
+        select: { id: true, title: true, company: true, location: true, contractType: true },
+      }),
+      prisma.trainingOffer.findMany({
+        where: { isActive: true },
+        take: 3,
+        orderBy: { createdAt: 'desc' },
+        select: { id: true, title: true, sector: true, duration: true, location: true },
+      }),
     ])
     return { hero, jobs, trainings }
-  } catch {
+  } catch (err) {
+    console.error('getHomeData error:', err)
     return { hero: null, jobs: [], trainings: [] }
   }
 }
@@ -35,25 +48,33 @@ export default async function HomePage() {
       <Navbar />
       <main className="flex-1">
         <HeroSection
+          eyebrow={hero?.eyebrow ?? t('heroEyebrow')}
           title={hero?.title ?? t('heroTitle')}
           subtitle={hero?.subtitle ?? t('heroSubtitle')}
           ctaText={hero?.ctaText ?? t('heroCtaText')}
           ctaLink={hero?.ctaLink ?? `mailto:contact@mf-talent-connect.de?subject=Bewerbung%20bei%20M%26F%20Talent%20Connect`}
+          secondaryCtaText={t('heroAllOffers')}
+          secondaryCtaLink={lp('/jobangebote')}
           keywords={keywords}
         />
 
         <ServicesSection />
 
+        <ProcessSection />
+
         {jobs.length > 0 && (
-          <section className="py-16 md:py-24">
+          <section className="py-20 md:py-28">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>
-                  {t('latestJobs')}
-                </h2>
-                <Button href={lp('/jobangebote')} variant="outline" size="sm">{t('viewAll')}</Button>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <SectionHeading
+                title={t('latestJobs')}
+                className="mb-10"
+                action={
+                  <Button href={lp('/jobangebote')} variant="ghost" size="sm">
+                    {t('viewAll')} <span aria-hidden="true">→</span>
+                  </Button>
+                }
+              />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {jobs.map((job) => (
                   <JobCard key={job.id} id={job.id} title={job.title} company={job.company}
                     location={job.location} contractType={job.contractType} locale={locale} />
@@ -64,15 +85,18 @@ export default async function HomePage() {
         )}
 
         {trainings.length > 0 && (
-          <section className="py-16 md:py-24 bg-surface">
+          <section className="py-20 md:py-28 bg-white border-y border-border/60">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>
-                  {t('latestTrainings')}
-                </h2>
-                <Button href={lp('/ausbildungsangebote')} variant="outline" size="sm">{t('viewAll')}</Button>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <SectionHeading
+                title={t('latestTrainings')}
+                className="mb-10"
+                action={
+                  <Button href={lp('/ausbildungsangebote')} variant="ghost" size="sm">
+                    {t('viewAll')} <span aria-hidden="true">→</span>
+                  </Button>
+                }
+              />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {trainings.map((tr) => (
                   <JobCard key={tr.id} id={tr.id} title={tr.title} company={tr.sector}
                     location={tr.location} contractType={tr.duration} type="training" locale={locale} />
@@ -82,17 +106,30 @@ export default async function HomePage() {
           </section>
         )}
 
-        <section className="py-16 bg-accent text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
-              {t('ctaTitle')}
-            </h2>
-            <p className="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">{t('ctaSubtitle')}</p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button href={lp('/kontakt')} variant="secondary" size="lg">{t('ctaContact')}</Button>
-              <Button href={lp('/fuer-bewerber')} size="lg" className="bg-white text-foreground hover:bg-orange-50 border border-white/20">
-                {t('ctaLearnMore')}
-              </Button>
+        <section className="py-20 md:py-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+              className="relative isolate overflow-hidden rounded-3xl px-6 py-16 md:px-16 md:py-20 text-center text-white shadow-[var(--shadow-lift)]"
+              style={{ background: 'linear-gradient(135deg, var(--color-accent-strong) 0%, var(--color-accent-strong-hover) 100%)' }}
+            >
+              <div className="absolute inset-0 -z-10 bg-grid opacity-40" aria-hidden="true" />
+              <div
+                className="absolute -top-24 -right-20 w-80 h-80 rounded-full -z-10 blur-3xl opacity-30"
+                style={{ background: 'radial-gradient(circle, #fff 0%, transparent 70%)' }}
+                aria-hidden="true"
+              />
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 max-w-2xl mx-auto">
+                {t('ctaTitle')}
+              </h2>
+              <p className="text-white/90 text-lg mb-9 max-w-2xl mx-auto">{t('ctaSubtitle')}</p>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <Button href={lp('/kontakt')} size="lg" className="bg-white text-accent-strong hover:bg-white/90">
+                  {t('ctaContact')}
+                </Button>
+                <Button href={lp('/fuer-bewerber')} variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10 hover:border-white">
+                  {t('ctaLearnMore')}
+                </Button>
+              </div>
             </div>
           </div>
         </section>

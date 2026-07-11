@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Description du projet
 Site vitrine bilingue (Allemand principal, Français secondaire) pour M&F Talent Connect,
-une agence qui met en relation des travailleurs et apprenants africains/européens avec
+une agence qui met en relation des travailleurs et apprenants venus de l'étranger avec
 des entreprises allemandes. Le site inclut un dashboard admin protégé pour gérer les
 contenus dynamiques.
 

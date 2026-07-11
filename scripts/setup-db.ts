@@ -24,6 +24,8 @@ CREATE TABLE IF NOT EXISTS "hero_content" (
   "ctaLink"   TEXT        NOT NULL,
   "updatedAt" TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+-- Colonne ajoutée ultérieurement (idempotent pour les bases déjà créées)
+ALTER TABLE "hero_content" ADD COLUMN IF NOT EXISTS "eyebrow" TEXT;
 
 -- job_offers
 CREATE TABLE IF NOT EXISTS "job_offers" (

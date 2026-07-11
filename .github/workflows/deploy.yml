@@ -2,8 +2,8 @@ name: Build & Deploy
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*.*.*'   # déclenché uniquement sur les tags ex: v2.0.1
 
 jobs:
   deploy:
@@ -13,9 +13,16 @@ jobs:
       packages: write
 
     steps:
+      # ── 1. Source ────────────────────────────────────────────────────────────
       - name: Checkout
         uses: actions/checkout@v4
 
+      # ── 2. Extract version from tag ──────────────────────────────────────────
+      - name: Extract version
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      # ── 3. Build & push image ────────────────────────────────────────────────
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
@@ -23,16 +30,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push app image
+      - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:main
+            ghcr.io/${{ github.repository }}:${{ steps.version.outputs.VERSION }}
             ghcr.io/${{ github.repository }}:latest
 
+      # ── 4. Copy compose file to VPS ──────────────────────────────────────────
       - name: Copy docker-compose.yml to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -43,6 +51,7 @@ jobs:
           source:   docker-compose.yml
           target:   ~/mf-talent-connect
 
+      # ── 5. Deploy on VPS ─────────────────────────────────────────────────────
       - name: Deploy on VPS
         uses: appleboy/ssh-action@v1
         with:
@@ -50,12 +59,38 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key:      ${{ secrets.VPS_SSH_KEY }}
           port:     ${{ secrets.VPS_PORT }}
-          command_timeout: 3m
+          command_timeout: 5m
           script: |
             set -e
             cd ~/mf-talent-connect
+
+            cat > .env <<'ENVEOF'
+            GHCR_IMAGE=ghcr.io/${{ github.repository }}:${{ steps.version.outputs.VERSION }}
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+            ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}
+            ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
+            AUTH_SECRET=${{ secrets.AUTH_SECRET }}
+            NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
+            SMTP_HOST=${{ secrets.SMTP_HOST }}
+            SMTP_PORT=${{ secrets.SMTP_PORT }}
+            SMTP_SECURE=${{ secrets.SMTP_SECURE }}
+            SMTP_USER=${{ secrets.SMTP_USER }}
+            SMTP_PASS=${{ secrets.SMTP_PASS }}
+            SMTP_FROM=${{ secrets.SMTP_FROM }}
+            MINIO_ENDPOINT=${{ secrets.MINIO_ENDPOINT }}
+            MINIO_PORT=${{ secrets.MINIO_PORT }}
+            MINIO_USE_SSL=${{ secrets.MINIO_USE_SSL }}
+            MINIO_ACCESS_KEY=${{ secrets.MINIO_ACCESS_KEY }}
+            MINIO_SECRET_KEY=${{ secrets.MINIO_SECRET_KEY }}
+            MINIO_BUCKET=${{ secrets.MINIO_BUCKET }}
+            ENVEOF
+
             echo "${{ secrets.GITHUB_TOKEN }}" | \
               docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
             docker compose pull app
             docker compose up -d --remove-orphans
             sleep 10

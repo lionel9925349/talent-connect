@@ -3,12 +3,25 @@ export const revalidate = 60
 import { getTranslations, getLocale } from 'next-intl/server'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { TrainingsFilterClient } from '@/components/sections/TrainingsFilterClient'
+import { EmptyState } from '@/components/ui/EmptyState'
 import { prisma } from '@/lib/prisma'
 
 async function getTrainings() {
   try {
-    return await prisma.trainingOffer.findMany({ where: { isActive: true }, orderBy: { createdAt: 'desc' } })
-  } catch {
+    return await prisma.trainingOffer.findMany({
+      where: { isActive: true },
+      orderBy: { createdAt: 'desc' },
+      select: {
+        id: true,
+        title: true,
+        sector: true,
+        duration: true,
+        location: true,
+        startDate: true,
+      },
+    })
+  } catch (err) {
+    console.error('getTrainings error:', err)
     return []
   }
 }
@@ -25,10 +38,12 @@ export default async function AusbildungsangebotePage() {
       <section className="py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {trainings.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-muted text-lg">{t('noTrainings')}</p>
-              <p className="text-muted text-sm mt-2">{t('checkBack')}</p>
-            </div>
+            <EmptyState
+              title={t('noTrainings')}
+              hint={t('checkBack')}
+              ctaText={t('emptyCta')}
+              ctaHref={`/${locale}/kontakt`}
+            />
           ) : (
             <TrainingsFilterClient trainings={trainings} locale={locale} />
           )}

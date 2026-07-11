@@ -29,8 +29,14 @@
     "heroTitle": "M&F Talent Connect",
     "heroSubtitle": "Bridging skilled professionals and the German market — connecting talents from abroad with German companies.",
     "heroCtaText": "Apply by Email",
+    "heroEyebrow": "Skilled workers & trainees for Germany",
     "heroAllOffers": "All Offers",
-    "heroKeywords": ["fast", "reliable", "straightforward", "Eye to Eye"],
+    "heroKeywords": [
+      "fast",
+      "reliable",
+      "straightforward",
+      "Eye to Eye"
+    ],
     "latestJobs": "Latest Job Offers",
     "latestTrainings": "Apprenticeship Offers",
     "viewAll": "View all",
@@ -88,7 +94,8 @@
       "resetFilters": "Reset filters",
       "clearAll": "Clear all filters",
       "activeFilters": "Active filters"
-    }
+    },
+    "emptyCta": "Send a speculative application"
   },
   "training": {
     "pageTitle": "Apprenticeship Offers",
@@ -116,7 +123,8 @@
       "description": "Description",
       "conditions": "Entry requirements",
       "applyBtn": "Apply now"
-    }
+    },
+    "emptyCta": "Get in touch"
   },
   "about": {
     "heroTitle": "About M&F Talent Connect",
@@ -133,9 +141,21 @@
     },
     "teamTitle": "Our Team",
     "team": [
-      { "name": "Marie F.", "role": "Founder & CEO", "bio": "Over 10 years of experience in international recruitment." },
-      { "name": "Amadou B.", "role": "Applicant Advisor", "bio": "Expert in integration and recognition procedures in Germany." },
-      { "name": "Sandra K.", "role": "Corporate Consultant", "bio": "Connects German companies with international talent." }
+      {
+        "name": "Marie F.",
+        "role": "Founder & CEO",
+        "bio": "Over 10 years of experience in international recruitment."
+      },
+      {
+        "name": "Amadou B.",
+        "role": "Applicant Advisor",
+        "bio": "Expert in integration and recognition procedures in Germany."
+      },
+      {
+        "name": "Sandra K.",
+        "role": "Corporate Consultant",
+        "bio": "Connects German companies with international talent."
+      }
     ]
   },
   "contact": {
@@ -215,5 +235,23 @@
     "disclaimerText": "The contents of our pages have been created with the greatest care. However, we cannot guarantee the accuracy, completeness and timeliness of the content.",
     "copyrightTitle": "Copyright",
     "copyrightText": "The content and works on these pages created by the site operators are subject to German copyright law. Reproduction, editing, distribution and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator."
+  },
+  "process": {
+    "title": "How it works",
+    "subtitle": "Three steps to the right position — or the right talent.",
+    "steps": [
+      {
+        "title": "Get in touch",
+        "description": "Send us your application or your request — free of charge and without obligation."
+      },
+      {
+        "title": "Precise matching",
+        "description": "We review qualifications and requirements and bring the right people and companies together."
+      },
+      {
+        "title": "Placement & support",
+        "description": "We guide both sides through the entire process — from paperwork to a successful start."
+      }
+    ]
   }
 }

@@ -6,9 +6,21 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("users")
+}
+
 model HeroContent {
   id        Int      @id @default(autoincrement())
   key       String   @unique
+  eyebrow   String?
   title     String
   subtitle  String
   ctaText   String
@@ -30,6 +42,7 @@ model JobOffer {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
+  @@index([isActive, createdAt(sort: Desc)])
   @@map("job_offers")
 }
 
@@ -46,6 +59,7 @@ model TrainingOffer {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  @@index([isActive, createdAt(sort: Desc)])
   @@map("training_offers")
 }
 
@@ -80,11 +94,14 @@ model Application {
   jobTitle  String
   company   String
   fileNames String[]
+  fileKeys  String[]
   status    String   @default("new")
   locale    String   @default("de")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@index([createdAt(sort: Desc)])
+  @@index([status])
   @@map("applications")
 }
 
@@ -101,5 +118,7 @@ model ContactMessage {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@index([createdAt(sort: Desc)])
+  @@index([status])
   @@map("contact_messages")
 }

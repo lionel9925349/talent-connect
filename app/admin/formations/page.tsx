@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic'
-
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import { Badge } from '@/components/ui/Badge'
@@ -7,8 +5,13 @@ import { Button } from '@/components/ui/Button'
 
 async function getTrainings() {
   try {
-    return await prisma.trainingOffer.findMany({ orderBy: { createdAt: 'desc' } })
-  } catch {
+    return await prisma.trainingOffer.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 200,
+      select: { id: true, title: true, sector: true, duration: true, isActive: true },
+    })
+  } catch (err) {
+    console.error('getTrainings (admin) error:', err)
     return []
   }
 }
@@ -19,7 +22,7 @@ export default async function AdminFormationsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>
+        <h1 className="font-heading text-2xl font-bold text-foreground">
           Ausbildungsangebote
         </h1>
         <Button href="/admin/formations/new" size="sm">+ Neue Formation</Button>

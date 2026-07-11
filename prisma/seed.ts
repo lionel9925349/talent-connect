@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
+import bcrypt from 'bcryptjs'
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! })
 const prisma = new PrismaClient({ adapter })
@@ -7,15 +8,30 @@ const prisma = new PrismaClient({ adapter })
 async function main() {
   console.log('🌱 Seeding database...')
 
+  // ── Admin user (idempotent) ────────────────────────────────────────────────
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@mf-talent-connect.de'
+  const adminPassword = process.env.ADMIN_PASSWORD
+  if (adminPassword) {
+    const passwordHash = await bcrypt.hash(adminPassword, 12)
+    await prisma.user.upsert({
+      where: { email: adminEmail },
+      update: { passwordHash, role: 'admin' },
+      create: { email: adminEmail, passwordHash, role: 'admin' },
+    })
+    console.log(`   • admin user: ${adminEmail}`)
+  } else {
+    console.warn('   ⚠ ADMIN_PASSWORD non défini — skip seed admin user')
+  }
+
   // ── Hero content ────────────────────────────────────────────────────────────
   await prisma.heroContent.upsert({
     where: { key: 'home_hero' },
     update: {},
     create: {
       key: 'home_hero',
-      title: 'Ihre Brücke zwischen Afrika und Deutschland',
+      title: 'Fachkräfte finden statt suchen – Ihr Partner für passgenaue Vermittlung von Talenten und Azubis',
       subtitle:
-        'M&F Talent Connect verbindet qualifizierte Fachkräfte und Ausbildungssuchende mit deutschen Unternehmen — für eine gemeinsame Zukunft.',
+        'M&F Talent Connect verbindet Fachkräfte und Ausbildungssuchende aus dem Ausland mit deutschen Unternehmen — für eine gemeinsame Zukunft.',
       ctaText: 'Jetzt bewerben',
       ctaLink: '/kontakt',
     },

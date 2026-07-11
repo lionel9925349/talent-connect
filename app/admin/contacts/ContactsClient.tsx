@@ -54,7 +54,7 @@ export function ContactsClient({ messages: initial }: { messages: ContactMessage
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>Kontaktnachrichten</h1>
+          <h1 className="font-heading text-2xl font-bold text-foreground">Kontaktnachrichten</h1>
           <p className="text-muted text-sm mt-1">{messages.length} Nachricht{messages.length !== 1 ? 'en' : ''} insgesamt</p>
         </div>
       </div>

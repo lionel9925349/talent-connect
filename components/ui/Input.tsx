@@ -13,13 +13,13 @@ export function Input({ label, error, className = '', id, ...props }: InputProps
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <label htmlFor={inputId} className="text-sm font-medium text-foreground">
+        <label htmlFor={inputId} className="text-sm font-semibold text-foreground/90">
           {label}
         </label>
       )}
       <input
         id={inputId}
-        className={`border border-gray-300 rounded-lg px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition ${error ? 'border-red-500' : ''} ${className}`}
+        className={`w-full bg-white border border-border rounded-xl px-4 py-3 text-[0.95rem] text-foreground placeholder:text-muted/60 shadow-[inset_0_1px_2px_rgb(15_24_45/0.03)] focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/12 transition duration-150 ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/12' : ''} ${className}`}
         {...props}
       />
       {error && <span className="text-sm text-red-500">{error}</span>}
@@ -32,14 +32,14 @@ export function Textarea({ label, error, className = '', id, ...props }: Textare
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <label htmlFor={inputId} className="text-sm font-medium text-foreground">
+        <label htmlFor={inputId} className="text-sm font-semibold text-foreground/90">
           {label}
         </label>
       )}
       <textarea
         id={inputId}
         rows={4}
-        className={`border border-gray-300 rounded-lg px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition resize-none ${error ? 'border-red-500' : ''} ${className}`}
+        className={`w-full bg-white border border-border rounded-xl px-4 py-3 text-[0.95rem] text-foreground placeholder:text-muted/60 shadow-[inset_0_1px_2px_rgb(15_24_45/0.03)] focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/12 transition duration-150 resize-none ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/12' : ''} ${className}`}
         {...props}
       />
       {error && <span className="text-sm text-red-500">{error}</span>}

@@ -1,7 +1,16 @@
 # Usage:
 #   docker compose -f docker-compose.dev.yml up -d
-#   → PostgreSQL démarre, migrations et seed s'exécutent automatiquement
-#   → Mettez DATABASE_URL=postgresql://mf_user:mf_password@localhost:5432/mf_talent dans .env.local
+#   → PostgreSQL + MinIO démarrent, migrations et seed s'exécutent automatiquement.
+#   → Mettez dans votre .env.local :
+#       DATABASE_URL=postgresql://mf_user:mf_password@localhost:5432/mf_talent
+#       MINIO_ENDPOINT=localhost
+#       MINIO_PORT=9000
+#       MINIO_USE_SSL=false
+#       MINIO_ACCESS_KEY=minioadmin
+#       MINIO_SECRET_KEY=minioadmin
+#       MINIO_BUCKET=mf-talent-uploads
+#
+#   Console MinIO : http://localhost:9001 (login minioadmin / minioadmin)
 #
 # Réinitialiser les données :
 #   docker compose -f docker-compose.dev.yml down -v && docker compose -f docker-compose.dev.yml up -d
@@ -24,6 +33,39 @@ services:
       timeout: 3s
       retries: 15
 
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - mf_dev_minio:/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:9000/minio/health/live || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  minio-bootstrap:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        mc alias set local http://minio:9000 minioadmin minioadmin
+        mc mb --ignore-existing local/mf-talent-uploads
+        mc anonymous set none local/mf-talent-uploads
+        echo "Bucket ready (private): mf-talent-uploads"
+    restart: "no"
+
   migrate:
     build:
       context: .
@@ -37,3 +79,4 @@ services:
 
 volumes:
   mf_dev_data:
+  mf_dev_minio:

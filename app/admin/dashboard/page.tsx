@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic'
-
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 
@@ -63,7 +61,7 @@ export default async function DashboardPage() {
       iconBg: 'bg-purple-50 text-purple-700',
       icon: '✉️',
     },
-  ]
+  ] as const
 
   const quickActions = [
     { label: 'Hero & Banner bearbeiten', href: '/admin/hero', icon: '🖼️', desc: 'Startseiten-Bannertexte ändern' },
@@ -71,14 +69,13 @@ export default async function DashboardPage() {
     { label: 'Neue Stelle ausschreiben', href: '/admin/jobs/new', icon: '➕', desc: 'Stellenangebot erstellen' },
     { label: 'Neues Ausbildungsangebot', href: '/admin/formations/new', icon: '🎓', desc: 'Ausbildungsplatz hinzufügen' },
     { label: 'E-Mail-Adresse pflegen', href: '/admin/settings', icon: '⚙️', desc: 'Empfangsadresse für Bewerbungen' },
-  ]
+  ] as const
 
   return (
     <div>
       <div className="mb-8">
         <h1
-          className="text-3xl md:text-4xl font-bold text-foreground"
-          style={{ fontFamily: 'var(--font-heading)' }}
+          className="font-heading text-3xl md:text-4xl font-bold text-foreground"
         >
           Dashboard
         </h1>
@@ -99,8 +96,7 @@ export default async function DashboardPage() {
               </div>
               <p className="text-sm text-muted mt-4">{card.label}</p>
               <p
-                className="text-3xl font-bold mt-1 text-foreground"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="font-heading text-3xl font-bold mt-1 text-foreground"
               >
                 {card.value}
               </p>
@@ -111,8 +107,7 @@ export default async function DashboardPage() {
 
       <div className="mb-4">
         <h2
-          className="text-xl font-bold text-foreground"
-          style={{ fontFamily: 'var(--font-heading)' }}
+          className="font-heading text-xl font-bold text-foreground"
         >
           Schnellzugriff
         </h2>

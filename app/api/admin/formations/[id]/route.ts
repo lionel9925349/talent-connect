@@ -1,48 +1,50 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
-import { isAdminAuthenticated } from '@/lib/auth'
+import { withAdmin } from '@/lib/withAdmin'
+import { parseId } from '@/lib/safeId'
+import { parseJson, trainingUpdateSchema } from '@/lib/schemas'
 
-interface Params {
-  params: Promise<{ id: string }>
+function revalidateTrainings(id: number) {
+  revalidatePath('/[locale]/ausbildungsangebote', 'page')
+  revalidatePath(`/[locale]/ausbildungsangebote/${id}`, 'page')
+  revalidatePath('/[locale]', 'page')
 }
 
-export async function GET(_req: NextRequest, { params }: Params) {
-  const auth = await isAdminAuthenticated()
-  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+function badId() {
+  return NextResponse.json({ error: 'Bad id' }, { status: 400 })
+}
 
+export const GET = withAdmin<{ id: string }>(async (_req, { params }) => {
   const { id } = await params
-  const training = await prisma.trainingOffer.findUnique({ where: { id: parseInt(id) } })
+  const trainingId = parseId(id)
+  if (trainingId === null) return badId()
+  const training = await prisma.trainingOffer.findUnique({ where: { id: trainingId } })
   if (!training) return NextResponse.json({ error: 'Not found' }, { status: 404 })
   return NextResponse.json(training)
-}
+})
 
-export async function PUT(request: NextRequest, { params }: Params) {
-  const auth = await isAdminAuthenticated()
-  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-
+export const PUT = withAdmin<{ id: string }>(async (request, { params }) => {
   const { id } = await params
-  const data = await request.json()
+  const trainingId = parseId(id)
+  if (trainingId === null) return badId()
+
+  const parsed = await parseJson(request, trainingUpdateSchema)
+  if (!parsed.ok) return parsed.response
+
   const training = await prisma.trainingOffer.update({
-    where: { id: parseInt(id) },
-    data: {
-      title: data.title,
-      sector: data.sector,
-      duration: data.duration,
-      location: data.location,
-      description: data.description,
-      conditions: data.conditions,
-      startDate: data.startDate,
-      isActive: data.isActive,
-    },
+    where: { id: trainingId },
+    data: parsed.data,
   })
+  revalidateTrainings(trainingId)
   return NextResponse.json(training)
-}
+})
 
-export async function DELETE(_req: NextRequest, { params }: Params) {
-  const auth = await isAdminAuthenticated()
-  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-
+export const DELETE = withAdmin<{ id: string }>(async (_req, { params }) => {
   const { id } = await params
-  await prisma.trainingOffer.delete({ where: { id: parseInt(id) } })
+  const trainingId = parseId(id)
+  if (trainingId === null) return badId()
+  await prisma.trainingOffer.delete({ where: { id: trainingId } })
+  revalidateTrainings(trainingId)
   return NextResponse.json({ ok: true })
-}
+})

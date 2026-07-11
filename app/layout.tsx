@@ -1,28 +1,34 @@
-import type { Metadata } from 'next'
-import { Playfair_Display, DM_Sans } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
-  display: 'swap',
-})
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mf-talent-connect.de'
 
 export const metadata: Metadata = {
-  title: 'M&F Talent Connect',
-  description: 'M&F Talent Connect — Ihre Brücke zwischen Afrika und Deutschland.',
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: 'M&F Talent Connect',
+    template: '%s | M&F Talent Connect',
+  },
+  description:
+    'M&F Talent Connect — passgenaue Vermittlung von Fachkräften und Auszubildenden aus dem Ausland an deutsche Unternehmen.',
+  applicationName: 'M&F Talent Connect',
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: 'website',
+    siteName: 'M&F Talent Connect',
+    title: 'M&F Talent Connect',
+    description: 'Passgenaue Vermittlung von Fachkräften und Auszubildenden an deutsche Unternehmen.',
+    url: BASE_URL,
+  },
+  twitter: { card: 'summary' },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#1A3A6B',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html className={`${playfair.variable} ${dmSans.variable}`}>
-      <body className="min-h-screen flex flex-col">{children}</body>
-    </html>
-  )
+  return children
 }

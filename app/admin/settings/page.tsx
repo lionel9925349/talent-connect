@@ -37,7 +37,7 @@ export default function AdminSettingsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-foreground mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
+      <h1 className="font-heading text-2xl font-bold text-foreground mb-2">
         Einstellungen
       </h1>
       <p className="text-muted text-sm mb-8">Allgemeine Konfiguration der Website</p>

@@ -1,42 +1,52 @@
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
+import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { Button } from '@/components/ui/Button'
 import { prisma } from '@/lib/prisma'
+import { parseId } from '@/lib/safeId'
 
 interface Props {
   params: Promise<{ id: string; locale: string }>
 }
 
-export async function generateMetadata({ params }: Props) {
-  const { id } = await params
-  const trainingId = parseInt(id, 10)
-  if (isNaN(trainingId)) return {}
+const getTraining = cache(async (id: number) => {
   try {
-    const training = await prisma.trainingOffer.findUnique({ where: { id: trainingId } })
-    if (!training) return {}
-    return {
-      title: `${training.title} — ${training.sector} | M&F Talent Connect`,
-      description: training.description.slice(0, 155),
-    }
-  } catch { return {} }
+    return await prisma.trainingOffer.findUnique({ where: { id } })
+  } catch (err) {
+    console.error('getTraining error:', err)
+    return null
+  }
+})
+
+export async function generateMetadata({ params }: Props) {
+  const { id, locale } = await params
+  const trainingId = parseId(id)
+  if (trainingId === null) return {}
+  const training = await getTraining(trainingId)
+  if (!training) return {}
+  const description = training.description.slice(0, 155)
+  const canonical = `/${locale}/ausbildungsangebote/${training.id}`
+  return {
+    title: `${training.title} — ${training.sector}`,
+    description,
+    alternates: { canonical },
+    openGraph: { title: `${training.title} — ${training.sector}`, description, url: canonical, type: 'article' },
+  }
 }
 
 export default async function AusbildungDetailPage({ params }: Props) {
   const { id, locale } = await params
-  const trainingId = parseInt(id, 10)
-  if (isNaN(trainingId)) notFound()
+  const trainingId = parseId(id)
+  if (trainingId === null) notFound()
 
-  const t = await getTranslations('training.detail')
+  const [t, training] = await Promise.all([
+    getTranslations('training.detail'),
+    getTraining(trainingId),
+  ])
 
-  let training
-  try {
-    training = await prisma.trainingOffer.findUnique({ where: { id: trainingId } })
-  } catch {
-    notFound()
-  }
   if (!training || !training.isActive) notFound()
 
   return (
@@ -47,7 +57,7 @@ export default async function AusbildungDetailPage({ params }: Props) {
 
       <div className="bg-white rounded-xl border border-gray-100 p-8 shadow-sm">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h1 className="font-heading text-3xl font-bold text-foreground">
             {training.title}
           </h1>
           <p className="text-accent font-medium mt-1">{training.sector}</p>
@@ -68,13 +78,13 @@ export default async function AusbildungDetailPage({ params }: Props) {
 
         <div className="space-y-6">
           <div>
-            <h2 className="font-bold text-foreground mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+            <h2 className="font-heading font-bold text-foreground mb-3">
               {t('description')}
             </h2>
             <p className="text-muted whitespace-pre-line leading-relaxed">{training.description}</p>
           </div>
           <div>
-            <h2 className="font-bold text-foreground mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+            <h2 className="font-heading font-bold text-foreground mb-3">
               {t('conditions')}
             </h2>
             <p className="text-muted whitespace-pre-line leading-relaxed">{training.conditions}</p>

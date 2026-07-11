@@ -1,15 +1,16 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useActionState, useRef, useState } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
+import { submitApplyAction, type ApplyState } from '@/app/[locale]/(public)/jobangebote/[id]/actions'
 
 interface ApplyFormProps {
-  jobTitle: string
-  company: string
   jobId: number
 }
+
+const INITIAL: ApplyState = { status: 'idle' }
 
 const ACCEPTED_TYPES = [
   'application/pdf',
@@ -36,14 +37,27 @@ function FileIcon() {
   )
 }
 
-export function ApplyForm({ jobTitle, company, jobId }: ApplyFormProps) {
+export function ApplyForm({ jobId }: ApplyFormProps) {
   const t = useTranslations('apply')
   const locale = useLocale()
   const [files, setFiles] = useState<File[]>([])
   const [fileError, setFileError] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [isDragging, setIsDragging] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const [state, formAction, isPending] = useActionState(submitApplyAction, INITIAL)
+  const status: 'success' | 'error' | 'idle' =
+    state.status === 'success' ? 'success' : state.status === 'error' ? 'error' : 'idle'
+
+  // Les fichiers viennent du state React (drag-drop + bouton). On les
+  // injecte dans la FormData avant d'appeler le dispatch.
+  function handleAction(formData: FormData) {
+    formData.delete('files')
+    for (const f of files) formData.append('files', f, f.name)
+    formData.set('jobId', String(jobId))
+    formData.set('locale', locale)
+    return formAction(formData)
+  }
 
   function addFiles(incoming: File[]) {
     setFileError('')
@@ -83,31 +97,6 @@ export function ApplyForm({ jobTitle, company, jobId }: ApplyFormProps) {
     addFiles(Array.from(e.dataTransfer.files))
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setStatus('loading')
-
-    const form = e.currentTarget
-    const data = new FormData()
-    data.append('firstName', (form.elements.namedItem('firstName') as HTMLInputElement).value)
-    data.append('lastName', (form.elements.namedItem('lastName') as HTMLInputElement).value)
-    data.append('email', (form.elements.namedItem('email') as HTMLInputElement).value)
-    data.append('phone', (form.elements.namedItem('phone') as HTMLInputElement).value)
-    data.append('jobTitle', jobTitle)
-    data.append('company', company)
-    data.append('jobId', String(jobId))
-    data.append('locale', locale)
-    files.forEach((file) => data.append('files', file, file.name))
-
-    try {
-      const res = await fetch('/api/apply', { method: 'POST', body: data })
-      if (!res.ok) throw new Error('failed')
-      setStatus('success')
-    } catch {
-      setStatus('error')
-    }
-  }
-
   if (status === 'success') {
     return (
       <div className="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
@@ -123,7 +112,7 @@ export function ApplyForm({ jobTitle, company, jobId }: ApplyFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form action={handleAction} className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Input label={t('firstName')} name="firstName" required placeholder={t('firstNamePlaceholder')} />
         <Input label={t('lastName')} name="lastName" required placeholder={t('lastNamePlaceholder')} />
@@ -226,8 +215,8 @@ export function ApplyForm({ jobTitle, company, jobId }: ApplyFormProps) {
         </p>
       )}
 
-      <Button type="submit" disabled={status === 'loading'} size="lg" className="w-full">
-        {status === 'loading' ? (
+      <Button type="submit" disabled={isPending} size="lg" className="w-full">
+        {isPending ? (
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
