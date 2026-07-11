@@ -73,6 +73,7 @@ jobs:
             ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}
             ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
             AUTH_SECRET=${{ secrets.AUTH_SECRET }}
+            AUTH_URL=https://talent.bekeletrack.de/api/auth
             NEXT_PUBLIC_SITE_URL=https://talent.bekeletrack.de
             SMTP_HOST=${{ secrets.SMTP_HOST }}
             SMTP_PORT=587

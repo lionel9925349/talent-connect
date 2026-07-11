@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
     optimizePackageImports: ['next-intl'],
+    serverActions: {
+      // Derrière le reverse proxy, l'app peut voir un Host interne
+      // (0.0.0.0:3000) différent de l'Origin public — sans cette liste,
+      // Next.js rejette les soumissions de formulaires (Server Actions).
+      allowedOrigins: ['talent.bekeletrack.de', 'localhost:3000', 'localhost:3003'],
+    },
   },
   async headers() {
     return [{ source: '/(.*)', headers: securityHeaders }]
