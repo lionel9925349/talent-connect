@@ -28,7 +28,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         const parsed = loginSchema.safeParse(raw)
         if (!parsed.success) return null
-        const { email, password } = parsed.data
+        const { password } = parsed.data
+        // Insensible à la casse : ensure-admin.js stocke l'email en minuscules.
+        const email = parsed.data.email.toLowerCase()
 
         const user = await prisma.user.findUnique({ where: { email } })
         // Hash réel d'un mot de passe inatteignable, pour aligner le coût

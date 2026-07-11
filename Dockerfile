@@ -31,9 +31,10 @@ RUN pnpm build
 # pas entrer en conflit avec le node_modules du build standalone.
 FROM base AS migrate
 WORKDIR /migrate
-RUN npm install prisma@7.7.0 dotenv@17.4.2 @prisma/adapter-pg@7.7.0 pg@8.20.0
+RUN npm install prisma@7.7.0 dotenv@17.4.2 @prisma/adapter-pg@7.7.0 pg@8.20.0 bcryptjs@3.0.3
 COPY prisma ./prisma
 COPY prisma.config.ts ./prisma.config.ts
+COPY scripts/ensure-admin.mjs ./ensure-admin.mjs
 
 # ── 3. Production runner ──────────────────────────────────────────────────────
 FROM base AS runner
