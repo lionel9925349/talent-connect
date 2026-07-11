@@ -14,4 +14,6 @@ COPY tsconfig.json ./
 RUN pnpm install --frozen-lockfile --ignore-scripts
 RUN npx prisma generate
 
-CMD ["sh", "-c", "npx tsx scripts/setup-db.ts && npx tsx prisma/seed.ts"]
+# Même chemin de migration qu'en production (prisma migrate deploy),
+# puis seed idempotent (admin user + contenus de démo).
+CMD ["sh", "-c", "npx prisma migrate deploy && npx tsx prisma/seed.ts"]

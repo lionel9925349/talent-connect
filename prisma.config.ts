@@ -1,5 +1,9 @@
 import { defineConfig } from 'prisma/config'
-import 'dotenv/config'
+import { config as loadEnv } from 'dotenv'
+
+// .env.local d'abord (dev Next.js), puis .env en repli. No-op si absents
+// (ex. dans l'image Docker, où DATABASE_URL vient de l'environnement).
+loadEnv({ path: ['.env.local', '.env'], quiet: true })
 
 // earlyAccess + migrate.adapter ne sont pas encore dans les types Prisma 7
 // mais fonctionnent au runtime — on caste vers le type du paramètre de

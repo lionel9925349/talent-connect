@@ -1,8 +1,11 @@
 # Usage:
-#   docker compose -f docker-compose.dev.yml up -d
+#   pnpm services:up      # démarre tout (ou : docker compose -f docker-compose.dev.yml up -d)
+#   pnpm dev:stack        # services + next dev en une commande
+#   pnpm services:down    # arrête (les données persistent)
+#   pnpm services:reset   # repart de zéro (supprime les volumes)
 #   → PostgreSQL + MinIO démarrent, migrations et seed s'exécutent automatiquement.
 #   → Mettez dans votre .env.local :
-#       DATABASE_URL=postgresql://mf_user:mf_password@localhost:5432/mf_talent
+#       DATABASE_URL=postgresql://mf_user:mf_password@localhost:5434/mf_talent
 #       MINIO_ENDPOINT=localhost
 #       MINIO_PORT=9000
 #       MINIO_USE_SSL=false
@@ -72,6 +75,9 @@ services:
       dockerfile: Dockerfile.migrate
     environment:
       DATABASE_URL: postgresql://mf_user:mf_password@db:5432/mf_talent
+      # Optionnels : permettent au seed de créer le compte admin local.
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@mf-talent-connect.de}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
     depends_on:
       db:
         condition: service_healthy
