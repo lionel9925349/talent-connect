@@ -11,6 +11,7 @@ type Application = {
   jobTitle: string
   company: string
   fileNames: string[]
+  fileKeys: string[]
   status: string
   locale: string
   createdAt: Date | string
@@ -49,7 +50,7 @@ export function ApplicationsClient({ applications: initial }: { applications: Ap
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>Bewerbungen</h1>
+          <h1 className="font-heading text-2xl font-bold text-foreground">Bewerbungen</h1>
           <p className="text-muted text-sm mt-1">{applications.length} Bewerbung{applications.length !== 1 ? 'en' : ''} insgesamt</p>
         </div>
       </div>
@@ -89,8 +90,37 @@ export function ApplicationsClient({ applications: initial }: { applications: Ap
                       <a href={`mailto:${app.email}`} className="hover:text-primary">{app.email}</a>
                       <span>{app.phone}</span>
                       <span>{date}</span>
-                      {app.fileNames.length > 0 && <span>📎 {app.fileNames.length} Dokument{app.fileNames.length !== 1 ? 'e' : ''}</span>}
                     </div>
+                    {app.fileNames.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {app.fileNames.map((name, idx) => {
+                          // Legacy applications (avant MinIO) ont fileNames mais
+                          // pas de fileKeys correspondant → on affiche le nom
+                          // sans lien plutôt qu'un href qui retournerait 404.
+                          const hasFile = !!app.fileKeys[idx]
+                          const cls = 'inline-flex items-center gap-1 px-2.5 py-1 bg-surface text-foreground text-xs rounded-lg border border-gray-200'
+                          return hasFile ? (
+                            <a
+                              key={`${app.id}-${idx}`}
+                              href={`/api/admin/applications/${app.id}/files/${idx}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`${cls} hover:border-primary hover:text-primary transition-colors`}
+                            >
+                              📎 <span className="truncate max-w-[200px]">{name}</span>
+                            </a>
+                          ) : (
+                            <span
+                              key={`${app.id}-${idx}`}
+                              title="Datei nicht mehr verfügbar (Legacy)"
+                              className={`${cls} opacity-60 cursor-not-allowed`}
+                            >
+                              📎 <span className="truncate max-w-[200px]">{name}</span>
+                            </span>
+                          )
+                        })}
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center gap-2 flex-wrap">
                     <select

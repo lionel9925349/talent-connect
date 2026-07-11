@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import type { Route } from 'next'
+import { cn } from '@/lib/cn'
 
 type Variant = 'primary' | 'secondary' | 'outline' | 'ghost'
 type Size = 'sm' | 'md' | 'lg'
@@ -12,89 +14,52 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-accent hover:bg-accent-hover text-white',
-  secondary: 'bg-primary hover:bg-primary-hover text-white',
-  outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white',
-  ghost: 'text-primary hover:bg-primary/10',
+  primary:
+    'bg-accent-strong hover:bg-accent-strong-hover text-white shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-lift)]',
+  secondary:
+    'bg-primary hover:bg-primary-hover text-white shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-lift)]',
+  outline:
+    'border border-primary/25 text-primary bg-white/0 hover:bg-primary hover:text-white hover:border-primary',
+  ghost: 'text-primary hover:bg-primary/8',
 }
 
 const sizeClasses: Record<Size, string> = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg',
+  sm: 'px-4 py-2 text-sm gap-1.5',
+  md: 'px-6 py-3 text-[0.95rem] gap-2',
+  lg: 'px-8 py-4 text-lg gap-2.5',
 }
 
-/**
- * Strip variant utility classes whose "type" (e.g. bg, text, border, hover:bg)
- * is also present in the user-supplied className override.
- *
- * Without this, Tailwind generates both `bg-accent` (variant) and `bg-white`
- * (override) into the final CSS, and the alphabetically-later class wins —
- * which is unpredictable. Removing the variant copy when overridden makes
- * `className` always win.
- */
-function mergeClasses(variantStr: string, overrideStr: string) {
-  if (!overrideStr) return variantStr
-
-  const groupOf = (cls: string) => {
-    const colon = cls.lastIndexOf(':')
-    const prefix = colon >= 0 ? cls.slice(0, colon + 1) : ''
-    const rest = colon >= 0 ? cls.slice(colon + 1) : cls
-    const dash = rest.indexOf('-')
-    if (dash < 0) return null
-    const kind = rest.slice(0, dash)
-    if (!['bg', 'text', 'border', 'ring', 'shadow', 'rounded'].includes(kind)) return null
-    return `${prefix}${kind}`
-  }
-
-  const overrideGroups = new Set(
-    overrideStr
-      .split(/\s+/)
-      .map((c) => groupOf(c))
-      .filter((g): g is string => g !== null),
-  )
-
-  const kept = variantStr
-    .split(/\s+/)
-    .filter((cls) => {
-      const g = groupOf(cls)
-      return g === null || !overrideGroups.has(g)
-    })
-    .join(' ')
-
-  return `${kept} ${overrideStr}`.trim()
-}
+const BASE =
+  'inline-flex items-center justify-center font-semibold rounded-xl cursor-pointer select-none transition-[transform,box-shadow,background-color,border-color,color] duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.985] disabled:pointer-events-none disabled:opacity-60'
 
 export function Button({
   variant = 'primary',
   size = 'md',
   href,
   children,
-  className = '',
+  className,
   onClick,
   ...props
 }: ButtonProps) {
-  const variantStr = variantClasses[variant]
-  const merged = mergeClasses(variantStr, className)
-  const base = `inline-flex items-center justify-center font-semibold rounded-lg transition-colors duration-200 cursor-pointer ${sizeClasses[size]} ${merged}`
+  const merged = cn(BASE, sizeClasses[size], variantClasses[variant], className)
 
   if (href) {
     if (href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('http')) {
       return (
-        <a href={href} className={base} onClick={onClick}>
+        <a href={href} className={merged} onClick={onClick}>
           {children}
         </a>
       )
     }
     return (
-      <Link href={href} className={base} onClick={onClick}>
+      <Link href={href as Route} className={merged} onClick={onClick}>
         {children}
       </Link>
     )
   }
 
   return (
-    <button className={base} onClick={onClick} {...props}>
+    <button className={merged} onClick={onClick} {...props}>
       {children}
     </button>
   )

@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { getPageContent } from '@/lib/pageSchemas'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 interface ForCompaniesContent {
   heroTitle: string
@@ -47,8 +47,7 @@ export default async function FuerUnternehmenPage() {
       <section className="py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
-            className="text-3xl md:text-4xl font-bold text-foreground mb-4"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4"
           >
             {c.introHeadline}
           </h2>
@@ -71,8 +70,7 @@ export default async function FuerUnternehmenPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2
-              className="text-3xl md:text-4xl font-bold text-foreground mb-3"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3"
             >
               {c.whyTitle}
             </h2>
@@ -85,8 +83,7 @@ export default async function FuerUnternehmenPage() {
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <h3
-                  className="font-bold text-foreground mb-2"
-                  style={{ fontFamily: 'var(--font-heading)' }}
+                  className="font-heading font-bold text-foreground mb-2"
                 >
                   {b.title}
                 </h3>
@@ -101,8 +98,7 @@ export default async function FuerUnternehmenPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2
-              className="text-3xl md:text-4xl font-bold text-foreground mb-3"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3"
             >
               {c.howTitle}
             </h2>
@@ -117,8 +113,7 @@ export default async function FuerUnternehmenPage() {
               {c.steps?.map((step) => (
                 <div key={step.num} className="text-center">
                   <div
-                    className="w-14 h-14 bg-accent text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4 ring-4 ring-white"
-                    style={{ fontFamily: 'var(--font-heading)' }}
+                    className="font-heading w-14 h-14 bg-accent text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4 ring-4 ring-white"
                   >
                     {step.num}
                   </div>
@@ -135,8 +130,7 @@ export default async function FuerUnternehmenPage() {
         <section className="py-16 bg-primary text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
-              className="text-3xl md:text-4xl font-bold mb-10 text-center"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="font-heading text-3xl md:text-4xl font-bold mb-10 text-center"
             >
               {c.extraTitle}
             </h2>
@@ -146,7 +140,7 @@ export default async function FuerUnternehmenPage() {
                   key={b.title}
                   className="bg-white/10 border border-white/15 rounded-xl p-6 backdrop-blur"
                 >
-                  <h3 className="font-bold text-lg mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                  <h3 className="font-heading font-bold text-lg mb-2">
                     {b.title}
                   </h3>
                   <p className="text-blue-100 text-[0.95rem] leading-relaxed">{b.description}</p>
@@ -162,8 +156,7 @@ export default async function FuerUnternehmenPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2
-                className="text-3xl md:text-4xl font-bold text-foreground mb-3"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3"
               >
                 {c.relocationTitle}
               </h2>
@@ -175,8 +168,7 @@ export default async function FuerUnternehmenPage() {
               {c.relocation.map((b) => (
                 <Card key={b.title} hover>
                   <h3
-                    className="font-bold text-foreground mb-3"
-                    style={{ fontFamily: 'var(--font-heading)' }}
+                    className="font-heading font-bold text-foreground mb-3"
                   >
                     {b.title}
                   </h3>
@@ -191,8 +183,7 @@ export default async function FuerUnternehmenPage() {
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2
-            className="text-3xl md:text-4xl font-bold text-foreground mb-4"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4"
           >
             {c.finalTitle}
           </h2>

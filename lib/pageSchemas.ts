@@ -495,8 +495,8 @@ export async function getPageContent<T = Record<string, unknown>>(
       const override = row.content as Record<string, unknown>
       return { ...defaults, ...override } as T
     }
-  } catch {
-    // ignore — fall back to defaults
+  } catch (err) {
+    console.error('getPageContent error:', err)
   }
   return defaults as T
 }

@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { getPageContent } from '@/lib/pageSchemas'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 interface ForApplicantsContent {
   heroTitle: string
@@ -68,8 +68,7 @@ export default async function FuerBewerberPage() {
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2
-            className="text-3xl md:text-4xl font-bold text-foreground mb-4"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4"
           >
             {c.welcomeHeadline}
           </h2>
@@ -82,8 +81,7 @@ export default async function FuerBewerberPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2
-                className="text-3xl md:text-4xl font-bold text-foreground mb-3"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3"
               >
                 {c.checklistTitle}
               </h2>
@@ -100,7 +98,7 @@ export default async function FuerBewerberPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                       </svg>
                     </span>
-                    <h3 className="font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>
+                    <h3 className="font-heading font-bold text-foreground">
                       {g.title}
                     </h3>
                   </div>
@@ -117,8 +115,7 @@ export default async function FuerBewerberPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2
-                className="text-3xl md:text-4xl font-bold text-foreground mb-3"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3"
               >
                 {c.supportTitle}
               </h2>
@@ -130,8 +127,7 @@ export default async function FuerBewerberPage() {
               {c.support.map((s) => (
                 <Card key={s.title} hover>
                   <h3
-                    className="font-bold text-foreground mb-3"
-                    style={{ fontFamily: 'var(--font-heading)' }}
+                    className="font-heading font-bold text-foreground mb-3"
                   >
                     {s.title}
                   </h3>
@@ -146,8 +142,7 @@ export default async function FuerBewerberPage() {
       <section className="py-16 bg-primary text-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2
-            className="text-3xl md:text-4xl font-bold mb-4"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            className="font-heading text-3xl md:text-4xl font-bold mb-4"
           >
             {c.commitmentTitle}
           </h2>
@@ -160,8 +155,7 @@ export default async function FuerBewerberPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2
-                className="text-3xl md:text-4xl font-bold text-foreground mb-3"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3"
               >
                 {c.stepsTitle}
               </h2>
@@ -176,8 +170,7 @@ export default async function FuerBewerberPage() {
                 {c.steps.map((step) => (
                   <div key={step.num} className="text-center">
                     <div
-                      className="w-14 h-14 bg-accent text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4 ring-4 ring-white"
-                      style={{ fontFamily: 'var(--font-heading)' }}
+                      className="font-heading w-14 h-14 bg-accent text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4 ring-4 ring-white"
                     >
                       {step.num}
                     </div>
@@ -196,8 +189,7 @@ export default async function FuerBewerberPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2
-                className="text-3xl md:text-4xl font-bold text-foreground mb-5"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-5"
               >
                 {c.eligibilityTitle}
               </h2>
@@ -224,8 +216,7 @@ export default async function FuerBewerberPage() {
             </div>
             <div className="bg-primary text-white rounded-xl p-8">
               <h3
-                className="text-2xl font-bold mb-3"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="font-heading text-2xl font-bold mb-3"
               >
                 {c.readyTitle}
               </h3>

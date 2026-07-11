@@ -1,12 +1,18 @@
-export const dynamic = 'force-dynamic'
-
 import { prisma } from '@/lib/prisma'
 import { ApplicationsClient } from './ApplicationsClient'
 
+const PAGE_SIZE = 50
+
 async function getApplications() {
   try {
-    return await prisma.application.findMany({ orderBy: { createdAt: 'desc' } })
-  } catch { return [] }
+    return await prisma.application.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: PAGE_SIZE,
+    })
+  } catch (err) {
+    console.error('getApplications error:', err)
+    return []
+  }
 }
 
 export default async function ApplicationsPage() {

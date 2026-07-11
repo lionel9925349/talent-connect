@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button'
 
 interface HeroData {
   key: string
+  eyebrow: string
   title: string
   subtitle: string
   ctaText: string
@@ -13,7 +14,7 @@ interface HeroData {
 }
 
 const defaultHeroes: HeroData[] = [
-  { key: 'home_hero', title: 'Ihre Brücke zwischen Afrika und Deutschland', subtitle: 'M&F Talent Connect verbindet qualifizierte Fachkräfte mit deutschen Unternehmen.', ctaText: 'Jetzt bewerben', ctaLink: '/kontakt' },
+  { key: 'home_hero', eyebrow: 'Fachkräfte & Azubis für Deutschland', title: 'Fachkräfte finden statt suchen – Ihr Partner für passgenaue Vermittlung von Talenten und Azubis', subtitle: 'M&F Talent Connect verbindet Fachkräfte und Ausbildungssuchende aus dem Ausland mit deutschen Unternehmen — für eine gemeinsame Zukunft.', ctaText: 'Jetzt bewerben', ctaLink: '/kontakt' },
 ]
 
 export default function AdminHeroPage() {
@@ -26,7 +27,11 @@ export default function AdminHeroPage() {
     fetch('/api/admin/hero')
       .then((r) => r.json())
       .then((data: HeroData[]) => {
-        setHeroes(data.length ? data : defaultHeroes)
+        setHeroes(
+          data.length
+            ? data.map((h) => ({ ...h, eyebrow: h.eyebrow ?? '' }))
+            : defaultHeroes,
+        )
         setLoading(false)
       })
       .catch(() => {
@@ -55,7 +60,7 @@ export default function AdminHeroPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-foreground mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
+      <h1 className="font-heading text-2xl font-bold text-foreground mb-8">
         Hero / Bannières
       </h1>
 
@@ -66,6 +71,12 @@ export default function AdminHeroPage() {
               {hero.key}
             </h2>
             <div className="space-y-4">
+              <Input
+                label="Eyebrow (kleine Zeile über dem Titel — optional)"
+                value={hero.eyebrow}
+                onChange={(e) => update(hero.key, 'eyebrow', e.target.value)}
+                placeholder="z. B. Fachkräfte & Azubis für Deutschland"
+              />
               <Input label="Titel" value={hero.title} onChange={(e) => update(hero.key, 'title', e.target.value)} />
               <Textarea label="Untertitel" value={hero.subtitle} onChange={(e) => update(hero.key, 'subtitle', e.target.value)} rows={3} />
               <div className="grid grid-cols-2 gap-4">

@@ -1,28 +1,47 @@
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
+import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { Badge } from '@/components/ui/Badge'
 import { ApplyForm } from '@/components/sections/ApplyForm'
 import { prisma } from '@/lib/prisma'
+import { parseId } from '@/lib/safeId'
 
 interface Props {
   params: Promise<{ id: string; locale: string }>
 }
 
-export async function generateMetadata({ params }: Props) {
-  const { id } = await params
-  const jobId = parseInt(id, 10)
-  if (isNaN(jobId)) return {}
+const getJob = cache(async (id: number) => {
   try {
-    const job = await prisma.jobOffer.findUnique({ where: { id: jobId } })
-    if (!job) return {}
-    return {
-      title: `${job.title} bei ${job.company} | M&F Talent Connect`,
-      description: job.description.slice(0, 155),
-    }
-  } catch { return {} }
+    return await prisma.jobOffer.findUnique({ where: { id } })
+  } catch (err) {
+    console.error('getJob error:', err)
+    return null
+  }
+})
+
+export async function generateMetadata({ params }: Props) {
+  const { id, locale } = await params
+  const jobId = parseId(id)
+  if (jobId === null) return {}
+  const job = await getJob(jobId)
+  if (!job) return {}
+  const description = job.description.slice(0, 155)
+  const canonical = `/${locale}/jobangebote/${job.id}`
+  return {
+    title: `${job.title} bei ${job.company}`,
+    description,
+    alternates: { canonical },
+    openGraph: { title: `${job.title} bei ${job.company}`, description, url: canonical, type: 'article' },
+  }
+}
+
+const EMPLOYMENT_TYPE: Record<string, string> = {
+  Vollzeit: 'FULL_TIME',
+  Teilzeit: 'PART_TIME',
+  Minijob: 'PART_TIME',
 }
 
 function getContractVariant(type: string) {
@@ -34,27 +53,49 @@ function getContractVariant(type: string) {
 
 export default async function JobDetailPage({ params }: Props) {
   const { id, locale } = await params
-  const jobId = parseInt(id, 10)
-  if (isNaN(jobId)) notFound()
+  const jobId = parseId(id)
+  if (jobId === null) notFound()
 
-  const t = await getTranslations('jobs.detail')
-  const tApply = await getTranslations('apply')
-  const tContracts = await getTranslations('contractTypes')
+  const [t, tApply, tContracts, job] = await Promise.all([
+    getTranslations('jobs.detail'),
+    getTranslations('apply'),
+    getTranslations('contractTypes'),
+    getJob(jobId),
+  ])
 
-  let job
-  try {
-    job = await prisma.jobOffer.findUnique({ where: { id: jobId } })
-  } catch {
-    notFound()
-  }
   if (!job || !job.isActive) notFound()
 
   const contractLabel = tContracts.has(job.contractType)
     ? tContracts(job.contractType as 'Vollzeit' | 'Teilzeit' | 'Minijob')
     : job.contractType
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mf-talent-connect.de'
+  const jsonLd = {
+    '@context': 'https://schema.org/',
+    '@type': 'JobPosting',
+    title: job.title,
+    description: job.description,
+    datePosted: job.createdAt.toISOString(),
+    employmentType: EMPLOYMENT_TYPE[job.contractType] ?? 'OTHER',
+    hiringOrganization: { '@type': 'Organization', name: job.company },
+    jobLocation: {
+      '@type': 'Place',
+      address: { '@type': 'PostalAddress', addressLocality: job.location, addressCountry: 'DE' },
+    },
+    directApply: true,
+    url: `${baseUrl}/${locale}/jobangebote/${job.id}`,
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          // Escape `</` pour empêcher la sortie de la balise <script> via
+          // un contenu utilisateur contenant `</script>`.
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
       <Link href={`/${locale}/jobangebote`} className="text-muted hover:text-primary text-sm flex items-center gap-1 mb-6">
         {t('back')}
       </Link>
@@ -65,7 +106,7 @@ export default async function JobDetailPage({ params }: Props) {
           <div className="bg-white rounded-xl border border-gray-100 p-8 shadow-sm">
             <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
               <div>
-                <h1 className="text-3xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>
+                <h1 className="font-heading text-3xl font-bold text-foreground">
                   {job.title}
                 </h1>
                 <p className="text-muted mt-1">{job.company}</p>
@@ -86,13 +127,13 @@ export default async function JobDetailPage({ params }: Props) {
 
             <div className="space-y-6">
               <div>
-                <h2 className="font-bold text-foreground mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+                <h2 className="font-heading font-bold text-foreground mb-3">
                   {t('description')}
                 </h2>
                 <p className="text-muted whitespace-pre-line leading-relaxed">{job.description}</p>
               </div>
               <div>
-                <h2 className="font-bold text-foreground mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+                <h2 className="font-heading font-bold text-foreground mb-3">
                   {t('requirements')}
                 </h2>
                 <p className="text-muted whitespace-pre-line leading-relaxed">{job.requirements}</p>
@@ -104,11 +145,11 @@ export default async function JobDetailPage({ params }: Props) {
         {/* Apply form */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm sticky top-24">
-            <h2 className="text-xl font-bold text-foreground mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
+            <h2 className="font-heading text-xl font-bold text-foreground mb-1">
               {tApply('sectionTitle')}
             </h2>
             <p className="text-muted text-sm mb-6">{tApply('sectionSubtitle')}</p>
-            <ApplyForm jobTitle={job.title} company={job.company} jobId={job.id} />
+            <ApplyForm jobId={job.id} />
           </div>
         </div>
       </div>

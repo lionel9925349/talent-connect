@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { isAdminAuthenticated } from '@/lib/auth'
+import { withAdmin } from '@/lib/withAdmin'
 import { getPageContent, pageSchemas, setPageContent } from '@/lib/pageSchemas'
 
-export async function GET(request: NextRequest) {
-  const auth = await isAdminAuthenticated()
-  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-
+export const GET = withAdmin(async (request: NextRequest) => {
   const { searchParams } = new URL(request.url)
   const slug = searchParams.get('slug')
   const locale = searchParams.get('locale') ?? 'de'
@@ -34,13 +31,10 @@ export async function GET(request: NextRequest) {
     fields: schema.fields,
     content,
   })
-}
+})
 
-export async function POST(request: NextRequest) {
-  const auth = await isAdminAuthenticated()
-  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-
-  const body = await request.json()
+export const POST = withAdmin(async (request: NextRequest) => {
+  const body = await request.json().catch(() => ({}))
   const { slug, locale, content } = body as { slug?: string; locale?: string; content?: Record<string, unknown> }
 
   if (!slug || !locale || !content) {
@@ -52,4 +46,4 @@ export async function POST(request: NextRequest) {
 
   await setPageContent(slug, locale, content)
   return NextResponse.json({ ok: true })
-}
+})

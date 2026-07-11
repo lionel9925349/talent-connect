@@ -1,8 +1,16 @@
 import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
 
+export const revalidate = 3600
+
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mf-talent-connect.de'
-const LOCALES = ['de', 'en']
+
+function languages(path: string) {
+  return {
+    de: `${BASE_URL}/de${path}`,
+    en: `${BASE_URL}/en${path}`,
+  }
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPaths = [
@@ -17,41 +25,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/sonstiges',
   ]
 
-  const staticEntries: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
-    staticPaths.map((path) => ({
-      url: `${BASE_URL}/${locale}${path}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: path === '' ? 1 : 0.8,
-    }))
-  )
+  const staticEntries: MetadataRoute.Sitemap = staticPaths.map((path) => ({
+    url: `${BASE_URL}/de${path}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: path === '' ? 1 : 0.8,
+    alternates: { languages: languages(path) },
+  }))
 
   let jobEntries: MetadataRoute.Sitemap = []
   let trainingEntries: MetadataRoute.Sitemap = []
 
   try {
     const jobs = await prisma.jobOffer.findMany({ where: { isActive: true }, select: { id: true, updatedAt: true } })
-    jobEntries = LOCALES.flatMap((locale) =>
-      jobs.map((job) => ({
-        url: `${BASE_URL}/${locale}/jobangebote/${job.id}`,
-        lastModified: job.updatedAt,
-        changeFrequency: 'weekly' as const,
-        priority: 0.7,
-      }))
-    )
-  } catch { /* ignore */ }
+    jobEntries = jobs.map((job) => ({
+      url: `${BASE_URL}/de/jobangebote/${job.id}`,
+      lastModified: job.updatedAt,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+      alternates: { languages: languages(`/jobangebote/${job.id}`) },
+    }))
+  } catch (err) { console.error('sitemap query error:', err) }
 
   try {
     const trainings = await prisma.trainingOffer.findMany({ where: { isActive: true }, select: { id: true, updatedAt: true } })
-    trainingEntries = LOCALES.flatMap((locale) =>
-      trainings.map((t) => ({
-        url: `${BASE_URL}/${locale}/ausbildungsangebote/${t.id}`,
-        lastModified: t.updatedAt,
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-      }))
-    )
-  } catch { /* ignore */ }
+    trainingEntries = trainings.map((t) => ({
+      url: `${BASE_URL}/de/ausbildungsangebote/${t.id}`,
+      lastModified: t.updatedAt,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+      alternates: { languages: languages(`/ausbildungsangebote/${t.id}`) },
+    }))
+  } catch (err) { console.error('sitemap query error:', err) }
 
   return [...staticEntries, ...jobEntries, ...trainingEntries]
 }

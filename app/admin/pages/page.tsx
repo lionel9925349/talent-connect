@@ -8,8 +8,7 @@ export default function AdminPagesIndex() {
     <div>
       <div className="mb-8">
         <h1
-          className="text-3xl md:text-4xl font-bold text-foreground"
-          style={{ fontFamily: 'var(--font-heading)' }}
+          className="font-heading text-3xl md:text-4xl font-bold text-foreground"
         >
           Seiten-Inhalte
         </h1>

@@ -29,8 +29,14 @@
     "heroTitle": "M&F Talent Connect",
     "heroSubtitle": "Zwischen potentiellen Fachkräften und dem deutschen Markt — wir verbinden Talente aus dem Ausland mit deutschen Unternehmen.",
     "heroCtaText": "Jetzt per E-Mail bewerben",
+    "heroEyebrow": "Fachkräfte & Azubis für Deutschland",
     "heroAllOffers": "Alle Angebote",
-    "heroKeywords": ["schnell", "zuverlässig", "unkompliziert", "Auf Augenhöhe"],
+    "heroKeywords": [
+      "schnell",
+      "zuverlässig",
+      "unkompliziert",
+      "Auf Augenhöhe"
+    ],
     "latestJobs": "Aktuelle Jobangebote",
     "latestTrainings": "Ausbildungsangebote",
     "viewAll": "Alle anzeigen",
@@ -88,7 +94,8 @@
       "resetFilters": "Filter zurücksetzen",
       "clearAll": "Alle Filter löschen",
       "activeFilters": "Aktive Filter"
-    }
+    },
+    "emptyCta": "Initiativbewerbung senden"
   },
   "training": {
     "pageTitle": "Ausbildungsangebote",
@@ -116,7 +123,8 @@
       "description": "Beschreibung",
       "conditions": "Zugangsbedingungen",
       "applyBtn": "Jetzt bewerben"
-    }
+    },
+    "emptyCta": "Jetzt Kontakt aufnehmen"
   },
   "about": {
     "heroTitle": "Über M&F Talent Connect",
@@ -133,9 +141,21 @@
     },
     "teamTitle": "Unser Team",
     "team": [
-      { "name": "Marie F.", "role": "Gründerin & Geschäftsführerin", "bio": "Über 10 Jahre Erfahrung in der internationalen Personalvermittlung." },
-      { "name": "Amadou B.", "role": "Berater für Bewerber", "bio": "Experte für Integration und Anerkennungsverfahren in Deutschland." },
-      { "name": "Sandra K.", "role": "Unternehmensberaterin", "bio": "Verbindet deutsche Unternehmen mit internationalen Talenten." }
+      {
+        "name": "Marie F.",
+        "role": "Gründerin & Geschäftsführerin",
+        "bio": "Über 10 Jahre Erfahrung in der internationalen Personalvermittlung."
+      },
+      {
+        "name": "Amadou B.",
+        "role": "Berater für Bewerber",
+        "bio": "Experte für Integration und Anerkennungsverfahren in Deutschland."
+      },
+      {
+        "name": "Sandra K.",
+        "role": "Unternehmensberaterin",
+        "bio": "Verbindet deutsche Unternehmen mit internationalen Talenten."
+      }
     ]
   },
   "contact": {
@@ -215,5 +235,23 @@
     "disclaimerText": "Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.",
     "copyrightTitle": "Urheberrecht",
     "copyrightText": "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers."
+  },
+  "process": {
+    "title": "So funktioniert's",
+    "subtitle": "In drei Schritten zur passenden Stelle — oder zur passenden Fachkraft.",
+    "steps": [
+      {
+        "title": "Kontakt aufnehmen",
+        "description": "Senden Sie uns Ihre Bewerbung oder Ihre Anfrage — unverbindlich und kostenlos."
+      },
+      {
+        "title": "Passgenaues Matching",
+        "description": "Wir prüfen Qualifikationen und Anforderungen und bringen die richtigen Menschen und Unternehmen zusammen."
+      },
+      {
+        "title": "Vermittlung & Begleitung",
+        "description": "Wir begleiten beide Seiten durch den gesamten Prozess — von den Formalitäten bis zum erfolgreichen Start."
+      }
+    ]
   }
 }

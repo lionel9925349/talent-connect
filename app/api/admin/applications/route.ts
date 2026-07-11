@@ -1,11 +1,8 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { isAdminAuthenticated } from '@/lib/auth'
+import { withAdmin } from '@/lib/withAdmin'
 
-export async function GET() {
-  const auth = await isAdminAuthenticated()
-  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-
+export const GET = withAdmin(async () => {
   const applications = await prisma.application.findMany({ orderBy: { createdAt: 'desc' } })
   return NextResponse.json(applications)
-}
+})

@@ -42,7 +42,7 @@ export default function NewFormationPage() {
     <div className="max-w-2xl">
       <div className="flex items-center gap-3 mb-8">
         <Link href="/admin/formations" className="text-muted hover:text-primary text-sm">← Zurück</Link>
-        <h1 className="text-2xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>Neue Formation</h1>
+        <h1 className="font-heading text-2xl font-bold text-foreground">Neue Formation</h1>
       </div>
 
       <div className="bg-white rounded-xl border border-gray-100 p-6">

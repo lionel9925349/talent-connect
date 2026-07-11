@@ -1,24 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
-import { isAdminAuthenticated } from '@/lib/auth'
+import { withAdmin } from '@/lib/withAdmin'
+import { heroSchema, parseJson } from '@/lib/schemas'
 
-export async function GET() {
-  const auth = await isAdminAuthenticated()
-  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-
+export const GET = withAdmin(async () => {
   const heroes = await prisma.heroContent.findMany()
   return NextResponse.json(heroes)
-}
+})
 
-export async function POST(request: NextRequest) {
-  const auth = await isAdminAuthenticated()
-  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+export const POST = withAdmin(async (request: NextRequest) => {
+  const parsed = await parseJson(request, heroSchema)
+  if (!parsed.ok) return parsed.response
 
-  const data = await request.json()
+  const { key, eyebrow, title, subtitle, ctaText, ctaLink } = parsed.data
+
   const hero = await prisma.heroContent.upsert({
-    where: { key: data.key },
-    update: { title: data.title, subtitle: data.subtitle, ctaText: data.ctaText, ctaLink: data.ctaLink },
-    create: { key: data.key, title: data.title, subtitle: data.subtitle, ctaText: data.ctaText, ctaLink: data.ctaLink },
+    where: { key },
+    update: { eyebrow, title, subtitle, ctaText, ctaLink },
+    create: { key, eyebrow, title, subtitle, ctaText, ctaLink },
   })
+  revalidatePath('/[locale]', 'page')
   return NextResponse.json(hero)
-}
+})

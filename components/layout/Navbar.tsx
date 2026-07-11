@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { siteConfig } from '@/lib/config'
+import { localePath as buildLocalePath } from '@/lib/routes'
 import { Button } from '@/components/ui/Button'
 import { LocaleSwitcher } from '@/components/ui/LocaleSwitcher'
 
@@ -13,40 +14,53 @@ export function Navbar() {
   const locale = useLocale()
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
-  const localePath = (href: string) => `/${locale}${href === '/' ? '' : href}`
+  const localePath = (href: string) => buildLocalePath(locale, href)
   const isActive = (href: string) => pathname === localePath(href)
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
+    document.body.style.overflow = open ? 'hidden' : ''
+
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
     }
+    if (open) window.addEventListener('keydown', onKeyDown)
+
     return () => {
       document.body.style.overflow = ''
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('keydown', onKeyDown)
     }
   }, [open])
 
-
   return (
-    <header className="bg-white/95 backdrop-blur border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+    <>
+    <header
+      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/85 backdrop-blur-md border-border/70 shadow-[0_8px_30px_-12px_rgb(15_24_45/0.18)]'
+          : 'bg-white/70 backdrop-blur-md border-transparent'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div
+          className={`flex items-center justify-between transition-all duration-300 ${
+            scrolled ? 'h-16' : 'h-16 lg:h-20'
+          }`}
+        >
           <Link
             href={`/${locale}`}
             className="flex items-center gap-2 shrink-0"
             onClick={() => setOpen(false)}
           >
-            <span
-              className="text-primary font-bold text-2xl leading-none tracking-tight"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
+            <span className="font-heading text-primary font-bold text-2xl leading-none tracking-tight">
               M
-              <span
-                className="text-accent mx-0.5 align-baseline"
-                style={{ fontFamily: 'var(--font-body)', fontWeight: 700 }}
-              >
+              <span className="font-body font-bold text-accent mx-0.5 align-baseline">
                 &
               </span>
               F
@@ -56,18 +70,27 @@ export function Navbar() {
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
-            {siteConfig.nav.map((item) => (
-              <Link
-                key={item.href}
-                href={localePath(item.href)}
-                className={`text-sm font-medium transition-colors whitespace-nowrap ${
-                  isActive(item.href) ? 'text-accent' : 'text-muted hover:text-primary'
-                }`}
-              >
-                {t(item.key)}
-              </Link>
-            ))}
+          <nav className="hidden lg:flex items-center gap-1">
+            {siteConfig.nav.map((item) => {
+              const active = isActive(item.href)
+              return (
+                <Link
+                  key={item.href}
+                  href={localePath(item.href)}
+                  className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${
+                    active ? 'text-primary' : 'text-muted hover:text-primary hover:bg-primary/5'
+                  }`}
+                >
+                  {t(item.key)}
+                  <span
+                    className={`absolute left-3 right-3 -bottom-px h-0.5 rounded-full bg-accent transition-transform duration-300 origin-center ${
+                      active ? 'scale-x-100' : 'scale-x-0'
+                    }`}
+                    aria-hidden="true"
+                  />
+                </Link>
+              )
+            })}
           </nav>
 
           <div className="hidden lg:flex items-center gap-3 shrink-0">
@@ -80,7 +103,7 @@ export function Navbar() {
           <div className="flex items-center gap-2 lg:hidden">
             <LocaleSwitcher />
             <button
-              className="p-2 rounded-lg text-primary hover:bg-gray-100 active:bg-gray-200 transition-colors"
+              className="p-2 rounded-lg text-primary hover:bg-primary/5 active:bg-primary/10 transition-colors"
               onClick={() => setOpen(!open)}
               aria-label="Menu"
               aria-expanded={open}
@@ -98,44 +121,45 @@ export function Navbar() {
           </div>
         </div>
       </div>
-
-      {open && (
-        <>
-          <div
-            className="fixed inset-0 top-16 bg-black/30 lg:hidden z-40"
-            onClick={() => setOpen(false)}
-            aria-hidden="true"
-          />
-          <div className="lg:hidden fixed left-0 right-0 top-16 bottom-0 z-40 bg-white overflow-y-auto">
-            <nav className="flex flex-col px-4 py-4">
-              {siteConfig.nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={localePath(item.href)}
-                  onClick={() => setOpen(false)}
-                  className={`px-3 py-3.5 text-base font-medium rounded-lg transition-colors ${
-                    isActive(item.href)
-                      ? 'bg-accent/10 text-accent'
-                      : 'text-foreground hover:bg-gray-50'
-                  }`}
-                >
-                  {t(item.key)}
-                </Link>
-              ))}
-              <div className="mt-4 px-3">
-                <Button
-                  href={localePath('/kontakt')}
-                  size="md"
-                  className="w-full"
-                  onClick={() => setOpen(false)}
-                >
-                  {t('applyNow')}
-                </Button>
-              </div>
-            </nav>
-          </div>
-        </>
-      )}
     </header>
+
+    {open && (
+      <div className="lg:hidden fixed inset-0 top-16 z-40">
+        <div
+          className="absolute inset-0 bg-black/40"
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-x-0 top-0 bottom-0 bg-white overflow-y-auto shadow-xl">
+          <nav className="flex flex-col px-4 py-4">
+            {siteConfig.nav.map((item) => (
+              <Link
+                key={item.href}
+                href={localePath(item.href)}
+                onClick={() => setOpen(false)}
+                className={`px-3 py-3.5 text-base font-medium rounded-lg transition-colors ${
+                  isActive(item.href)
+                    ? 'bg-accent/10 text-accent'
+                    : 'text-foreground hover:bg-surface'
+                }`}
+              >
+                {t(item.key)}
+              </Link>
+            ))}
+            <div className="mt-4 px-3">
+              <Button
+                href={localePath('/kontakt')}
+                size="md"
+                className="w-full"
+                onClick={() => setOpen(false)}
+              >
+                {t('applyNow')}
+              </Button>
+            </div>
+          </nav>
+        </div>
+      </div>
+    )}
+    </>
   )
 }

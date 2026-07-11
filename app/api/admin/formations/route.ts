@@ -1,30 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
-import { isAdminAuthenticated } from '@/lib/auth'
+import { withAdmin } from '@/lib/withAdmin'
+import { parseJson, trainingCreateSchema } from '@/lib/schemas'
 
-export async function GET() {
-  const auth = await isAdminAuthenticated()
-  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-
+export const GET = withAdmin(async () => {
   const trainings = await prisma.trainingOffer.findMany({ orderBy: { createdAt: 'desc' } })
   return NextResponse.json(trainings)
-}
+})
 
-export async function POST(request: NextRequest) {
-  const auth = await isAdminAuthenticated()
-  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+export const POST = withAdmin(async (request: NextRequest) => {
+  const parsed = await parseJson(request, trainingCreateSchema)
+  if (!parsed.ok) return parsed.response
 
-  const data = await request.json()
-  const training = await prisma.trainingOffer.create({
-    data: {
-      title: data.title,
-      sector: data.sector,
-      duration: data.duration,
-      location: data.location,
-      description: data.description,
-      conditions: data.conditions,
-      startDate: data.startDate,
-    },
-  })
+  const training = await prisma.trainingOffer.create({ data: parsed.data })
+  revalidatePath('/[locale]/ausbildungsangebote', 'page')
+  revalidatePath('/[locale]', 'page')
   return NextResponse.json(training, { status: 201 })
-}
+})

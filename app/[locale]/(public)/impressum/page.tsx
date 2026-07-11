@@ -6,13 +6,13 @@ export default async function ImpressumPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h1 className="text-3xl font-bold text-foreground mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
+      <h1 className="font-heading text-3xl font-bold text-foreground mb-8">
         {t('title')}
       </h1>
 
       <div className="prose prose-gray max-w-none space-y-6 text-muted">
         <section>
-          <h2 className="text-xl font-bold text-foreground mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
             {t('legalTitle')}
           </h2>
           <p>M&amp;F Talent Connect</p>
@@ -21,7 +21,7 @@ export default async function ImpressumPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-foreground mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
             {t('contactTitle')}
           </h2>
           <p>E-Mail: {siteConfig.email}</p>
@@ -29,14 +29,14 @@ export default async function ImpressumPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-foreground mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
             {t('disclaimerTitle')}
           </h2>
           <p>{t('disclaimerText')}</p>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-foreground mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
             {t('copyrightTitle')}
           </h2>
           <p>{t('copyrightText')}</p>
