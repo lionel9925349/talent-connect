@@ -15,6 +15,12 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+# Env factices pour le build uniquement : lib/prisma.ts exige DATABASE_URL à
+# l'import, et les pages prérendues catchent l'échec de connexion. Les vraies
+# valeurs sont injectées au runtime par docker compose (stage runner ≠ builder).
+ENV DATABASE_URL="postgresql://build:build@localhost:5432/build"
+ENV AUTH_SECRET="build-only-secret-not-used-at-runtime"
+ENV NEXT_PUBLIC_SITE_URL="https://mf-talent-connect.de"
 RUN pnpm build
 
 # ── 3. Production runner ──────────────────────────────────────────────────────
