@@ -5,7 +5,9 @@ import { randomUUID } from 'node:crypto'
  * Client MinIO (S3-compatible).
  *
  * Singleton attaché à `globalThis` pour survivre au HMR en dev,
- * comme pour Prisma.
+ * comme pour Prisma. Créé paresseusement à la première utilisation :
+ * les env vars ne doivent pas être exigées à l'import, sinon le build
+ * Next (collecte des page data) échoue en CI où MinIO n'est pas configuré.
  *
  * Env requis :
  *   MINIO_ENDPOINT, MINIO_PORT, MINIO_USE_SSL,
@@ -30,10 +32,11 @@ function createClient(): MinioClient {
   })
 }
 
-export const minio: MinioClient = globalForMinio.minio ?? createClient()
-
-if (process.env.NODE_ENV !== 'production') {
-  globalForMinio.minio = minio
+export function getMinio(): MinioClient {
+  if (!globalForMinio.minio) {
+    globalForMinio.minio = createClient()
+  }
+  return globalForMinio.minio
 }
 
 export const BUCKET = process.env.MINIO_BUCKET ?? 'mf-talent-uploads'
@@ -44,9 +47,9 @@ let bucketReady: Promise<void> | null = null
 export function ensureBucket(): Promise<void> {
   if (!bucketReady) {
     bucketReady = (async () => {
-      const exists = await minio.bucketExists(BUCKET).catch(() => false)
+      const exists = await getMinio().bucketExists(BUCKET).catch(() => false)
       if (!exists) {
-        await minio.makeBucket(BUCKET)
+        await getMinio().makeBucket(BUCKET)
       }
     })()
   }
@@ -77,7 +80,7 @@ export async function putApplicationFile(
 ): Promise<string> {
   await ensureBucket()
   const key = buildApplicationKey(originalName)
-  await minio.putObject(BUCKET, key, buffer, buffer.length, {
+  await getMinio().putObject(BUCKET, key, buffer, buffer.length, {
     'Content-Type': contentType,
   })
   return key
@@ -88,20 +91,20 @@ export async function putApplicationFile(
  *  d'email ou cache proxy. Pour la consultation admin, on préfère le stream
  *  via la route Next (cf. /api/admin/applications/[id]/files/[idx]). */
 export function presignedDownloadUrl(key: string, expirySeconds = 24 * 60 * 60): Promise<string> {
-  return minio.presignedGetObject(BUCKET, key, expirySeconds)
+  return getMinio().presignedGetObject(BUCKET, key, expirySeconds)
 }
 
 /** Stream binaire (pour route admin /files/[idx]). */
 export async function getObjectStream(key: string): Promise<NodeJS.ReadableStream> {
   await ensureBucket()
-  return minio.getObject(BUCKET, key)
+  return getMinio().getObject(BUCKET, key)
 }
 
 /** Best-effort delete (silencieux). */
 export async function deleteApplicationFiles(keys: string[]): Promise<void> {
   if (keys.length === 0) return
   try {
-    await minio.removeObjects(BUCKET, keys)
+    await getMinio().removeObjects(BUCKET, keys)
   } catch (err) {
     console.error('MinIO delete failed:', err)
   }

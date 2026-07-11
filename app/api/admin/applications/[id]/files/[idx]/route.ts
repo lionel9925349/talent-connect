@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { withAdmin } from '@/lib/withAdmin'
 import { parseId } from '@/lib/safeId'
-import { getObjectStream, minio, BUCKET } from '@/lib/minio'
+import { getObjectStream, getMinio, BUCKET } from '@/lib/minio'
 
 export const runtime = 'nodejs'
 
@@ -32,7 +32,7 @@ export const GET = withAdmin<{ id: string; idx: string }>(async (_req, { params 
   if (!key) return NextResponse.json({ error: 'File not found' }, { status: 404 })
 
   const [stat, stream] = await Promise.all([
-    minio.statObject(BUCKET, key),
+    getMinio().statObject(BUCKET, key),
     getObjectStream(key),
   ])
 
