@@ -7,7 +7,7 @@ import { HeroSection } from '@/components/sections/HeroSection'
 import { Input, Textarea } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { Button } from '@/components/ui/Button'
-import { siteConfig } from '@/lib/config'
+import { siteConfig, telHref } from '@/lib/config'
 import { submitContactAction, type ContactState } from './actions'
 
 const INITIAL: ContactState = { status: 'idle' }
@@ -26,7 +26,16 @@ export default function KontaktPage() {
   const locale = useLocale()
   const [state, formAction] = useActionState(submitContactAction, INITIAL)
 
-  const contactItems = [
+  const contactItems: { icon: React.ReactNode; label: string; value: string; href?: string }[] = [
+    {
+      icon: (
+        <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      ),
+      label: t('labelContactPerson'),
+      value: siteConfig.contactPerson,
+    },
     {
       icon: (
         <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,6 +44,7 @@ export default function KontaktPage() {
       ),
       label: t('labelEmail'),
       value: siteConfig.email,
+      href: `mailto:${siteConfig.email}`,
     },
     {
       icon: (
@@ -44,6 +54,17 @@ export default function KontaktPage() {
       ),
       label: t('labelPhone'),
       value: siteConfig.phone,
+      href: telHref(siteConfig.phone),
+    },
+    {
+      icon: (
+        <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+      ),
+      label: t('labelMobile'),
+      value: siteConfig.mobile,
+      href: telHref(siteConfig.mobile),
     },
     {
       icon: (
@@ -113,7 +134,13 @@ export default function KontaktPage() {
                   </div>
                   <div>
                     <p className="text-sm text-muted">{item.label}</p>
-                    <p className="font-medium text-foreground">{item.value}</p>
+                    {item.href ? (
+                      <a href={item.href} className="font-medium text-foreground hover:text-accent transition-colors">
+                        {item.value}
+                      </a>
+                    ) : (
+                      <p className="font-medium text-foreground">{item.value}</p>
+                    )}
                   </div>
                 </div>
               ))}

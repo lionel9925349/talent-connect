@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
-import { siteConfig } from '@/lib/config'
+import { siteConfig, telHref } from '@/lib/config'
 import { localePath as buildLocalePath } from '@/lib/routes'
 
 const socialIcons: Record<string, React.ReactNode> = {
@@ -86,6 +86,12 @@ export async function Footer() {
               {t('contact')}
             </h4>
             <ul className="space-y-3 text-sm text-white/70">
+              <li className="inline-flex items-start gap-2.5 font-medium text-white/90">
+                <svg className="w-4 h-4 mt-0.5 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                {siteConfig.contactPerson}
+              </li>
               <li>
                 <a href={`mailto:${siteConfig.email}`} className="inline-flex items-start gap-2.5 hover:text-white transition-colors">
                   <svg className="w-4 h-4 mt-0.5 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,11 +100,21 @@ export async function Footer() {
                   {siteConfig.email}
                 </a>
               </li>
-              <li className="inline-flex items-start gap-2.5">
-                <svg className="w-4 h-4 mt-0.5 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M3 5a2 2 0 012-2h2.6a1 1 0 01.96.74l1 3.6a1 1 0 01-.27.96L8.1 10.1a14 14 0 005.8 5.8l1.8-1.2a1 1 0 01.96-.27l3.6 1a1 1 0 01.74.96V19a2 2 0 01-2 2A16 16 0 013 5z" />
-                </svg>
-                {siteConfig.phone}
+              <li>
+                <a href={telHref(siteConfig.phone)} className="inline-flex items-start gap-2.5 hover:text-white transition-colors">
+                  <svg className="w-4 h-4 mt-0.5 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M3 5a2 2 0 012-2h2.6a1 1 0 01.96.74l1 3.6a1 1 0 01-.27.96L8.1 10.1a14 14 0 005.8 5.8l1.8-1.2a1 1 0 01.96-.27l3.6 1a1 1 0 01.74.96V19a2 2 0 01-2 2A16 16 0 013 5z" />
+                  </svg>
+                  {siteConfig.phone}
+                </a>
+              </li>
+              <li>
+                <a href={telHref(siteConfig.mobile)} className="inline-flex items-start gap-2.5 hover:text-white transition-colors">
+                  <svg className="w-4 h-4 mt-0.5 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                  {siteConfig.mobile}
+                </a>
               </li>
               <li className="inline-flex items-start gap-2.5">
                 <svg className="w-4 h-4 mt-0.5 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">

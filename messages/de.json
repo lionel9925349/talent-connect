@@ -183,6 +183,8 @@
     "infoTitle": "Kontaktdaten",
     "labelEmail": "E-Mail",
     "labelPhone": "Telefon",
+    "labelMobile": "Mobil",
+    "labelContactPerson": "Ansprechpartner",
     "labelAddress": "Adresse",
     "errorText": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
   },
@@ -230,6 +232,7 @@
   "impressum": {
     "title": "Impressum",
     "legalTitle": "Angaben gemäß § 5 TMG",
+    "representedBy": "Vertreten durch",
     "contactTitle": "Kontakt",
     "disclaimerTitle": "Haftungsausschluss",
     "disclaimerText": "Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.",

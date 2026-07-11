@@ -22,10 +22,18 @@ export default async function ImpressumPage() {
 
         <section>
           <h2 className="font-heading text-xl font-bold text-foreground mb-3">
+            {t('representedBy')}
+          </h2>
+          <p>{siteConfig.contactPerson}</p>
+        </section>
+
+        <section>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
             {t('contactTitle')}
           </h2>
           <p>E-Mail: {siteConfig.email}</p>
-          <p>Tel: {siteConfig.phone}</p>
+          <p>Telefon: {siteConfig.phone}</p>
+          <p>Mobil: {siteConfig.mobile}</p>
         </section>
 
         <section>

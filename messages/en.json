@@ -183,6 +183,8 @@
     "infoTitle": "Contact details",
     "labelEmail": "Email",
     "labelPhone": "Phone",
+    "labelMobile": "Mobile",
+    "labelContactPerson": "Contact person",
     "labelAddress": "Address",
     "errorText": "Something went wrong. Please try again."
   },
@@ -230,6 +232,7 @@
   "impressum": {
     "title": "Legal Notice",
     "legalTitle": "Information according to § 5 TMG",
+    "representedBy": "Represented by",
     "contactTitle": "Contact",
     "disclaimerTitle": "Disclaimer",
     "disclaimerText": "The contents of our pages have been created with the greatest care. However, we cannot guarantee the accuracy, completeness and timeliness of the content.",

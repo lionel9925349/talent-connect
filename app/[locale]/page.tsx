@@ -3,6 +3,7 @@ export const revalidate = 60
 import { getTranslations, getLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
+import { OrganizationJsonLd } from '@/components/seo/OrganizationJsonLd'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
 import { ProcessSection } from '@/components/sections/ProcessSection'
@@ -45,6 +46,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <OrganizationJsonLd />
       <Navbar />
       <main className="flex-1">
         <HeroSection
