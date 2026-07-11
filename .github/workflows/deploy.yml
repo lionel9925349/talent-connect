@@ -66,20 +66,20 @@ jobs:
 
             cat > .env <<'ENVEOF'
             GHCR_IMAGE=ghcr.io/${{ github.repository }}:${{ steps.version.outputs.VERSION }}
-            DATABASE_URL=${{ secrets.DATABASE_URL }}
-            POSTGRES_DB=${{ secrets.POSTGRES_DB }}
-            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+            DATABASE_URL=postgresql://mf_talent:${{ secrets.POSTGRES_PASSWORD }}@db:5432/mf_talent
+            POSTGRES_DB=mf_talent
+            POSTGRES_USER=mf_talent
             POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
             ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}
             ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
             AUTH_SECRET=${{ secrets.AUTH_SECRET }}
-            NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
+            NEXT_PUBLIC_SITE_URL=https://mf-talent-connect.de
             SMTP_HOST=${{ secrets.SMTP_HOST }}
-            SMTP_PORT=${{ secrets.SMTP_PORT }}
-            SMTP_SECURE=${{ secrets.SMTP_SECURE }}
+            SMTP_PORT=587
+            SMTP_SECURE=false
             SMTP_USER=${{ secrets.SMTP_USER }}
             SMTP_PASS=${{ secrets.SMTP_PASS }}
-            SMTP_FROM=${{ secrets.SMTP_FROM }}
+            SMTP_FROM=M&F Talent Connect <noreply@mf-talent-connect.de>
             MINIO_ENDPOINT=minio
             MINIO_PORT=9000
             MINIO_USE_SSL=false
