@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -55,19 +56,17 @@ export function Navbar() {
         >
           <Link
             href={`/${locale}`}
-            className="flex items-center gap-2 shrink-0"
+            className="flex items-center shrink-0"
             onClick={() => setOpen(false)}
           >
-            <span className="font-heading text-primary font-bold text-2xl leading-none tracking-tight">
-              M
-              <span className="font-body font-bold text-accent mx-0.5 align-baseline">
-                &
-              </span>
-              F
-            </span>
-            <span className="text-foreground font-semibold text-sm hidden sm:block">
-              Talent Connect
-            </span>
+            <Image
+              src="/logo-navbar.png"
+              alt="M&F Talent Connect"
+              width={526}
+              height={284}
+              priority
+              className="h-10 md:h-12 w-auto"
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">

@@ -130,8 +130,9 @@
     "heroTitle": "Über M&F Talent Connect",
     "heroSubtitle": "Wir glauben an eine Welt, in der Talent keine Grenzen kennt.",
     "missionTitle": "Unsere Mission",
-    "missionText1": "M&F Talent Connect wurde gegründet, um eine echte Brücke zwischen qualifizierten Fachkräften und dem deutschen Arbeitsmarkt zu bauen. Wir verstehen die Herausforderungen auf beiden Seiten — und wir haben Lösungen.",
-    "missionText2": "Unser Ansatz ist persönlich, professionell und auf langfristigen Erfolg ausgerichtet. Wir begleiten unsere Kandidaten von der ersten Bewerbung bis zur erfolgreichen Integration.",
+    "missionText1": "Bei M&F Talent Connect glauben wir daran, dass Erfolg mit Menschen beginnt. Unsere Leidenschaft ist es, Brücken zu bauen – zwischen engagierten Fachkräften und Unternehmen, die echte Perspektiven bieten.",
+    "missionText2": "Wir verstehen, dass hinter jeder Bewerbung ein Traum steht und hinter jeder offenen Stelle eine Chance. Darum begleiten wir unsere Kandidaten mit Empathie, Erfahrung und echter Begeisterung – von der ersten Kontaktaufnahme bis zur erfolgreichen Integration.",
+    "missionText3": "Unser Ziel ist mehr als nur Vermittlung: Wir schaffen Verbindungen, die Zukunft gestalten – für Menschen, für Unternehmen, für nachhaltigen Erfolg.",
     "missionBtn": "Kontakt aufnehmen",
     "stats": {
       "placements": "Vermittlungen",
@@ -139,6 +140,17 @@
       "countries": "Länder",
       "satisfaction": "Zufriedenheit"
     },
+    "challengeTitle": "Fachkräftemangel in Deutschland – eine Herausforderung, die Unternehmen spürt",
+    "challengeText1": "Der deutsche Arbeitsmarkt steht vor einer der größten Herausforderungen unserer Zeit: Gut ausgebildete Fachkräfte fehlen – in nahezu allen Branchen. Unternehmen kämpfen darum, offene Stellen zu besetzen, Projekte voranzubringen und ihre Wettbewerbsfähigkeit zu sichern. Besonders schwer wiegt der Mangel an qualifizierten Auszubildenden und Fachkräften, die die Basis für die Zukunft eines jeden Betriebs bilden.",
+    "challengeText2": "Viele Betriebe investieren bereits enorme Ressourcen in Recruiting, doch die Realität bleibt dieselbe: Die richtigen Talente zu finden, wird immer schwieriger. Demografischer Wandel, steigende Anforderungen und ein intensiver Wettbewerb um die besten Köpfe verschärfen die Situation zusätzlich.",
+    "responseTitle": "Unsere Antwort auf diese Entwicklung",
+    "responseText1": "Bei M&F Talent Connect haben wir uns darauf spezialisiert, Unternehmen genau dort zu unterstützen, wo der Bedarf am größten ist. Wir öffnen Türen zu einem Talentpool, der in Deutschland oft übersehen wird – und gleichzeitig volles Potenzial steckt: Auszubildende und Fachkräfte aus dem Ausland, nämlich Kamerun und Senegal.",
+    "responseText2": "In beiden Ländern gibt es eine hohe Nachfrage nach beruflichen Perspektiven in Deutschland, verbunden mit einer beeindruckenden Zahl motivierter, gut ausgebildeter junger Menschen. Sie bringen nicht nur fachliche Kompetenz mit, sondern auch Leidenschaft, Lernbereitschaft und den Wunsch, sich langfristig zu integrieren.",
+    "bridgeTitle": "Wir verbinden Unternehmen mit Talenten, die wirklich wollen",
+    "bridgeText1": "Unser Ziel ist es, Brücken zu bauen – zwischen deutschen Unternehmen, die dringend Verstärkung benötigen, und engagierten Fachkräften sowie Auszubildenden, die bereit sind, ihre Zukunft aktiv zu gestalten.",
+    "bridgeText2": "Wir begleiten beide Seiten professionell, transparent und zuverlässig: Von der Auswahl geeigneter Kandidaten über die Vorbereitung auf den deutschen Arbeitsmarkt bis hin zur erfolgreichen Integration im Unternehmen.",
+    "futureTitle": "Gemeinsam schaffen wir Zukunft",
+    "futureText": "Mit M&F Talent Connect gewinnen Unternehmen nicht nur neue Mitarbeiter – sie gewinnen Menschen, die Chancen nutzen, Verantwortung übernehmen und langfristig bleiben wollen.",
     "teamTitle": "Unser Team",
     "team": [
       {
@@ -252,7 +264,7 @@
         "description": "Wir prüfen Qualifikationen und Anforderungen und bringen die richtigen Menschen und Unternehmen zusammen."
       },
       {
-        "title": "Vermittlung & Begleitung",
+        "title": "Vermittlung und Begleitung",
         "description": "Wir begleiten beide Seiten durch den gesamten Prozess — von den Formalitäten bis zum erfolgreichen Start."
       }
     ]

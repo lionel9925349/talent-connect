@@ -60,7 +60,7 @@ function Logo() {
   return (
     <span className="font-heading font-bold text-lg leading-none">
       M
-      <span className="font-body font-bold text-accent mx-0.5">
+      <span className="text-accent">
         &
       </span>
       F <span className="text-white/60 font-medium text-sm">Admin</span>

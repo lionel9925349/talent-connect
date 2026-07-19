@@ -143,7 +143,7 @@ export const pageSchemas: Record<string, PageSchema> = {
               'Viele der besten Fachkräfte suchen nicht aktiv. Wir erreichen sie – gezielt und persönlich.',
           },
           {
-            title: 'Entlastung von Geschäftsführung & HR',
+            title: 'Entlastung von Geschäftsführung und HR',
             description:
               'Konzentrieren Sie sich auf Ihr Business. Wir übernehmen Screening, Terminierung und das gesamte Bewerbermanagement.',
           },
@@ -178,7 +178,7 @@ export const pageSchemas: Record<string, PageSchema> = {
           },
           {
             num: '04',
-            title: 'Kennenlernen & Interview',
+            title: 'Kennenlernen und Interview',
             desc:
               'Wir koordinieren die Termine. Sie führen die Vorstellungsgespräche – persönlich oder digital. Auf Wunsch nehmen wir beratend teil.',
           },
@@ -214,7 +214,7 @@ export const pageSchemas: Record<string, PageSchema> = {
           'Wir begleiten Ihre neuen Mitarbeitenden auf jedem Schritt – von der Visumsfrage bis zum Einzug in Deutschland.',
         relocation: [
           {
-            title: '1. Pre-Arrival & Visum-Management',
+            title: '1. Pre-Arrival und Visum-Management',
             description:
               'Behördenservice beim Visumantrag, Vorabprüfung aller Zeugnisse und Anerkennungsverfahren sowie Briefing zu Leben und Arbeiten in Deutschland (Versicherungen, Steuern, Kultur).',
           },
@@ -224,7 +224,7 @@ export const pageSchemas: Record<string, PageSchema> = {
               'Persönlicher Empfang am Gate, Transfer zur ersten Unterkunft und auf Wunsch ein Welcome-Package mit lokaler SIM-Karte und Orientierungshilfen für die Region.',
           },
           {
-            title: '3. Integration & Behördengänge',
+            title: '3. Integration und Behördengänge',
             description:
               'Begleitung zum Einwohnermeldeamt, Eröffnung eines Girokontos, Suche nach möbliertem Wohnen oder Mietwohnungen und Unterstützung bei der Wahl der Krankenkasse.',
           },
@@ -261,7 +261,7 @@ export const pageSchemas: Record<string, PageSchema> = {
           { title: 'Risk minimisation', description: 'You only pay on successful placement — no financial risk.' },
           { title: 'Fewer probation drop-outs', description: 'We only present candidates we have personally checked for skills and cultural fit, reducing probation-period terminations.' },
           { title: 'Access to passive talent', description: 'Many of the best people don’t actively search. Through our network we reach them directly.' },
-          { title: 'Relief for management & HR', description: 'Focus on your business — we handle screening, scheduling, and the entire candidate management.' },
+          { title: 'Relief for management and HR', description: 'Focus on your business — we handle screening, scheduling, and the entire candidate management.' },
           { title: 'Apprenticeship focus', description: 'Training your own people is the most sustainable form of HR. We find motivated apprentices who fit your craft and your team.' },
         ],
 
@@ -272,7 +272,7 @@ export const pageSchemas: Record<string, PageSchema> = {
           { num: '01', title: 'Needs analysis', desc: 'In a short kick-off call we define both the technical qualifications and the cultural fit — so the new hire really matches your team.' },
           { num: '02', title: 'Targeted sourcing', desc: 'We activate our network and modern recruiting channels (social, databases, partners) to reach the right professionals and apprenticeship seekers.' },
           { num: '03', title: 'Pre-selection', desc: 'Each candidate goes through an interview with us. We check documents, language skills, motivation and availability. You receive a clear short profile and our recommendation.' },
-          { num: '04', title: 'Meet & interview', desc: 'We coordinate scheduling. You conduct the interviews — in person or remotely. On request we sit in as advisors.' },
+          { num: '04', title: 'Meet and interview', desc: 'We coordinate scheduling. You conduct the interviews — in person or remotely. On request we sit in as advisors.' },
           { num: '05', title: 'Smooth onboarding', desc: 'We accompany the process all the way to the signed contract — and stay your contact during the first weeks if you wish.' },
         ],
 
@@ -287,9 +287,9 @@ export const pageSchemas: Record<string, PageSchema> = {
         relocationSubtitle:
           'We accompany your new hires every step of the way — from visa to moving in.',
         relocation: [
-          { title: '1. Pre-arrival & visa management', description: 'Authority service for the visa application, pre-check of all certificates and recognition procedures, plus briefing on living and working in Germany.' },
+          { title: '1. Pre-arrival and visa management', description: 'Authority service for the visa application, pre-check of all certificates and recognition procedures, plus briefing on living and working in Germany.' },
           { title: '2. Welcome service at the airport', description: 'Personal pick-up at the gate, transfer to the first accommodation and an optional welcome package with local SIM and orientation help.' },
-          { title: '3. Integration & administration', description: 'Help with city-hall registration, bank account, temporary or long-term housing, and selecting a public health insurance.' },
+          { title: '3. Integration and administration', description: 'Help with city-hall registration, bank account, temporary or long-term housing, and selecting a public health insurance.' },
         ],
 
         finalTitle: 'We find the right person — not just anyone.',
@@ -346,7 +346,7 @@ export const pageSchemas: Record<string, PageSchema> = {
               '• Check der Unterlagen: Wir prüfen Ihren Lebenslauf und Ihr Motivationsschreiben nach deutschen Standards.\n• Interview-Training: Wir bereiten Sie in Video-Gesprächen gezielt auf die Vorstellungsgespräche bei deutschen Arbeitgebern vor.\n• Direkter Draht: Wir präsentieren Ihr Profil direkt den Entscheidern in den Unternehmen — das spart Zeit und vermeidet anonyme Online-Portale.',
           },
           {
-            title: '2. Hilfe bei Visum & Bürokratie',
+            title: '2. Hilfe bei Visum und Bürokratie',
             description:
               '• Visum-Begleitung: Wir unterstützen Sie beim Zusammenstellen aller Dokumente für die deutsche Botschaft.\n• Anerkennungs-Service: Wir helfen Ihnen, Ihre ausländischen Abschlüsse in Deutschland offiziell anerkennen zu lassen.\n• Behörden-Guide: Wir erklären Ihnen, wie Sie sich nach der Ankunft anmelden und eine Krankenversicherung abschließen.',
           },
@@ -356,7 +356,7 @@ export const pageSchemas: Record<string, PageSchema> = {
               '• Wohnungssuche: Wir unterstützen Sie dabei, eine erste Unterkunft oder ein Zimmer in einer WG zu finden.\n• Abhol-Service: Wenn möglich organisieren wir, dass Sie bei Ihrer Ankunft in Deutschland in Empfang genommen werden.\n• Bankkonto & Handy: Wir helfen bei den ersten praktischen Schritten wie Kontoeröffnung und SIM-Karte.',
           },
           {
-            title: '4. Integration & Sprache',
+            title: '4. Integration und Sprache',
             description:
               '• Sprachschul-Vermittlung: Falls Ihr Deutsch noch nicht reicht, vermitteln wir passende Online-Sprachkurse bei unseren Partnern.\n• Kultur-Coaching: Wir geben Ihnen Tipps für Leben und Arbeiten in Deutschland, damit Sie sich schnell wie zu Hause fühlen.',
           },
@@ -430,7 +430,7 @@ export const pageSchemas: Record<string, PageSchema> = {
               '• Document review: we check your CV and motivation letter against German standards.\n• Interview training: targeted video sessions to prepare you for interviews with German employers.\n• Direct line: we present your profile straight to decision makers — saving time vs. anonymous online portals.',
           },
           {
-            title: '2. Visa & administration',
+            title: '2. Visa and administration',
             description:
               '• Visa support: we help you assemble all documents for the German embassy.\n• Recognition service: we help officially recognise your foreign qualifications in Germany.\n• Authorities guide: we explain how to register and choose health insurance after arrival.',
           },
@@ -440,7 +440,7 @@ export const pageSchemas: Record<string, PageSchema> = {
               '• Housing search: we help you find a first place to stay or a room in a shared flat.\n• Pick-up service: where possible we organise to meet you on arrival in Germany.\n• Bank account & phone: we help with the first practical steps — bank account, SIM card and more.',
           },
           {
-            title: '4. Integration & language',
+            title: '4. Integration and language',
             description:
               '• Language school referral: if your German is not yet enough we connect you with our partner courses.\n• Cultural coaching: tips for living and working in Germany so you feel at home quickly.',
           },
