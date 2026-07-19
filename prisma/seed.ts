@@ -9,7 +9,7 @@ async function main() {
   console.log('🌱 Seeding database...')
 
   // ── Admin user (idempotent) ────────────────────────────────────────────────
-  const adminEmail = (process.env.ADMIN_EMAIL || 'admin@mf-talent-connect.de').trim().toLowerCase()
+  const adminEmail = (process.env.ADMIN_EMAIL || 'admin@bekeletrack.de').trim().toLowerCase()
   const adminPassword = process.env.ADMIN_PASSWORD
   if (adminPassword) {
     const passwordHash = await bcrypt.hash(adminPassword, 12)

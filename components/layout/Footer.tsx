@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { siteConfig, telHref } from '@/lib/config'
 import { localePath as buildLocalePath } from '@/lib/routes'
+import { getContactEmail } from '@/lib/contactEmail'
 
 const socialIcons: Record<string, React.ReactNode> = {
   linkedin: (
@@ -18,10 +19,11 @@ const socialIcons: Record<string, React.ReactNode> = {
 const socials = Object.entries(siteConfig.social).filter(([, url]) => url && url !== '#')
 
 export async function Footer() {
-  const [locale, t, tNav] = await Promise.all([
+  const [locale, t, tNav, contactEmail] = await Promise.all([
     getLocale(),
     getTranslations('footer'),
     getTranslations('nav'),
+    getContactEmail(),
   ])
 
   const localePath = (href: string) => buildLocalePath(locale, href)
@@ -36,7 +38,7 @@ export async function Footer() {
           <div className="md:col-span-5">
             <h3 className="font-heading font-bold text-2xl mb-3">
               M
-              <span className="font-body font-bold text-accent mx-0.5">
+              <span className="text-accent">
                 &
               </span>
               F Talent Connect
@@ -93,11 +95,11 @@ export async function Footer() {
                 {siteConfig.contactPerson}
               </li>
               <li>
-                <a href={`mailto:${siteConfig.email}`} className="inline-flex items-start gap-2.5 hover:text-white transition-colors">
+                <a href={`mailto:${contactEmail}`} className="inline-flex items-start gap-2.5 hover:text-white transition-colors">
                   <svg className="w-4 h-4 mt-0.5 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  {siteConfig.email}
+                  {contactEmail}
                 </a>
               </li>
               <li>

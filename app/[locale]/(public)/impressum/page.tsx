@@ -1,8 +1,9 @@
 import { getTranslations } from 'next-intl/server'
 import { siteConfig } from '@/lib/config'
+import { getContactEmail } from '@/lib/contactEmail'
 
 export default async function ImpressumPage() {
-  const t = await getTranslations('impressum')
+  const [t, contactEmail] = await Promise.all([getTranslations('impressum'), getContactEmail()])
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -31,7 +32,7 @@ export default async function ImpressumPage() {
           <h2 className="font-heading text-xl font-bold text-foreground mb-3">
             {t('contactTitle')}
           </h2>
-          <p>E-Mail: {siteConfig.email}</p>
+          <p>E-Mail: {contactEmail}</p>
           <p>Telefon: {siteConfig.phone}</p>
           <p>Mobil: {siteConfig.mobile}</p>
         </section>

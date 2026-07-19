@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/Badge'
 import { ApplyForm } from '@/components/sections/ApplyForm'
 import { prisma } from '@/lib/prisma'
 import { parseId } from '@/lib/safeId'
+import { siteConfig } from '@/lib/config'
 
 interface Props {
   params: Promise<{ id: string; locale: string }>
@@ -69,7 +70,7 @@ export default async function JobDetailPage({ params }: Props) {
     ? tContracts(job.contractType as 'Vollzeit' | 'Teilzeit' | 'Minijob')
     : job.contractType
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mf-talent-connect.de'
+  const baseUrl = siteConfig.url
   const jsonLd = {
     '@context': 'https://schema.org/',
     '@type': 'JobPosting',

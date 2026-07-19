@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
+import { siteConfig } from '@/lib/config'
 
 export const revalidate = 3600
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mf-talent-connect.de'
+const BASE_URL = siteConfig.url
 
 function languages(path: string) {
   return {

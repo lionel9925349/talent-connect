@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma'
+import { siteConfig } from '@/lib/config'
 
 /** Adresse de réception (paramétrable en admin, sinon variable d'env). */
 const CACHE_TTL_MS = 60_000
@@ -16,7 +17,7 @@ export async function getContactEmail(): Promise<string> {
     console.error('getContactEmail setting lookup failed:', err)
   }
 
-  const resolved = value ?? process.env.ADMIN_EMAIL ?? 'contact@mf-talent-connect.de'
+  const resolved = value ?? process.env.ADMIN_EMAIL ?? siteConfig.email
   cached = { value: resolved, exp: now + CACHE_TTL_MS }
   return resolved
 }

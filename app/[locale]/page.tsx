@@ -11,6 +11,7 @@ import { JobCard } from '@/components/sections/JobCard'
 import { Button } from '@/components/ui/Button'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { prisma } from '@/lib/prisma'
+import { getContactEmail } from '@/lib/contactEmail'
 
 async function getHomeData() {
   try {
@@ -40,6 +41,7 @@ export default async function HomePage() {
   const { hero, jobs, trainings } = await getHomeData()
   const t = await getTranslations('home')
   const locale = await getLocale()
+  const contactEmail = await getContactEmail()
 
   const lp = (href: string) => `/${locale}${href}`
   const keywords = t.raw('heroKeywords') as string[]
@@ -54,7 +56,7 @@ export default async function HomePage() {
           title={hero?.title ?? t('heroTitle')}
           subtitle={hero?.subtitle ?? t('heroSubtitle')}
           ctaText={hero?.ctaText ?? t('heroCtaText')}
-          ctaLink={hero?.ctaLink ?? `mailto:contact@mf-talent-connect.de?subject=Bewerbung%20bei%20M%26F%20Talent%20Connect`}
+          ctaLink={hero?.ctaLink ?? `mailto:${contactEmail}?subject=Bewerbung%20bei%20M%26F%20Talent%20Connect`}
           secondaryCtaText={t('heroAllOffers')}
           secondaryCtaLink={lp('/jobangebote')}
           keywords={keywords}

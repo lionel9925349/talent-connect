@@ -127,7 +127,10 @@ DATABASE_URL="postgresql://user:password@localhost:5432/mf_talent"
 ADMIN_PASSWORD="votre_mot_de_passe"
 COOKIE_SECRET="chaine_aleatoire_longue"
 NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+CONTACT_EMAIL="contact@votre-domaine.de"
 ```
+
+`siteConfig` (`lib/config.ts`) lit `NEXT_PUBLIC_SITE_URL` et `CONTACT_EMAIL` — aucun domaine ni adresse métier n'est codé en dur dans le code, tout se change via ces variables (sans rebuild pour `CONTACT_EMAIL`, qui n'est lu que côté serveur).
 
 ---
 

@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import { siteConfig } from '@/lib/config'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mf-talent-connect.de'
+const BASE_URL = siteConfig.url
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { siteConfig } from '@/lib/config'
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -20,7 +21,7 @@ export interface MailOptions {
 
 export async function sendMail(options: MailOptions) {
   return transporter.sendMail({
-    from: process.env.SMTP_FROM ?? 'M&F Talent Connect <noreply@mf-talent-connect.de>',
+    from: process.env.SMTP_FROM ?? `${siteConfig.name} <noreply@bekeletrack.de>`,
     to: options.to,
     replyTo: options.replyTo,
     subject: options.subject,
