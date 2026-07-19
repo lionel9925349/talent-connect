@@ -1,9 +1,13 @@
 import { getTranslations } from 'next-intl/server'
-import { siteConfig } from '@/lib/config'
 import { getContactEmail } from '@/lib/contactEmail'
+import { getSiteInfo } from '@/lib/siteInfo'
 
 export default async function ImpressumPage() {
-  const [t, contactEmail] = await Promise.all([getTranslations('impressum'), getContactEmail()])
+  const [t, contactEmail, info] = await Promise.all([
+    getTranslations('impressum'),
+    getContactEmail(),
+    getSiteInfo(),
+  ])
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -17,7 +21,7 @@ export default async function ImpressumPage() {
             {t('legalTitle')}
           </h2>
           <p>M&amp;F Talent Connect</p>
-          <p>{siteConfig.address}</p>
+          <p>{info.address}</p>
           <p>Deutschland</p>
         </section>
 
@@ -25,7 +29,7 @@ export default async function ImpressumPage() {
           <h2 className="font-heading text-xl font-bold text-foreground mb-3">
             {t('representedBy')}
           </h2>
-          <p>{siteConfig.contactPerson}</p>
+          <p>{info.contactPerson}</p>
         </section>
 
         <section>
@@ -33,8 +37,8 @@ export default async function ImpressumPage() {
             {t('contactTitle')}
           </h2>
           <p>E-Mail: {contactEmail}</p>
-          <p>Telefon: {siteConfig.phone}</p>
-          <p>Mobil: {siteConfig.mobile}</p>
+          <p>Telefon: {info.phone}</p>
+          <p>Mobil: {info.mobile}</p>
         </section>
 
         <section>

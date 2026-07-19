@@ -12,6 +12,20 @@ import { Button } from '@/components/ui/Button'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { prisma } from '@/lib/prisma'
 import { getContactEmail } from '@/lib/contactEmail'
+import { getPageContent } from '@/lib/pageSchemas'
+
+interface HomeContent {
+  servicesTitle: string
+  servicesSubtitle: string
+  services: { title: string; description: string }[]
+  processTitle: string
+  processSubtitle: string
+  processSteps: { title: string; description: string }[]
+  ctaTitle: string
+  ctaSubtitle: string
+  ctaContact: string
+  ctaLearnMore: string
+}
 
 async function getHomeData() {
   try {
@@ -42,6 +56,7 @@ export default async function HomePage() {
   const t = await getTranslations('home')
   const locale = await getLocale()
   const contactEmail = await getContactEmail()
+  const c = await getPageContent<HomeContent>('home', locale)
 
   const lp = (href: string) => `/${locale}${href}`
   const keywords = t.raw('heroKeywords') as string[]
@@ -62,9 +77,9 @@ export default async function HomePage() {
           keywords={keywords}
         />
 
-        <ServicesSection />
+        <ServicesSection title={c.servicesTitle} subtitle={c.servicesSubtitle} items={c.services} />
 
-        <ProcessSection />
+        <ProcessSection title={c.processTitle} subtitle={c.processSubtitle} steps={c.processSteps} />
 
         {jobs.length > 0 && (
           <section className="py-20 md:py-28">
@@ -123,15 +138,15 @@ export default async function HomePage() {
                 aria-hidden="true"
               />
               <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 max-w-2xl mx-auto">
-                {t('ctaTitle')}
+                {c.ctaTitle}
               </h2>
-              <p className="text-white/90 text-lg mb-9 max-w-2xl mx-auto">{t('ctaSubtitle')}</p>
+              <p className="text-white/90 text-lg mb-9 max-w-2xl mx-auto">{c.ctaSubtitle}</p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button href={lp('/kontakt')} size="lg" className="bg-white text-accent-strong hover:bg-white/90">
-                  {t('ctaContact')}
+                  {c.ctaContact}
                 </Button>
                 <Button href={lp('/fuer-bewerber')} variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10 hover:border-white">
-                  {t('ctaLearnMore')}
+                  {c.ctaLearnMore}
                 </Button>
               </div>
             </div>

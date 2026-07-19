@@ -86,6 +86,47 @@ const forApplicantsFields: FieldDef[] = [
   { id: 'viewTrainings', label: 'Button — Ausbildungen', type: 'text' },
 ]
 
+const ueberUnsFields: FieldDef[] = [
+  { id: 'heroTitle', label: 'Hero — Titel', type: 'text' },
+  { id: 'heroSubtitle', label: 'Hero — Untertitel', type: 'textarea' },
+
+  { id: 'missionTitle', label: 'Mission — Titel', type: 'text' },
+  { id: 'missionText1', label: 'Mission — Absatz 1', type: 'textarea' },
+  { id: 'missionText2', label: 'Mission — Absatz 2', type: 'textarea' },
+  { id: 'missionText3', label: 'Mission — Absatz 3', type: 'textarea' },
+  { id: 'missionBtn', label: 'Mission — Button', type: 'text' },
+
+  { id: 'challengeTitle', label: 'Herausforderung — Titel', type: 'text' },
+  { id: 'challengeText1', label: 'Herausforderung — Absatz 1', type: 'textarea' },
+  { id: 'challengeText2', label: 'Herausforderung — Absatz 2', type: 'textarea' },
+
+  { id: 'responseTitle', label: 'Unsere Antwort — Titel', type: 'text' },
+  { id: 'responseText1', label: 'Unsere Antwort — Absatz 1', type: 'textarea' },
+  { id: 'responseText2', label: 'Unsere Antwort — Absatz 2', type: 'textarea' },
+
+  { id: 'bridgeTitle', label: 'Brücken bauen — Titel', type: 'text' },
+  { id: 'bridgeText1', label: 'Brücken bauen — Absatz 1', type: 'textarea' },
+  { id: 'bridgeText2', label: 'Brücken bauen — Absatz 2', type: 'textarea' },
+
+  { id: 'futureTitle', label: 'Abschluss — Titel', type: 'text' },
+  { id: 'futureText', label: 'Abschluss — Text', type: 'textarea' },
+]
+
+const homeFields: FieldDef[] = [
+  { id: 'servicesTitle', label: 'Leistungen — Titel', type: 'text' },
+  { id: 'servicesSubtitle', label: 'Leistungen — Untertitel', type: 'textarea' },
+  { id: 'services', label: 'Leistungen (Karten)', type: 'card-list', hint: 'Pro Karte: title und description' },
+
+  { id: 'processTitle', label: 'Ablauf — Titel', type: 'text' },
+  { id: 'processSubtitle', label: 'Ablauf — Untertitel', type: 'textarea' },
+  { id: 'processSteps', label: 'Ablauf-Schritte (Karten)', type: 'card-list', hint: 'Pro Karte: title und description' },
+
+  { id: 'ctaTitle', label: 'Abschluss-CTA — Titel', type: 'text' },
+  { id: 'ctaSubtitle', label: 'Abschluss-CTA — Untertitel', type: 'textarea' },
+  { id: 'ctaContact', label: 'Abschluss-CTA — Button Kontakt', type: 'text' },
+  { id: 'ctaLearnMore', label: 'Abschluss-CTA — Button Mehr erfahren', type: 'text' },
+]
+
 export const pageSchemas: Record<string, PageSchema> = {
   'fuer-unternehmen': {
     slug: 'fuer-unternehmen',
@@ -472,6 +513,106 @@ export const pageSchemas: Record<string, PageSchema> = {
         readySubtitle: 'Browse our current offers or get in touch directly.',
         viewJobs: 'View job offers',
         viewTrainings: 'Apprenticeship offers',
+      },
+    },
+  },
+  'ueber-uns': {
+    slug: 'ueber-uns',
+    label: 'Über uns',
+    description: 'Komplette Inhalte der Seite "Über uns"',
+    locales: ['de', 'en'] as const,
+    fields: ueberUnsFields,
+    defaults: {
+      de: {
+        heroTitle: 'Über M&F Talent Connect',
+        heroSubtitle: 'Wir glauben an eine Welt, in der Talent keine Grenzen kennt.',
+        missionTitle: 'Unsere Mission',
+        missionText1: 'Bei M&F Talent Connect glauben wir daran, dass Erfolg mit Menschen beginnt. Unsere Leidenschaft ist es, Brücken zu bauen – zwischen engagierten Fachkräften und Unternehmen, die echte Perspektiven bieten.',
+        missionText2: 'Wir verstehen, dass hinter jeder Bewerbung ein Traum steht und hinter jeder offenen Stelle eine Chance. Darum begleiten wir unsere Kandidaten mit Empathie, Erfahrung und echter Begeisterung – von der ersten Kontaktaufnahme bis zur erfolgreichen Integration.',
+        missionText3: 'Unser Ziel ist mehr als nur Vermittlung: Wir schaffen Verbindungen, die Zukunft gestalten – für Menschen, für Unternehmen, für nachhaltigen Erfolg.',
+        missionBtn: 'Kontakt aufnehmen',
+        challengeTitle: 'Fachkräftemangel in Deutschland – eine Herausforderung, die Unternehmen spürt',
+        challengeText1: 'Der deutsche Arbeitsmarkt steht vor einer der größten Herausforderungen unserer Zeit: Gut ausgebildete Fachkräfte fehlen – in nahezu allen Branchen. Unternehmen kämpfen darum, offene Stellen zu besetzen, Projekte voranzubringen und ihre Wettbewerbsfähigkeit zu sichern. Besonders schwer wiegt der Mangel an qualifizierten Auszubildenden und Fachkräften, die die Basis für die Zukunft eines jeden Betriebs bilden.',
+        challengeText2: 'Viele Betriebe investieren bereits enorme Ressourcen in Recruiting, doch die Realität bleibt dieselbe: Die richtigen Talente zu finden, wird immer schwieriger. Demografischer Wandel, steigende Anforderungen und ein intensiver Wettbewerb um die besten Köpfe verschärfen die Situation zusätzlich.',
+        responseTitle: 'Unsere Antwort auf diese Entwicklung',
+        responseText1: 'Bei M&F Talent Connect haben wir uns darauf spezialisiert, Unternehmen genau dort zu unterstützen, wo der Bedarf am größten ist. Wir öffnen Türen zu einem Talentpool, der in Deutschland oft übersehen wird – und gleichzeitig volles Potenzial steckt: Auszubildende und Fachkräfte aus dem Ausland, nämlich Kamerun und Senegal.',
+        responseText2: 'In beiden Ländern gibt es eine hohe Nachfrage nach beruflichen Perspektiven in Deutschland, verbunden mit einer beeindruckenden Zahl motivierter, gut ausgebildeter junger Menschen. Sie bringen nicht nur fachliche Kompetenz mit, sondern auch Leidenschaft, Lernbereitschaft und den Wunsch, sich langfristig zu integrieren.',
+        bridgeTitle: 'Wir verbinden Unternehmen mit Talenten, die wirklich wollen',
+        bridgeText1: 'Unser Ziel ist es, Brücken zu bauen – zwischen deutschen Unternehmen, die dringend Verstärkung benötigen, und engagierten Fachkräften sowie Auszubildenden, die bereit sind, ihre Zukunft aktiv zu gestalten.',
+        bridgeText2: 'Wir begleiten beide Seiten professionell, transparent und zuverlässig: Von der Auswahl geeigneter Kandidaten über die Vorbereitung auf den deutschen Arbeitsmarkt bis hin zur erfolgreichen Integration im Unternehmen.',
+        futureTitle: 'Gemeinsam schaffen wir Zukunft',
+        futureText: 'Mit M&F Talent Connect gewinnen Unternehmen nicht nur neue Mitarbeiter – sie gewinnen Menschen, die Chancen nutzen, Verantwortung übernehmen und langfristig bleiben wollen.',
+      },
+      en: {
+        heroTitle: 'About M&F Talent Connect',
+        heroSubtitle: 'We believe in a world where talent knows no borders.',
+        missionTitle: 'Our Mission',
+        missionText1: 'At M&F Talent Connect, we believe that success begins with people. Our passion is building bridges — between dedicated professionals and companies that offer real opportunities.',
+        missionText2: "We understand that behind every application is a dream, and behind every open position is a chance. That's why we accompany our candidates with empathy, experience and genuine enthusiasm — from first contact through to successful integration.",
+        missionText3: 'Our goal is more than placement: we create connections that shape the future — for people, for companies, for lasting success.',
+        missionBtn: 'Get in touch',
+        challengeTitle: 'Skills shortage in Germany – a challenge companies feel every day',
+        challengeText1: "The German labour market faces one of the greatest challenges of our time: well-trained skilled workers are missing — in almost every sector. Companies struggle to fill open positions, move projects forward and secure their competitiveness. The shortage of qualified apprentices and skilled workers, who form the foundation of every company's future, weighs especially heavily.",
+        challengeText2: 'Many companies already invest enormous resources in recruiting, yet the reality stays the same: finding the right talent keeps getting harder. Demographic change, rising requirements and intense competition for the best people make the situation even more difficult.',
+        responseTitle: 'Our answer to this development',
+        responseText1: 'At M&F Talent Connect, we specialise in supporting companies exactly where the need is greatest. We open doors to a talent pool that is often overlooked in Germany — yet holds enormous potential: apprentices and skilled workers from abroad, namely Cameroon and Senegal.',
+        responseText2: 'Both countries see high demand for career opportunities in Germany, combined with an impressive number of motivated, well-trained young people. They bring not only professional skills, but also passion, eagerness to learn and a genuine wish to build a long-term future.',
+        bridgeTitle: 'We connect companies with talent that truly wants to be there',
+        bridgeText1: 'Our goal is to build bridges — between German companies urgently needing support and dedicated skilled workers and apprentices ready to actively shape their future.',
+        bridgeText2: 'We guide both sides professionally, transparently and reliably: from selecting suitable candidates, through preparing them for the German labour market, to their successful integration within the company.',
+        futureTitle: 'Together, we build the future',
+        futureText: "With M&F Talent Connect, companies don't just gain new employees — they gain people who seize opportunities, take on responsibility and want to stay for the long run.",
+      },
+    },
+  },
+  home: {
+    slug: 'home',
+    label: 'Startseite',
+    description: 'Leistungen, Ablauf und Abschluss-CTA der Startseite (Hero wird unter „Hero & Banner" verwaltet)',
+    locales: ['de', 'en'] as const,
+    fields: homeFields,
+    defaults: {
+      de: {
+        servicesTitle: 'Unsere Leistungen',
+        servicesSubtitle: 'M&F Talent Connect — Ihre verlässliche Brücke zum deutschen Arbeitsmarkt.',
+        services: [
+          { title: 'Vermittlung', description: 'Wir vermitteln qualifizierte Fachkräfte und Ausbildungssuchende an deutsche Unternehmen — schnell, zuverlässig und auf Augenhöhe.' },
+          { title: 'Ausbildung', description: 'Wir begleiten Ausbildungssuchende auf ihrem Weg ins deutsche Berufsausbildungssystem und unterstützen bei allen bürokratischen Schritten.' },
+          { title: 'Für Unternehmen', description: 'Finden Sie motivierte Mitarbeiter und Auszubildende — mit vollständiger Vorauswahl, Sprachüberprüfung und Integrationssupport.' },
+          { title: 'Für Bewerber', description: 'Ob Berufserfahrene oder Ausbildungssuchende — wir öffnen Ihnen die Türen zum deutschen Arbeitsmarkt und stehen Ihnen Seite an Seite.' },
+        ],
+        processTitle: "So funktioniert's",
+        processSubtitle: 'In drei Schritten zur passenden Stelle — oder zur passenden Fachkraft.',
+        processSteps: [
+          { title: 'Kontakt aufnehmen', description: 'Senden Sie uns Ihre Bewerbung oder Ihre Anfrage — unverbindlich und kostenlos.' },
+          { title: 'Passgenaues Matching', description: 'Wir prüfen Qualifikationen und Anforderungen und bringen die richtigen Menschen und Unternehmen zusammen.' },
+          { title: 'Vermittlung und Begleitung', description: 'Wir begleiten beide Seiten durch den gesamten Prozess — von den Formalitäten bis zum erfolgreichen Start.' },
+        ],
+        ctaTitle: 'Bereit für den nächsten Schritt?',
+        ctaSubtitle: 'Ob Unternehmen oder Bewerber — wir begleiten Sie auf Ihrem Weg.',
+        ctaContact: 'Jetzt Kontakt aufnehmen',
+        ctaLearnMore: 'Mehr erfahren',
+      },
+      en: {
+        servicesTitle: 'Our Services',
+        servicesSubtitle: 'M&F Talent Connect — your reliable bridge to the German job market.',
+        services: [
+          { title: 'Recruitment', description: 'We place qualified professionals and apprenticeship seekers with German companies — fast, reliable, and at eye level.' },
+          { title: 'Apprenticeships', description: 'We guide apprenticeship seekers through the German vocational training system and support them with all bureaucratic steps.' },
+          { title: 'For Companies', description: 'Find motivated employees and apprentices — with full pre-selection, language verification, and integration support.' },
+          { title: 'For Applicants', description: 'Whether experienced professionals or apprenticeship seekers — we open the doors to the German job market and stand by your side.' },
+        ],
+        processTitle: 'How it works',
+        processSubtitle: 'Three steps to the right position — or the right talent.',
+        processSteps: [
+          { title: 'Get in touch', description: 'Send us your application or your request — free of charge and without obligation.' },
+          { title: 'Precise matching', description: 'We review qualifications and requirements and bring the right people and companies together.' },
+          { title: 'Placement and support', description: 'We guide both sides through the entire process — from paperwork to a successful start.' },
+        ],
+        ctaTitle: 'Ready for the next step?',
+        ctaSubtitle: 'Whether a company or an applicant — we guide you on your journey.',
+        ctaContact: 'Get in touch',
+        ctaLearnMore: 'Learn more',
       },
     },
   },

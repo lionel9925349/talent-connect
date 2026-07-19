@@ -7,7 +7,8 @@ import { HeroSection } from '@/components/sections/HeroSection'
 import { Input, Textarea } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { Button } from '@/components/ui/Button'
-import { siteConfig, telHref } from '@/lib/config'
+import { telHref } from '@/lib/config'
+import type { SiteInfo } from '@/lib/siteInfo'
 import { submitContactAction, type ContactState } from './actions'
 
 const INITIAL: ContactState = { status: 'idle' }
@@ -21,7 +22,7 @@ function SubmitContact({ label, sending }: { label: string; sending: string }) {
   )
 }
 
-export function KontaktClient({ contactEmail }: { contactEmail: string }) {
+export function KontaktClient({ contactEmail, info }: { contactEmail: string; info: SiteInfo }) {
   const t = useTranslations('contact')
   const locale = useLocale()
   const [state, formAction] = useActionState(submitContactAction, INITIAL)
@@ -34,7 +35,7 @@ export function KontaktClient({ contactEmail }: { contactEmail: string }) {
         </svg>
       ),
       label: t('labelContactPerson'),
-      value: siteConfig.contactPerson,
+      value: info.contactPerson,
     },
     {
       icon: (
@@ -53,8 +54,8 @@ export function KontaktClient({ contactEmail }: { contactEmail: string }) {
         </svg>
       ),
       label: t('labelPhone'),
-      value: siteConfig.phone,
-      href: telHref(siteConfig.phone),
+      value: info.phone,
+      href: telHref(info.phone),
     },
     {
       icon: (
@@ -63,8 +64,8 @@ export function KontaktClient({ contactEmail }: { contactEmail: string }) {
         </svg>
       ),
       label: t('labelMobile'),
-      value: siteConfig.mobile,
-      href: telHref(siteConfig.mobile),
+      value: info.mobile,
+      href: telHref(info.mobile),
     },
     {
       icon: (
@@ -74,7 +75,7 @@ export function KontaktClient({ contactEmail }: { contactEmail: string }) {
         </svg>
       ),
       label: t('labelAddress'),
-      value: siteConfig.address + ', Deutschland',
+      value: info.address + ', Deutschland',
     },
   ]
 

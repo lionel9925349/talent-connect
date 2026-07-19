@@ -3,6 +3,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { siteConfig, telHref } from '@/lib/config'
 import { localePath as buildLocalePath } from '@/lib/routes'
 import { getContactEmail } from '@/lib/contactEmail'
+import { getSiteInfo } from '@/lib/siteInfo'
 
 const socialIcons: Record<string, React.ReactNode> = {
   linkedin: (
@@ -16,17 +17,17 @@ const socialIcons: Record<string, React.ReactNode> = {
   ),
 }
 
-const socials = Object.entries(siteConfig.social).filter(([, url]) => url && url !== '#')
-
 export async function Footer() {
-  const [locale, t, tNav, contactEmail] = await Promise.all([
+  const [locale, t, tNav, contactEmail, info] = await Promise.all([
     getLocale(),
     getTranslations('footer'),
     getTranslations('nav'),
     getContactEmail(),
+    getSiteInfo(),
   ])
 
   const localePath = (href: string) => buildLocalePath(locale, href)
+  const socials = Object.entries(info.social).filter(([, url]) => url && url !== '#')
 
   return (
     <footer className="relative bg-primary-900 text-white">
@@ -92,7 +93,7 @@ export async function Footer() {
                 <svg className="w-4 h-4 mt-0.5 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                {siteConfig.contactPerson}
+                {info.contactPerson}
               </li>
               <li>
                 <a href={`mailto:${contactEmail}`} className="inline-flex items-start gap-2.5 hover:text-white transition-colors">
@@ -103,19 +104,19 @@ export async function Footer() {
                 </a>
               </li>
               <li>
-                <a href={telHref(siteConfig.phone)} className="inline-flex items-start gap-2.5 hover:text-white transition-colors">
+                <a href={telHref(info.phone)} className="inline-flex items-start gap-2.5 hover:text-white transition-colors">
                   <svg className="w-4 h-4 mt-0.5 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M3 5a2 2 0 012-2h2.6a1 1 0 01.96.74l1 3.6a1 1 0 01-.27.96L8.1 10.1a14 14 0 005.8 5.8l1.8-1.2a1 1 0 01.96-.27l3.6 1a1 1 0 01.74.96V19a2 2 0 01-2 2A16 16 0 013 5z" />
                   </svg>
-                  {siteConfig.phone}
+                  {info.phone}
                 </a>
               </li>
               <li>
-                <a href={telHref(siteConfig.mobile)} className="inline-flex items-start gap-2.5 hover:text-white transition-colors">
+                <a href={telHref(info.mobile)} className="inline-flex items-start gap-2.5 hover:text-white transition-colors">
                   <svg className="w-4 h-4 mt-0.5 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
-                  {siteConfig.mobile}
+                  {info.mobile}
                 </a>
               </li>
               <li className="inline-flex items-start gap-2.5">
@@ -123,7 +124,7 @@ export async function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                {siteConfig.address}
+                {info.address}
               </li>
             </ul>
           </div>

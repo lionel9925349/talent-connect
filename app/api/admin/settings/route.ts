@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { withAdmin } from '@/lib/withAdmin'
 import { clearContactEmailCache } from '@/lib/contactEmail'
+import { clearSiteInfoCache } from '@/lib/siteInfo'
 
 export const GET = withAdmin(async () => {
   const settings = await prisma.setting.findMany()
@@ -32,6 +33,7 @@ export const POST = withAdmin(async (request: NextRequest) => {
 
   // Invalide les caches dépendants.
   if (entries.some((e) => e.key === 'contact_email')) clearContactEmailCache()
+  if (entries.some((e) => e.key !== 'contact_email')) clearSiteInfoCache()
 
   return NextResponse.json({ success: true })
 })

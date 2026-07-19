@@ -39,33 +39,7 @@
     ],
     "latestJobs": "Latest Job Offers",
     "latestTrainings": "Apprenticeship Offers",
-    "viewAll": "View all",
-    "ctaTitle": "Ready for the next step?",
-    "ctaSubtitle": "Whether a company or an applicant — we guide you on your journey.",
-    "ctaContact": "Get in touch",
-    "ctaLearnMore": "Learn more"
-  },
-  "services": {
-    "title": "Our Services",
-    "subtitle": "M&F Talent Connect — your reliable bridge to the German job market.",
-    "items": [
-      {
-        "title": "Recruitment",
-        "description": "We place qualified professionals and apprenticeship seekers with German companies — fast, reliable, and at eye level."
-      },
-      {
-        "title": "Apprenticeships",
-        "description": "We guide apprenticeship seekers through the German vocational training system and support them with all bureaucratic steps."
-      },
-      {
-        "title": "For Companies",
-        "description": "Find motivated employees and apprentices — with full pre-selection, language verification, and integration support."
-      },
-      {
-        "title": "For Applicants",
-        "description": "Whether experienced professionals or apprenticeship seekers — we open the doors to the German job market and stand by your side."
-      }
-    ]
+    "viewAll": "View all"
   },
   "jobs": {
     "pageTitle": "Job Offers",
@@ -125,50 +99,6 @@
       "applyBtn": "Apply now"
     },
     "emptyCta": "Get in touch"
-  },
-  "about": {
-    "heroTitle": "About M&F Talent Connect",
-    "heroSubtitle": "We believe in a world where talent knows no borders.",
-    "missionTitle": "Our Mission",
-    "missionText1": "At M&F Talent Connect, we believe that success begins with people. Our passion is building bridges — between dedicated professionals and companies that offer real opportunities.",
-    "missionText2": "We understand that behind every application is a dream, and behind every open position is a chance. That's why we accompany our candidates with empathy, experience and genuine enthusiasm — from first contact through to successful integration.",
-    "missionText3": "Our goal is more than placement: we create connections that shape the future — for people, for companies, for lasting success.",
-    "missionBtn": "Get in touch",
-    "stats": {
-      "placements": "Placements",
-      "partners": "Partner companies",
-      "countries": "Countries",
-      "satisfaction": "Satisfaction"
-    },
-    "challengeTitle": "Skills shortage in Germany – a challenge companies feel every day",
-    "challengeText1": "The German labour market faces one of the greatest challenges of our time: well-trained skilled workers are missing — in almost every sector. Companies struggle to fill open positions, move projects forward and secure their competitiveness. The shortage of qualified apprentices and skilled workers, who form the foundation of every company's future, weighs especially heavily.",
-    "challengeText2": "Many companies already invest enormous resources in recruiting, yet the reality stays the same: finding the right talent keeps getting harder. Demographic change, rising requirements and intense competition for the best people make the situation even more difficult.",
-    "responseTitle": "Our answer to this development",
-    "responseText1": "At M&F Talent Connect, we specialise in supporting companies exactly where the need is greatest. We open doors to a talent pool that is often overlooked in Germany — yet holds enormous potential: apprentices and skilled workers from abroad, namely Cameroon and Senegal.",
-    "responseText2": "Both countries see high demand for career opportunities in Germany, combined with an impressive number of motivated, well-trained young people. They bring not only professional skills, but also passion, eagerness to learn and a genuine wish to build a long-term future.",
-    "bridgeTitle": "We connect companies with talent that truly wants to be there",
-    "bridgeText1": "Our goal is to build bridges — between German companies urgently needing support and dedicated skilled workers and apprentices ready to actively shape their future.",
-    "bridgeText2": "We guide both sides professionally, transparently and reliably: from selecting suitable candidates, through preparing them for the German labour market, to their successful integration within the company.",
-    "futureTitle": "Together, we build the future",
-    "futureText": "With M&F Talent Connect, companies don't just gain new employees — they gain people who seize opportunities, take on responsibility and want to stay for the long run.",
-    "teamTitle": "Our Team",
-    "team": [
-      {
-        "name": "Marie F.",
-        "role": "Founder & CEO",
-        "bio": "Over 10 years of experience in international recruitment."
-      },
-      {
-        "name": "Amadou B.",
-        "role": "Applicant Advisor",
-        "bio": "Expert in integration and recognition procedures in Germany."
-      },
-      {
-        "name": "Sandra K.",
-        "role": "Corporate Consultant",
-        "bio": "Connects German companies with international talent."
-      }
-    ]
   },
   "contact": {
     "heroTitle": "Contact",
@@ -250,23 +180,5 @@
     "disclaimerText": "The contents of our pages have been created with the greatest care. However, we cannot guarantee the accuracy, completeness and timeliness of the content.",
     "copyrightTitle": "Copyright",
     "copyrightText": "The content and works on these pages created by the site operators are subject to German copyright law. Reproduction, editing, distribution and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator."
-  },
-  "process": {
-    "title": "How it works",
-    "subtitle": "Three steps to the right position — or the right talent.",
-    "steps": [
-      {
-        "title": "Get in touch",
-        "description": "Send us your application or your request — free of charge and without obligation."
-      },
-      {
-        "title": "Precise matching",
-        "description": "We review qualifications and requirements and bring the right people and companies together."
-      },
-      {
-        "title": "Placement and support",
-        "description": "We guide both sides through the entire process — from paperwork to a successful start."
-      }
-    ]
   }
 }

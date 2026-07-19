@@ -1,16 +1,18 @@
-import { getTranslations } from 'next-intl/server'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 
-export async function ProcessSection() {
-  const t = await getTranslations('process')
-  const steps = t.raw('steps') as { title: string; description: string }[]
+interface ProcessSectionProps {
+  title: string
+  subtitle: string
+  steps: { title: string; description: string }[]
+}
 
+export function ProcessSection({ title, subtitle, steps }: ProcessSectionProps) {
   return (
     <section className="py-20 md:py-28 bg-white border-y border-border/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          title={t('title')}
-          subtitle={t('subtitle')}
+          title={title}
+          subtitle={subtitle}
           align="center"
           className="mb-14"
         />
