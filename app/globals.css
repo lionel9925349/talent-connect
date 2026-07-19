@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/*
+ * Playfair Display's own "&" glyph is a decorative swash that clashes with
+ * any upright text around it (mismatched size/weight/baseline). Rather than
+ * hunting down every "&" in copy (content is admin-editable, so new ones will
+ * always reappear), swap just that one character for a plain sans glyph
+ * wherever the heading font is used — everything else keeps Playfair.
+ */
+@font-face {
+  font-family: "Ampersand Fix";
+  src:
+    local("Arial"),
+    local("Helvetica Neue"),
+    local("Helvetica"),
+    local("Liberation Sans"),
+    local("DejaVu Sans");
+  unicode-range: U+0026;
+  font-display: swap;
+}
+
 @theme {
   /* Brand — primary (deep navy) */
   --color-primary-50: #eef3fb;
@@ -26,7 +45,7 @@
   --color-border: #e5e8ee;
 
   /* Typography */
-  --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-heading: "Ampersand Fix", var(--font-playfair), "Playfair Display", Georgia, serif;
   --font-body: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
 
   /* Elevation */
