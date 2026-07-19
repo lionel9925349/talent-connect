@@ -4,27 +4,25 @@ import { useState, useEffect } from 'react'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 
-interface FormState {
-  contact_email: string
-  contact_person: string
-  phone: string
-  mobile: string
-  address: string
-  social_linkedin: string
-  social_facebook: string
-  social_instagram: string
+const SETTING_KEYS = [
+  'contact_email',
+  'contact_person',
+  'phone',
+  'mobile',
+  'address',
+  'social_linkedin',
+  'social_facebook',
+  'social_instagram',
+] as const
+
+type SettingKey = (typeof SETTING_KEYS)[number]
+type FormState = Record<SettingKey, string>
+
+function toFormState(data: Record<string, string>): FormState {
+  return Object.fromEntries(SETTING_KEYS.map((k) => [k, data[k] ?? ''])) as FormState
 }
 
-const EMPTY: FormState = {
-  contact_email: '',
-  contact_person: '',
-  phone: '',
-  mobile: '',
-  address: '',
-  social_linkedin: '',
-  social_facebook: '',
-  social_instagram: '',
-}
+const EMPTY: FormState = toFormState({})
 
 export default function AdminSettingsPage() {
   const [form, setForm] = useState<FormState>(EMPTY)
@@ -36,16 +34,7 @@ export default function AdminSettingsPage() {
     fetch('/api/admin/settings')
       .then((r) => r.json())
       .then((data: Record<string, string>) => {
-        setForm({
-          contact_email: data.contact_email ?? '',
-          contact_person: data.contact_person ?? '',
-          phone: data.phone ?? '',
-          mobile: data.mobile ?? '',
-          address: data.address ?? '',
-          social_linkedin: data.social_linkedin ?? '',
-          social_facebook: data.social_facebook ?? '',
-          social_instagram: data.social_instagram ?? '',
-        })
+        setForm(toFormState(data))
         setLoading(false)
       })
       .catch(() => setLoading(false))

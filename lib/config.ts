@@ -3,11 +3,13 @@ export function telHref(phone: string) {
   return `tel:${phone.replace(/\(0\)/g, '').replace(/[^+\d]/g, '')}`
 }
 
+// NB : ce module est importé par des composants client (Navbar) — ne mettre ici
+// que des valeurs publiques. L'e-mail de contact vit dans lib/contactEmail.ts
+// (serveur uniquement : réglage admin → variables d'env).
 export const siteConfig = {
   name: 'M&F Talent Connect',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
   tagline: 'Zwischen potentiellen Fachkräften und dem deutschen Markt',
-  email: process.env.CONTACT_EMAIL ?? 'contact@example.com',
   contactPerson: 'Vanneck Fouelefack',
   phone: '+49 (0) 2462 9011492',
   mobile: '+49 (0) 1573 4393860',

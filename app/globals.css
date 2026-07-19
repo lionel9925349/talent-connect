@@ -9,12 +9,28 @@
  */
 @font-face {
   font-family: "Ampersand Fix";
+  font-weight: 400;
   src:
     local("Arial"),
     local("Helvetica Neue"),
     local("Helvetica"),
     local("Liberation Sans"),
-    local("DejaVu Sans");
+    local("DejaVu Sans"),
+    url("/fonts/ampersand-regular.woff2") format("woff2");
+  unicode-range: U+0026;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ampersand Fix";
+  font-weight: 700;
+  src:
+    local("Arial Bold"),
+    local("Helvetica Neue Bold"),
+    local("Helvetica Bold"),
+    local("Liberation Sans Bold"),
+    local("DejaVu Sans Bold"),
+    url("/fonts/ampersand-bold.woff2") format("woff2");
   unicode-range: U+0026;
   font-display: swap;
 }

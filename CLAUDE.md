@@ -130,7 +130,7 @@ NEXT_PUBLIC_SITE_URL="http://localhost:3000"
 CONTACT_EMAIL="contact@votre-domaine.de"
 ```
 
-`siteConfig` (`lib/config.ts`) lit `NEXT_PUBLIC_SITE_URL` et `CONTACT_EMAIL` — aucun domaine ni adresse métier n'est codé en dur dans le code, tout se change via ces variables (sans rebuild pour `CONTACT_EMAIL`, qui n'est lu que côté serveur).
+`siteConfig` (`lib/config.ts`) lit `NEXT_PUBLIC_SITE_URL` ; il est importé par des composants client, donc n'y mettre que des valeurs publiques. `CONTACT_EMAIL` est lu uniquement par `lib/contactEmail.ts` (serveur), avec la priorité : réglage admin (DB) → `ADMIN_EMAIL` → `CONTACT_EMAIL`. Les coordonnées (téléphone, adresse, réseaux sociaux) suivent le même principe via `lib/siteInfo.ts` ; les deux partagent le cache de `lib/settings.ts`.
 
 ---
 

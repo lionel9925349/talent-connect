@@ -633,7 +633,11 @@ export async function getPageContent<T = Record<string, unknown>>(
       where: { slug_locale: { slug, locale } },
     })
     if (row?.content) {
-      const override = row.content as Record<string, unknown>
+      // Un null stocké en base ne doit jamais écraser une valeur par défaut
+      // (sinon un .map() sur un champ liste ferait planter le rendu de la page).
+      const override = Object.fromEntries(
+        Object.entries(row.content as Record<string, unknown>).filter(([, v]) => v != null),
+      )
       return { ...defaults, ...override } as T
     }
   } catch (err) {

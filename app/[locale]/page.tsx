@@ -52,11 +52,13 @@ async function getHomeData() {
 }
 
 export default async function HomePage() {
-  const { hero, jobs, trainings } = await getHomeData()
-  const t = await getTranslations('home')
   const locale = await getLocale()
-  const contactEmail = await getContactEmail()
-  const c = await getPageContent<HomeContent>('home', locale)
+  const [{ hero, jobs, trainings }, t, contactEmail, c] = await Promise.all([
+    getHomeData(),
+    getTranslations('home'),
+    getContactEmail(),
+    getPageContent<HomeContent>('home', locale),
+  ])
 
   const lp = (href: string) => `/${locale}${href}`
   const keywords = t.raw('heroKeywords') as string[]
