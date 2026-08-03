@@ -20,7 +20,10 @@ export default async function ImpressumPage() {
           <h2 className="font-heading text-xl font-bold text-foreground mb-3">
             {t('legalTitle')}
           </h2>
-          <p>M&amp;F Talent Connect</p>
+          <p>{t('companyLine')}</p>
+          <p>
+            {t('ownerLabel')}: {t('ownerName')}
+          </p>
           <p>{info.address}</p>
           <p>Deutschland</p>
         </section>
@@ -36,9 +39,44 @@ export default async function ImpressumPage() {
           <h2 className="font-heading text-xl font-bold text-foreground mb-3">
             {t('contactTitle')}
           </h2>
-          <p>E-Mail: {contactEmail}</p>
           <p>Telefon: {info.phone}</p>
           <p>Mobil: {info.mobile}</p>
+          <p>E-Mail: {contactEmail}</p>
+          <p>
+            {t('websiteLabel')}: {t('websiteValue')}
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
+            {t('authorityTitle')}
+          </h2>
+          <p>{t('authorityName')}</p>
+          <p>{t('authorityAddress')}</p>
+          <p>Deutschland</p>
+        </section>
+
+        <section>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
+            {t('vatTitle')}
+          </h2>
+          <p>{t('vatId')}</p>
+        </section>
+
+        <section>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
+            {t('taxNumberTitle')}
+          </h2>
+          <p>{t('taxNumberValue')}</p>
+        </section>
+
+        <section>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
+            {t('responsibleTitle')}
+          </h2>
+          <p>{info.contactPerson}</p>
+          <p>{info.address}</p>
+          <p>Deutschland</p>
         </section>
 
         <section>
@@ -53,6 +91,33 @@ export default async function ImpressumPage() {
             {t('copyrightTitle')}
           </h2>
           <p>{t('copyrightText')}</p>
+        </section>
+
+        <section>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
+            {t('disputeTitle')}
+          </h2>
+          <p>
+            {t.rich('disputeText', {
+              link: (chunks) => (
+                <a
+                  href="https://ec.europa.eu/consumers/odr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary underline"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
+            {t('consumerDisputeTitle')}
+          </h2>
+          <p>{t('consumerDisputeText')}</p>
         </section>
       </div>
     </div>
