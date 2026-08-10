@@ -30,13 +30,6 @@ export default async function ImpressumPage() {
 
         <section>
           <h2 className="font-heading text-xl font-bold text-foreground mb-3">
-            {t('representedBy')}
-          </h2>
-          <p>{info.contactPerson}</p>
-        </section>
-
-        <section>
-          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
             {t('contactTitle')}
           </h2>
           <p>Telefon: {info.phone}</p>
@@ -77,20 +70,6 @@ export default async function ImpressumPage() {
           <p>{info.contactPerson}</p>
           <p>{info.address}</p>
           <p>Deutschland</p>
-        </section>
-
-        <section>
-          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
-            {t('disclaimerTitle')}
-          </h2>
-          <p>{t('disclaimerText')}</p>
-        </section>
-
-        <section>
-          <h2 className="font-heading text-xl font-bold text-foreground mb-3">
-            {t('copyrightTitle')}
-          </h2>
-          <p>{t('copyrightText')}</p>
         </section>
 
         <section>
