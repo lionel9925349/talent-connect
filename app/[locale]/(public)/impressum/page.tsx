@@ -1,11 +1,20 @@
 import { getTranslations } from 'next-intl/server'
-import { getContactEmail } from '@/lib/contactEmail'
 import { getSiteInfo } from '@/lib/siteInfo'
 
+/** L'adresse est saisie sur une ligne (« rue, code postal ville ») ; l'Impressum l'affiche en bloc postal. */
+function AddressLines({ address }: { address: string }) {
+  return (
+    <>
+      {address.split(',').map((line, i) => (
+        <p key={i}>{line.trim()}</p>
+      ))}
+    </>
+  )
+}
+
 export default async function ImpressumPage() {
-  const [t, contactEmail, info] = await Promise.all([
+  const [t, info] = await Promise.all([
     getTranslations('impressum'),
-    getContactEmail(),
     getSiteInfo(),
   ])
 
@@ -24,7 +33,7 @@ export default async function ImpressumPage() {
           <p>
             {t('ownerLabel')}: {t('ownerName')}
           </p>
-          <p>{info.address}</p>
+          <AddressLines address={info.address} />
           <p>Deutschland</p>
         </section>
 
@@ -34,7 +43,7 @@ export default async function ImpressumPage() {
           </h2>
           <p>Telefon: {info.phone}</p>
           <p>Mobil: {info.mobile}</p>
-          <p>E-Mail: {contactEmail}</p>
+          <p>E-Mail: {t('emailValue')}</p>
           <p>
             {t('websiteLabel')}: {t('websiteValue')}
           </p>
@@ -45,7 +54,7 @@ export default async function ImpressumPage() {
             {t('authorityTitle')}
           </h2>
           <p>{t('authorityName')}</p>
-          <p>{t('authorityAddress')}</p>
+          <AddressLines address={t('authorityAddress')} />
           <p>Deutschland</p>
         </section>
 
@@ -68,7 +77,7 @@ export default async function ImpressumPage() {
             {t('responsibleTitle')}
           </h2>
           <p>{info.contactPerson}</p>
-          <p>{info.address}</p>
+          <AddressLines address={info.address} />
           <p>Deutschland</p>
         </section>
 
